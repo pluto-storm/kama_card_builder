@@ -1,0 +1,16 @@
+comfyui_root: /home/you/ComfyUI
+checkpoints_dir: ${comfyui_root}/models/checkpoints
+loras_dir: ${comfyui_root}/models/loras
+ge_dir: ${comfyui_root}/models/geometry_estimation
+comfyui_output_dir: ${comfyui_root}/output
+output_dir: ./output
+comfyui_url: http://127.0.0.1:8188
+
+enhancements: ${loras_dir}/enhancements
+characters: ${loras_dir}/characters
+outfits: ${loras_dir}/outfits
+styles: ${loras_dir}/styles
+poses: ${loras_dir}/poses
+body: ${loras_dir}/body
+
+ge_model: ${ge_dir}/depth_anything_3_mono_large.safetensors

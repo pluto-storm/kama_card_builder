@@ -1,0 +1,66 @@
+#Template
+# set_0:
+#   set_defaults: (optional, applies to all cards in the set unless overwritten by card data)
+#     character: character_name
+#     outfit: outfit_name
+#     pose: pose_name
+#     place: place_name
+#     prompt_pos: positive_prompt_here 
+#     prompt_neg: negative_prompt_here
+#     loras:
+#       - name: lora_name
+#         weight: 0.5
+#       - name: another_lora_name
+#         weight: 0.3
+#     lora_preset: preset_name
+#   card_1:
+#     character: character_name
+#     outfit: outfit_name
+#     pose: pose_name
+#     place: place_name
+#     prompt_pos: positive_prompt_here  
+#     prompt_neg: negative_prompt_here 
+#     loras:
+#       - name: lora_name
+#         weight: 0.5
+#       - name: another_lora_name
+#         weight: 0.3
+#     lora_preset: preset_name
+#   card_2:
+#     ...
+
+set_1:
+  set_defaults:
+    character: raven
+    prompt_pos: 1girl, sexy, anime, perky boobs, round boobs
+  card_1:
+    outfit: raven
+    pose: basic_1
+    place: city
+  card_2:
+    outfit: bikini
+    pose: basic_2
+    place: beach
+    prompt_pos: black bikini, micro bikini, nip slip
+  card_3:
+    outfit: naked
+    pose: basic_3
+    place: bathroom
+
+set_2:
+  set_defaults:
+    character: starfire
+    prompt_pos: 1girl, sexy, anime, perky boobs, round boobs
+  card_1:
+    outfit: starfire
+    pose: basic_1
+    place: city
+  card_2:
+    outfit: bikini
+    pose: basic_2
+    place: beach
+    prompt_pos: purple bikini, micro bikini, nip slip
+  card_3:
+    outfit: naked
+    pose: basic_3
+    place: bathroom

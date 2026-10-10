@@ -1,0 +1,158 @@
+# Contributor note:
+# - Each top-level key is an outfit slug referenced from cards.yaml.
+# - Keep outfit prompts focused on clothing and accessories.
+# - Use `default_display` for a short label when the outfit should appear on the card UI.
+# - Optional `lora` accepts one or more names or `{name, weight}` mappings.
+
+# Outfit prompts for different styles
+athleisure: 
+  prompt: leggings, sports bra, oversized hoodie, running shoes, baseball cap 
+  default_display: "ATHLEISURE"
+
+beach: 
+  prompt: swimsuit, cover-up, flip flops, sun hat, sunglasses
+  default_display: "BEACH"
+
+bikini:
+  prompt: bikini, micro bikini, small bikini, sexy, thong
+  default_display: "BIKINI"
+
+bohemian: 
+  prompt: flowy maxi dress, fringe bag, layered necklaces, wide-brim hat, sandals
+  default_display: "BOHEMIAN"
+
+casual: 
+  prompt: t shirt, plain white t shirt, shirt tucked into pants, blue jeans, black backpack, long blue jeans, black and grey sneakers, brown belt
+  default_display: "CASUAL"
+
+cheerleader: 
+  prompt: pleated skirt, fitted top, sneakers, pom poms, hair bow
+  default_display: "CHEERLEADER"
+
+chel:
+  prompt: white bandeau top with red and pink lines, loincloth
+  default_display: "TRIBAL"
+
+chic: 
+  prompt: blazer, tailored pants, pointed-toe heels, statement bag, minimalist jewelry
+  default_display: "CHIC"
+
+edgy: 
+  prompt: leather jacket, ripped skinny jeans, ankle boots, graphic tee, bold accessories
+  default_display: "EDGY"
+
+evening: 
+  prompt: cocktail dress, high heels, clutch bag, statement necklace, shawl
+  default_display: "EVENING"
+
+festival: 
+  prompt: bohemian dress, fringe vest, ankle boots, wide-brim hat, layered jewelry
+  default_display: "FESTIVAL"
+
+formal: 
+  prompt: white dress shirt, black dress pants, black leather shoes, black belt, navy blazer, silk tie
+  default_display: "FORMAL"
+
+gothic: 
+  prompt: black lace dress, combat boots, dark makeup, silver jewelry, leather jacket
+  default_display: "GOTHIC"
+
+grunge: 
+  prompt: flannel shirt, ripped jeans, combat boots, beanie, layered necklaces
+  default_display: "GRUNGE"
+
+harem_outfit:
+  prompt: <lora:harem-outfit-ponyxl-lora-nochekaiser:1>, harem outfit, white veil, arabian clothes, neck ring, mouth veil, circlet, harem pants, thighlet, gold trim, dancer,
+  lora:
+    - harem_outfit_ponyxl_lora_nochekaiser
+  default_display: "HAREM OUTFIT"
+
+kim_possible_spy:
+  prompt: black tank long sleeve shirt, crop top, green cargo pants, black shoes, black gloves, black belt
+  default_display: "SPY"
+
+kim_possible_student: 
+  prompt: pink crop top, baggy blue jeans,
+  default_display: " STUDENT"
+
+leia_slave:
+  prompt: Leiagolddg, pelvic curtain, gold bikini top, braid, collar, 
+  lora:
+    - Leia_DALLE_3_PonyXL
+  default_display: "LEIA"
+
+leia_white:
+  prompt: Leiagolddg, double bun, white dress, belt, high heel boots, side slit, wide sleeves, 
+  lora:
+    - Leia_DALLE_3_PonyXL
+  default_display: "LEIA"
+
+loungewear: 
+  prompt: soft hoodie, jogger pants, cozy socks, slippers, casual t shirt
+  default_display: "LOUNGEWEAR"
+
+naked:
+  prompt: bare skin, no clothing, natural pose, sexy, uncensored, nipples
+  default_display: "NAKED"
+
+party: 
+  prompt: sequin dress, stilettos, clutch bag, statement earrings, bold makeup
+  default_display: "PARTY"
+
+preppy: 
+  prompt: polo shirt, pleated skirt, loafers, knee-high socks, headband
+  default_display: "PREPPY"
+
+punk: 
+  prompt: ripped jeans, band t shirt, leather jacket, studded belt, combat boots
+  default_display: "PUNK"
+
+raven:
+  prompt: blue cape, impossible leotard, boots, shiny, belt, cape,leotard, covered navel, black leotard, highleg leotard, blue footwear, impossible clothes
+  default_display: "RAVEN"
+
+retro: 
+  prompt: high-waisted jeans, graphic t shirt, bomber jacket, sneakers, round sunglasses
+  default_display: "RETRO"
+
+romantic: 
+  prompt: flowy dress, ballet flats, delicate jewelry, soft cardigan, floral hair accessory
+  default_display: "ROMANTIC"
+
+secretary: 
+  prompt: pencil skirt, blouse, blazer, pumps, simple jewelry
+  default_display: "SECRETARY"
+
+slingshot_bikini:
+  prompt: slingshot swimsuit, slingshot bikini, high-cut, minimal coverage, thong back, halter neck, bold colors
+  lora:
+    - slingshotPony_resize.safetensors
+  default_display: "SLINGSHOT BIKINI"
+
+sporty: 
+  prompt: athletic shorts, moisture-wicking t shirt, running shoes, sports watch, baseball cap
+  default_display: "SPORTY"
+
+starfire: 
+  prompt: armlet, gorget, crop top, midriff, purple skirt, green sclera, breasts, purple footwear, bracer
+  default_display: "STARFIRE"
+
+summer: 
+  prompt: tank top, denim shorts, flip flops, sunglasses, straw hat
+  default_display: "SUMMER"
+
+vintage: 
+  prompt: floral dress, cardigan, Mary Jane shoes, pearl necklace, vintage handbag
+  default_display: "VINTAGE"
+
+winter: 
+  prompt: wool coat, scarf, gloves, thermal sweater, dark jeans, leather boots
+  default_display: "WINTER"
+
+wanda_1:
+  prompt: yellow crop top, black panties, side-tie panties, black heels
+  default_display: "CASUAL FAIRY"
+
+wanda_2:
+  prompt: yellow bra, pink panties, garter belt, garter straps, pink thighhighs, black heels
+  default_display: "SEXY FAIRY"

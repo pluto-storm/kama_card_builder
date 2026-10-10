@@ -1,0 +1,60 @@
+# Contributor note:
+# - Each top-level key is a scene/location slug referenced by cards.yaml.
+# - Keep these as environment prompts only; avoid mixing in character pose details.
+# - `default_display` is optional and should be short for UI labels.
+
+bathroom:
+  prompt: bathroom picture, white tiles, sink, mirror
+  default_display: "BATHROOM"
+
+beach:
+  prompt: beach background, sand, ocean, clear sky
+  default_display: "BEACH"
+
+bedroom:
+  prompt: bedroom background, bed, nightstand, lamp
+  default_display: "BEDROOM"
+
+blank:
+  prompt: blank background
+  default_display: ""
+
+city:
+  prompt: city background, buildings, streets, traffic
+  default_display: "CITY"
+
+desert:
+  prompt: desert background, sand dunes, cacti, clear sky
+  default_display: "DESERT"
+
+forest:
+  prompt: forest background, trees, foliage, sunlight filtering through leaves
+  default_display: "FOREST"
+
+gym:
+  prompt: gym background, exercise equipment, mirrors, wooden floor
+  default_display: "GYM"
+
+gym_shower:
+  prompt: gym shower background, shower stalls, tiled walls, mirrors
+  default_display: "GYM SHOWER"
+
+mountain:
+  prompt: mountain background, peaks, rocky terrain, clear sky
+  default_display: "MOUNTAIN"
+
+park:
+  prompt: park background, trees, grass, benches
+  default_display: "PARK"
+
+school:
+  prompt: school background, classroom, desks, chalkboard
+  default_display: "SCHOOL"
+
+space:
+  prompt: space background, stars, planets, nebulae
+  default_display: "SPACE"
+
+underwater:
+  prompt: underwater background, coral reefs, fish, bubbles
+  default_display: "UNDERWATER"

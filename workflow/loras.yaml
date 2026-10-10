@@ -1,0 +1,409 @@
+# Contributor note:
+# - `lora_presets` is a reusable grouping of LoRA entries that can be referenced from cards.yaml.
+# - Each preset entry must be a list of `{name, weight}` objects or plain names.
+# - The top-level entries below are individual LoRA definitions keyed by their exact name.
+# - Keep file paths relative to the configured `loras_dir` and support `${...}` variables when needed.
+# - `source` is an optional URL to the source model page; prefer the exact version when known.
+
+lora_presets:
+  preset_1:
+  - name: Mixplin
+    weight: 0.5
+  - name: incase_style_v3-1_ponyxl_ilff
+    weight: 0.2
+  - name: reiq_style_xl_ilff
+    weight: 0.6
+  preset_2:
+  - name: add_detail_xl
+    weight: 0.6
+  - name: anime_sdxl_v1
+    weight: 0.6
+
+
+
+#art styles
+Akabur_IllustriousV1:
+  file: '${styles}\Akabur_IllustriousV1.safetensors'
+  source: https://civitai.red/models/349063?modelVersionId=1147346
+  prompt: Akaburstyle
+
+AomizuanCE:
+  file: '${styles}\AomizuanCE.safetensors'
+  source: https://civitai.red/models/436175?modelVersionId=485861
+  prompt: aomizuance, uncensored
+
+CherryMouseStreetStylePonyLyco:
+  file: '${styles}\CherryMouseStreetStylePonyLyco.safetensors'
+  source: https://civitai.red/models/1146341?modelVersionId=458380
+  
+Cicada_Artstyle_Illustrious:
+  file: '${styles}\Cicada_Artstyle_Illustrious.safetensors'
+  source: https://civitai.red/models/350610?modelVersionId=1114134
+  prompt: cicadaart
+  
+CrocsComics_style_12:
+  file: '${styles}\CrocsComics_style-12.safetensors'
+  source: https://civitai.red/models/1371645?modelVersionId=1549721
+  prompt: CrocXL,cartoon
+  
+cutesexyrobutts_style_xl_goofy:
+  file: '${styles}\cutesexyrobutts_style_xl_goofy.safetensors'
+  source: https://civitai.red/models/11161?modelVersionId=379995
+  prompt: csr style
+  
+Derpixon_48:
+  file: '${styles}\Derpixon-48.safetensors'
+  source: https://civitai.red/models/122645?modelVersionId=133606
+  prompt: Derpixon
+  
+DevilHSLycoXL:
+  file: '${styles}\DevilHSLycoXL.safetensors'
+  source: https://civitai.red/models/310797?modelVersionId=379207
+  
+Disney4:
+  file: '${styles}\Disney4.safetensors'
+  source: https://civitai.red/models/681120?modelVersionId=1683072
+  
+DisneyStudios_style_10:
+  file: '${styles}\DisneyStudios_style-10.safetensors'
+  source: https://civitai.red/models/404277?modelVersionId=450766
+  prompt: DisneyStyleXLP, cartoon, cute, cinematic, art by disney pixar studios
+  
+Garth_Graham_Style:
+  file: '${styles}\Garth_Graham_Style.safetensors'
+  source: https://civitai.red/models/788473?modelVersionId=881748
+  
+Geekpower_PDXL:
+  file: '${styles}\Geekpower [PDXL].safetensors'
+  source: https://civitai.red/models/315703?modelVersionId=354128
+  
+Hooves_art_Beta_version:
+  file: '${styles}\Hooves-art-Beta-version.safetensors'
+  source: https://civitai.red/models/372616?modelVersionId=416207
+  
+IAHFY_Art_XL:
+  file: '${styles}\IAHFY_Art_XL.safetensors'
+  source: https://civitai.red/models/376131?modelVersionId=420026
+  prompt: iahfy
+  
+incase_style_v3-1_ponyxl_ilff:
+  file: '${styles}\incase_style_v3-1_ponyxl_ilff.safetensors'
+  source: https://civitai.red/models/300005?modelVersionId=436219
+  
+Jabstyle_PNYV1_5:
+  file: '${styles}\Jabstyle_PNYV1.5.safetensors'
+  source: https://civitai.red/models/206115?modelVersionId=371412
+  prompt: Jabstyle
+  
+jay_marvel:
+  file: '${styles}\jay_marvel.safetensors'
+  source: https://civitai.red/models/1387616?modelVersionId=1568145
+  prompt: jaymarvelstyle
+
+kingbang:
+  file: '${styles}\Pony_XL_Kingbang_Style.safetensors'
+  source: https://civitai.red/models/413050/pony-xl-kingbang-style?modelVersionId=460335
+
+Lunas_Sparrow_SDXL_A1:
+  file: '${styles}\Lunas-Sparrow-SDXL-A1.safetensors'
+  source: https://civitai.red/models/347128?modelVersionId=388378
+  
+Melkor_V4_Illustrious_20:
+  file: '${styles}\Melkor_V4_Illustrious_20.safetensors'
+  source: https://civitai.red/models/876652?modelVersionId=1535275
+  prompt: melkor_style
+  
+Mixplin:
+  file: '${styles}\Mixplin.safetensors'
+  source: https://civitai.red/models/1700543
+  
+NowaJoestar_Style:
+  file: '${styles}\NowaJoestar_Style.safetensors'
+  source: https://civitai.red/models/537408?modelVersionId=597422
+  
+officialpit_style_v2_ponyxl_ilff:
+  file: '${styles}\officialpit_style_v2_ponyxl_ilff.safetensors'
+  source: https://civitai.red/models/305206?modelVersionId=449028
+  
+Pony_XL_Kingbang_Style:
+  file: '${styles}\Pony_XL_Kingbang_Style.safetensors'
+  source: https://civitai.red/models/413050?modelVersionId=460335
+  
+princess_xl_v2:
+  file: '${styles}\princess_xl_v2.safetensors'
+  source: https://civitai.red/models/212532?modelVersionId=244808
+  
+rabiestlagomorph_guy_PONYv1:
+  file: '${styles}\rabiestlagomorph-guy-PONYv1.safetensors'
+  source: https://civitai.red/models/348857?modelVersionId=390276
+  
+raita_ponyxl:
+  file: '${styles}\raita_ponyxl.safetensors'
+  source: https://civitai.red/models/80503?modelVersionId=400289
+  
+Rapscallion_Illustrious:
+  file: '${styles}\Rapscallion_Illustrious.safetensors'
+  source: https://civitai.red/models/389869?modelVersionId=1169143
+  prompt: Rapscallionstyle
+  
+reiq_style_xl_ilff:
+  file: '${styles}\reiq_style_xl_ilff.safetensors'
+  source: https://civitai.red/models/319274?modelVersionId=358015
+  
+RoccoV1:
+  file: '${styles}\RoccoV1.safetensors'
+  source: https://civitai.red/models/342364?modelVersionId=383259
+  prompt: Rocco Style
+  
+sadakage_v1_5_lora_any_6ep_reisze:
+  file: '${styles}\sadakage-v1.5-lora-any-6ep-reisze.safetensors'
+  prompt: sadakage
+  
+sakimicartoon:
+  file: '${styles}\sakimicartoon.safetensors'
+  source: https://civitai.red/models/513001?modelVersionId=1549429
+  prompt: sakimicartoon
+  
+shadmanPONYXL_guy_v101:
+  file: '${styles}\shadmanPONYXL-guy-v101.safetensors'
+  source: https://civitai.red/models/313367?modelVersionId=366024
+  
+shadman_style_ponyxl_ilff:
+  file: '${styles}\shadman_style_ponyxl_ilff.safetensors'
+  source: https://civitai.red/models/328567?modelVersionId=368206
+  
+sleepygimp_guy_PONYv1:
+  file: '${styles}\sleepygimp-guy-PONYv1.safetensors'
+  source: https://civitai.red/models/351809?modelVersionId=393472
+  
+teranen:
+  file: '${styles}\teranen.safetensors'
+  source: https://civitai.red/models/801175?modelVersionId=895833
+  
+ToonBabes_lora_Pony_v1_10e:
+  file: '${styles}\ToonBabes_lora_Pony_v1_10e.safetensors'
+  source: https://civitai.red/models/422013?modelVersionId=476805
+  prompt: tbp, cartoon
+  
+Vikings_Mixplin_Lora_000009:
+  file: '${styles}\Vikings_Mixplin_Lora-000009.safetensors'
+  source: https://civitai.red/models/726177?modelVersionId=812014
+  prompt: Mixplin Style
+  
+WitchkingStyle_05:
+  file: '${styles}\WitchkingStyle-05.safetensors'
+  source: https://civitai.red/models/930858?modelVersionId=1041961
+  prompt: WitchK1ng
+  
+Yawg_Style_PonyXL:
+  file: '${styles}\Yawg_Style_PonyXL.safetensors'
+  source: https://civitai.red/models/715333?modelVersionId=799951
+  prompt: yawg, by yawg
+  
+
+#body
+body_weight_slider_v1:
+  file: '${body}\body_weight_slider_v1.safetensors'
+  source: https://civitai.red/models/1230780?modelVersionId=1386847
+  
+Breast_Slider_Pony_alpha1_0_rank4_noxattn_last:
+  file: '${body}\Breast Slider - Pony_alpha1.0_rank4_noxattn_last.safetensors'
+  source: https://civitai.red/models/481016?modelVersionId=534952
+  
+Bubble_butt_big_ass_v4:
+  file: '${body}\Bubble_butt_big_ass_-_v4.safetensors'
+  source: https://civitai.red/models/613260?modelVersionId=1462560
+  
+Face_Enhancer_Illustrious:
+  file: '${body}\Face_Enhancer_Illustrious.safetensors'
+  source: https://civitai.red/models/1625070?modelVersionId=1839268
+  
+Fake_breasts_v3:
+  file: '${body}\Fake_breasts_v3.safetensors'
+  source: https://civitai.red/models/740249?modelVersionId=828921
+  
+Penis_Size_alpha1_0_rank4_noxattn_last:
+  file: '${body}\Penis Size_alpha1.0_rank4_noxattn_last.safetensors'
+  source: https://civitai.red/models/465379?modelVersionId=517898
+  
+puffytits_PONY_v1:
+  file: '${body}\puffytits_PONY_v1.safetensors'
+  source: https://civitai.red/models/1526286?modelVersionId=1726904
+  
+Round_Breasts_XL_XV7_000038:
+  file: '${body}\Round_Breasts_XL_XV7-000038.safetensors'
+  source: https://civitai.red/models/161161?modelVersionId=407574
+  
+Thigh_Size_Slider_V2_alpha1_0_rank4_noxattn_last:
+  file: '${body}\Thigh Size Slider V2_alpha1.0_rank4_noxattn_last.safetensors'
+  source: https://civitai.red/models/481421?modelVersionId=625365
+  
+titsonastickv2_PONY:
+  file: '${body}\titsonastickv2_PONY.safetensors'
+  source: https://civitai.red/models/156623?modelVersionId=1210912
+  
+
+#clothes
+Concept_Slutty_Clothes:
+  file: '${outfits}\Concept_Slutty_Clothes.safetensors'
+  source: https://civitai.red/models/523290?modelVersionId=581380
+  
+harem_outfit_ponyxl_lora_nochekaiser:
+  file: '${outfits}\harem-outfit-ponyxl-lora-nochekaiser.safetensors'
+  source: https://civitai.red/models/544681?modelVersionId=605726
+  
+Leia_DALLE_3_PonyXL:
+  file: '${outfits}\Leia DALL E-3  PonyXL.safetensors'
+  source: https://civitai.red/models/466961?modelVersionId=519613
+  
+SkindentationSlider:
+  file: '${outfits}\SkindentationSlider.safetensors'
+  source: https://civitai.red/models/827612?modelVersionId=925544
+  
+  
+
+
+#people_characters
+alice_tf_plus_v1:
+  file: '${characters}\alice_tf_plus_v1.safetensors'
+  source: https://civitai.red/models/915353?modelVersionId=1024505
+
+chel:
+  file: '${characters}\Chel_ElDorado.safetensors'
+  source: https://civitai.red/models/380690?modelVersionId=424989
+
+kim_possible:
+  file: '${characters}\Kim_Possible.safetensors'
+  source: https://civitai.red/models/2890865?modelVersionId=3268294
+  
+MegaraCivitai:
+  file: '${characters}\MegaraCivitai.safetensors'
+  source: https://civitai.red/models/360275?modelVersionId=402639
+  
+meru_succubus_ponyxl_v1_unet_resized:
+  file: '${characters}\meru_succubus_ponyxl_v1_unet_resized.safetensors'
+  source: https://civitai.red/models/359510?modelVersionId=401815
+  
+QueenTyra_character_10:
+  file: '${characters}\QueenTyra_character-10.safetensors'
+  source: https://civitai.red/models/861415?modelVersionId=963803
+
+raven:
+  file: '${characters}\raven-10.safetensors'
+  strength: 0.5
+  source: https://civitai.red/models/343666/raven-dc-nsfwsfw-sdxl-lora-pony
+
+starfire:
+  file: '${characters}\StarfireTTPony.safetensors'
+  source: https://civitai.red/models/887019/starfire-teen-titans-pony-illustrious?modelVersionId=992915
+  
+syx:
+  file: '${characters}\syx.safetensors'
+  source: https://civitai.red/models/1152130?modelVersionId=1295856
+
+  
+Wanda:
+  file: '${characters}\Wanda.safetensors'
+  source: https://civitai.red/models/669593?modelVersionId=1121698
+  
+
+
+#poses
+poses_0570_trash_can_v1_pony:
+  file: '${poses}\0570 trash can_v1_pony.safetensors'
+  source: https://civitai.red/models/466634?modelVersionId=519235
+  
+poses_airtight_000008:
+  file: '${poses}\airtight-000008.safetensors'
+  
+anuspeek_v2:
+  file: '${poses}\anuspeek_v2.safetensors'
+  source: https://civitai.red/models/1395976?modelVersionId=1634908
+  
+FUCKED_SILLY_Extreme_Rough_Sex_Best_Lewd_Expression_v1_0_Pony_XL:
+  file: '${poses}\FUCKED_SILLY_-_Extreme_Rough_Sex_-_Best_Lewd_Expression_v1.0__Pony_XL.safetensors'
+  source: https://civitai.red/models/1273929?modelVersionId=1448737
+  
+Multigrope:
+  file: '${poses}\Multigrope.safetensors'
+  source: https://civitai.red/models/653955?modelVersionId=731619
+  weight: 0.4
+  
+shirtlift_pony:
+  file: '${poses}\shirtlift_pony.safetensors'
+  source: https://civitai.red/models/646183?modelVersionId=722891
+  weight: 0.4
+  
+shirtpull_SDXL:
+  file: '${poses}\shirtpull_SDXL.safetensors'
+  source: https://civitai.red/models/128257?modelVersionId=140402
+  
+spreadass_xl:
+  file: '${poses}\spreadass_xl.safetensors'
+  source: https://civitai.red/models/731123?modelVersionId=817570
+  
+superdeep:
+  file: '${poses}\superdeep.safetensors'
+  
+top_down_doggystyle_v0_2_pony:
+  file: '${poses}\top-down_doggystyle_v0.2-pony.safetensors'
+  source: https://civitai.red/models/124027?modelVersionId=768929
+  
+Triple_Penetration_V3_PonyXL_000009:
+  file: '${poses}\Triple_Penetration_V3_-_PonyXL-000009.safetensors'
+  source: https://civitai.red/models/609865?modelVersionId=681697
+  
+
+  
+#enhancement visual styles
+add_detail_xl:
+  file: '${enhancements}\add-detail-xl.safetensors'
+  source: https://civitai.red/models/122359?modelVersionId=135867
+  
+anime_sdxl_v1:
+  file: '${enhancements}\anime_sdxl_v1.safetensors'
+  source: https://civitai.red/models/126750?modelVersionId=140052
+  
+Concept_Art_Twilight_Style_SDXL_LoRA_Pony_Diffusion_V6_XL:
+  file: '${enhancements}\Concept Art Twilight Style SDXL_LoRA_Pony Diffusion V6 XL.safetensors'
+  source: https://civitai.red/models/264290?modelVersionId=330475
+  
+detailed_notrigger:
+  file: '${enhancements}\detailed_notrigger.safetensors'
+  source: https://civitai.red/models/229213?modelVersionId=383563
+  
+DreamArtPonyV1_0:
+  file: '${enhancements}\DreamArtPonyV1.0.safetensors'
+  source: https://civitai.red/models/105491?modelVersionId=775927
+  
+Expressive_H_000001:
+  file: '${enhancements}\Expressive_H-000001.safetensors'
+  source: https://civitai.red/models/341353?modelVersionId=382152
+  
+g0th1c2XLP:
+  file: '${enhancements}\g0th1c2XLP.safetensors'
+  source: https://civitai.red/models/888231?modelVersionId=1029540
+  
+g0th1cPXL:
+  file: '${enhancements}\g0th1cPXL.safetensors'
+  source: https://civitai.red/models/888231?modelVersionId=398847
+  
+Kawaii_PastelCore_v1_xxXL:
+  file: '${enhancements}\Kawaii_PastelCore_v1_xxXL.safetensors'
+  source: https://civitai.red/models/1702738?modelVersionId=1926995
+  
+MythP0rtr4itStyle:
+  file: '${enhancements}\MythP0rtr4itStyle.safetensors'
+  source: https://civitai.red/models/599757?modelVersionId=704723
+  
+Sinfully_Stylish_dramitic_bold_lighting:
+  file: '${enhancements}\Sinfully_Stylish_dramitic_bold_lighting.safetensors'
+  
+Smooth_Anime_2_Style_SDXL_LoRA_Pony_Diffusion_V6_XL:
+  file: '${enhancements}\Smooth Anime 2 Style SDXL_LoRA_Pony Diffusion V6 XL.safetensors'
+  source: https://civitai.red/models/264290?modelVersionId=333607
+  
+Smooth_Style_2_SDXL_LoRA_Pony_Diffusion_V6_XL:
+  file: '${enhancements}\Smooth Style 2 SDXL_LoRA_Pony Diffusion V6 XL.safetensors'
+  source: https://civitai.red/models/264290?modelVersionId=333587
+  

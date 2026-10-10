@@ -1,0 +1,10 @@
+generate.local.yaml
+paths.local.yaml
+.venv/
+__pycache__/
+*.py[cod]
+output/*
+depths/inputs/*
+!depths/inputs/.gitkeep
+depths/outputs/*
+!depths/outputs/.gitkeep

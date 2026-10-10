@@ -1,0 +1,66 @@
+# Contributor note:
+# - Each top-level key is a character slug used by cards.yaml.
+# - Keep prompts descriptive and reusable; do not bake in a specific card title.
+# - `prompt` is the positive prompt text used during generation.
+# - `default_display` is optional label text for UI or card naming.
+# - Optional `lora` accepts one or more names or `{name, weight}` mappings.
+
+alice: 
+  prompt: 1girl, 18yo, blonde hair, long hair, lips, curvy, hair bow,  bow,  ,  mini_skirt,  white_thighhighs,  crop_top,  pink_laced_thong,  gigantic_breasts,   breasts, cleavage, navel, midriff, camel_toe,
+  lora:
+    - alice_tf_plus_v1
+  default_display: "ALICE"
+
+chel:
+  prompt: sh_el, 1girl, black hair, tanned skin, brown eyes, jade bracelet
+  lora:
+    - chel
+  default_display: "CHEL"
+
+kim_possible:
+  prompt: kim_possible, young woman, red hair, green eyes, thin, perky boobs, thick lips, pale skin
+  lora:
+    - kim_possible
+  default_display: "KIM POSSIBLE"
+
+megara:
+  prompt: brown hair, m_ra, 1girl, brown hair, purple eyes, big boobs, ponytail hair, thin body, big waist, pale skin
+  lora:
+    - MegaraCivitai
+  default_display: "MEGARA"
+
+meru:
+  prompt: succubus, red skin, horns, meru, perky boobs, thick thighs, short, devil tail, yellow eyes, dark lips, long dark hair, black hair, bangs, 
+  lora:
+    - meru_succubus_ponyxl_v1_unet_resized
+  default_display: "MERU"
+
+queentyra:
+  prompt: QueenTyra, colored skin, black skin, white hair, purple eyes, no mouth, jewelry, makeup, forehead jewel, egyptian clothes, bikini, necklace, gem, loincloth, bracer, bracelet,
+  lora:
+    - QueenTyra_character_10
+  default_display: "QUEEN TYRA"
+
+raven:
+  prompt: ravenDC, breasts, looking at viewer, blush, short hair, large breasts, purple eyes, purple hair, thighs,  shiny hair, shiny skin,colored skin, highleg, gem, grey skin, forehead jewel, perky boobs, round boobs
+  lora:
+    - raven
+  default_display: "RAVEN"
+
+starfire:
+  prompt: starfirett, red hair, solo, long hair, green eyes, orange skin, perky breasts, round boobs
+  lora:
+    - starfire
+  default_display: "STARFIRE"
+
+syx:
+  prompt: syx purple skin elf, syx outfit, white hair, purple outfit, collar, anklets, bracelets,long gloves, hoop earrings, multiple earrings, gigantic breasts
+  lora:
+    - syx
+  default_display: "SYX"
+
+wanda:
+  prompt: w4nd4, pink hair, pink eyes, lipstick, crown, wings
+  lora:
+    - Wanda
+  default_display: "WANDA"

@@ -1,0 +1,30 @@
+
+# Choose generate_images or depth_maps.
+mode: generate_images
+
+checkpoint_to_use: pony
+
+
+#NOTE: For SDXL, it is recommended to use trained values listed below:
+#  - 1024 x 1024
+#  - 1152 x 896
+#  - 896  x 1152
+#  - 1216 x 832
+#  - 832  x 1216
+#  - 1344 x 768
+#  - 768  x 1344
+#  - 1536 x 640
+#  - 640  x 1536
+image_size:
+  width: 1024
+  height: 1024
+
+global_positive: score_9, score_8_up, score_7_up, masterpiece, best quality, sexy, 
+global_negative: bad text, score_4, score_5, score_6, (low quality, worst quality:1.4), poorly drawn hands, bad anatomy, monochrome, bad anatomy , liquid body, malformed, mutated, anatomical nonsense ,bad proportions, uncoordinated body, disfigured, ugly, gross proportions ,mutation, disfigured, deformed
+
+sets_to_generate:
+  - set_1
+  - set_2
+
+# Used only with mode: depth_maps. Put images under depths/inputs; nested
+# folders are mirrored under depths/outputs with depth_ prefixed to each name.

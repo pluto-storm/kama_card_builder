@@ -1,0 +1,166 @@
+{
+  "232": {
+    "inputs": {
+      "filename_prefix": "2026-10-09/143004483955_set_1/depth_card_1",
+      "images": [
+        "246:1",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "251": {
+    "inputs": {
+      "image": "cammy_00001_.png"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "245:243": {
+    "inputs": {
+      "model_name": "depth_anything_3_mono_large.safetensors",
+      "weight_dtype": "default"
+    },
+    "class_type": "LoadDA3Model",
+    "_meta": {
+      "title": "Load Depth Anything 3"
+    }
+  },
+  "246:96": {
+    "inputs": {
+      "choice": "RGB",
+      "index": 0,
+      "option1": "RGB",
+      "option2": "R",
+      "option3": "G",
+      "option4": "B",
+      "option5": ""
+    },
+    "class_type": "CustomCombo",
+    "_meta": {
+      "title": "Channel"
+    }
+  },
+  "246:244": {
+    "inputs": {
+      "value": 0
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Output Black"
+    }
+  },
+  "246:3": {
+    "inputs": {
+      "value": 90
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Input Black"
+    }
+  },
+  "246:97": {
+    "inputs": {
+      "value": 255
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Input White"
+    }
+  },
+  "246:98": {
+    "inputs": {
+      "value": 0.6
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Gamma"
+    }
+  },
+  "246:9": {
+    "inputs": {
+      "value": 201.7
+    },
+    "class_type": "PrimitiveFloat",
+    "_meta": {
+      "title": "Output White"
+    }
+  },
+  "245:242": {
+    "inputs": {
+      "resolution": 1498,
+      "resize_method": "lower_bound_resize",
+      "mode": "mono",
+      "da3_model": [
+        "245:243",
+        0
+      ],
+      "image": [
+        "251",
+        0
+      ]
+    },
+    "class_type": "DA3Inference",
+    "_meta": {
+      "title": "Run Depth Anything 3"
+    }
+  },
+  "245:241": {
+    "inputs": {
+      "output": "depth",
+      "output.normalization": "v2_style",
+      "output.apply_sky_clip": false,
+      "da3_geometry": [
+        "245:242",
+        0
+      ]
+    },
+    "class_type": "DA3Render",
+    "_meta": {
+      "title": "Render Depth Anything 3"
+    }
+  },
+  "246:1": {
+    "inputs": {
+      "fragment_shader": "#version 300 es\nprecision highp float;\n\n// Levels Adjustment\n// u_int0:   channel      (0=RGB, 1=R, 2=G, 3=B)         default: 0\n// u_float0: input black  (0-255)                        default: 0\n// u_float1: input white  (0-255)                        default: 255\n// u_float2: gamma        (0.01-9.99)                    default: 1.0\n// u_float3: output black (0-255)                        default: 0\n// u_float4: output white (0-255)                        default: 255\n\nuniform sampler2D u_image0;\nuniform int u_int0;\nuniform float u_float0;\nuniform float u_float1;\nuniform float u_float2;\nuniform float u_float3;\nuniform float u_float4;\n\nin vec2 v_texCoord;\nout vec4 fragColor;\n\nvec3 applyLevels(vec3 color, float inBlack, float inWhite, float gamma, float outBlack, float outWhite) {\n    float inRange = max(inWhite - inBlack, 0.0001);\n    vec3 result = clamp((color - inBlack) / inRange, 0.0, 1.0);\n    result = pow(result, vec3(1.0 / gamma));\n    result = mix(vec3(outBlack), vec3(outWhite), result);\n    return result;\n}\n\nfloat applySingleChannel(float value, float inBlack, float inWhite, float gamma, float outBlack, float outWhite) {\n    float inRange = max(inWhite - inBlack, 0.0001);\n    float result = clamp((value - inBlack) / inRange, 0.0, 1.0);\n    result = pow(result, 1.0 / gamma);\n    result = mix(outBlack, outWhite, result);\n    return result;\n}\n\nvoid main() {\n    vec4 texColor = texture(u_image0, v_texCoord);\n    vec3 color = texColor.rgb;\n    \n    float inBlack = u_float0 / 255.0;\n    float inWhite = u_float1 / 255.0;\n    float gamma = u_float2;\n    float outBlack = u_float3 / 255.0;\n    float outWhite = u_float4 / 255.0;\n    \n    vec3 result;\n    \n    if (u_int0 == 0) {\n        result = applyLevels(color, inBlack, inWhite, gamma, outBlack, outWhite);\n    }\n    else if (u_int0 == 1) {\n        result = color;\n        result.r = applySingleChannel(color.r, inBlack, inWhite, gamma, outBlack, outWhite);\n    }\n    else if (u_int0 == 2) {\n        result = color;\n        result.g = applySingleChannel(color.g, inBlack, inWhite, gamma, outBlack, outWhite);\n    }\n    else if (u_int0 == 3) {\n        result = color;\n        result.b = applySingleChannel(color.b, inBlack, inWhite, gamma, outBlack, outWhite);\n    }\n    else {\n        result = color;\n    }\n    \n    fragColor = vec4(result, texColor.a);\n}",
+      "size_mode": "from_input",
+      "images.image0": [
+        "245:241",
+        0
+      ],
+      "floats.u_float0": [
+        "246:3",
+        0
+      ],
+      "floats.u_float1": [
+        "246:97",
+        0
+      ],
+      "floats.u_float2": [
+        "246:98",
+        0
+      ],
+      "floats.u_float3": [
+        "246:244",
+        0
+      ],
+      "floats.u_float4": [
+        "246:9",
+        0
+      ],
+      "ints.u_int0": [
+        "246:96",
+        1
+      ]
+    },
+    "class_type": "GLSLShader",
+    "_meta": {
+      "title": "GLSL Shader"
+    }
+  }
+}

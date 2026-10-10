@@ -1,0 +1,29 @@
+# Contributor note:
+# - Top-level keys are checkpoint names referenced by generate.local.yaml.
+# - Keep `file` relative to the configured checkpoints_dir path.
+# - `base_model` helps validate LoRA compatibility.
+# - `sampler_defaults` are fallback generation settings; local generate.local.yaml can override them.
+
+pony:
+  name: Pony Diffusion V6XL
+  file: ${checkpoints_dir}/ponyDiffusionV6XL_v6StartWithThisOne.safetensors
+  base_model: pony
+  source: https://huggingface.co/LyliaEngine/Pony_Diffusion_V6_XL
+  sampler_defaults:
+    steps: 40
+    cfg: 9
+    sampler: dpmpp_2m_sde
+    scheduler: karras
+
+cyberpony_real: 
+  name: Cyber Pony Realistic
+  file: ${checkpoints_dir}/cyberrealisticPony_v125.safetensor
+  base_model: pony
+  source: https://huggingface.co/cyberdelia/CyberRealisticPony
+  sampler_defaults:
+    steps: 40
+    cfg: 8.0
+    sampler: dpmpp_2m_sde
+    scheduler: karras
+
+
