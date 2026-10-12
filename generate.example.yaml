@@ -19,8 +19,8 @@ image_size:
   width: 1024
   height: 1024
 
-global_positive: score_9, score_8_up, score_7_up, masterpiece, best quality, sexy, 
-global_negative: bad text, score_4, score_5, score_6, (low quality, worst quality:1.4), poorly drawn hands, bad anatomy, monochrome, bad anatomy , liquid body, malformed, mutated, anatomical nonsense ,bad proportions, uncoordinated body, disfigured, ugly, gross proportions ,mutation, disfigured, deformed
+global_positive: score_9, score_8_up, score_7_up, masterpiece, best quality, sexy, 1girl
+global_negative: bad text, score_4, score_5, score_6, (low quality, worst quality:1.4), poorly drawn hands, bad anatomy, monochrome, bad anatomy , liquid body, malformed, mutated, anatomical nonsense ,bad proportions, uncoordinated body, disfigured, ugly, gross proportions ,mutation, disfigured, deformed, painting, portraits, clones, twins, duplicates, background people, crowded areas, mirrors, mirror
 
 sets_to_generate:
   - set_1

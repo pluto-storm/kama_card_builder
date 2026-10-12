@@ -1,6 +1,6 @@
 # Contributor note:
 # - `lora_presets` is a reusable grouping of LoRA entries that can be referenced from cards.yaml.
-# - Each preset entry must be a list of `{name, weight}` objects or plain names.
+# - Preset entries may be plain names or `{name, weight, clip}` objects; `clip` is optional and defaults to `weight`.
 # - The top-level entries below are individual LoRA definitions keyed by their exact name.
 # - Keep file paths relative to the configured `loras_dir` and support `${...}` variables when needed.
 # - `source` is an optional URL to the source model page; prefer the exact version when known.
@@ -18,14 +18,40 @@ lora_presets:
     weight: 0.6
   - name: anime_sdxl_v1
     weight: 0.6
+  preset_3:
+  - name: Melkor_Mancin_Style_V3
+    weight: 0.6
+  - name: princess
+    weight: 0.4
+  - name: reiq_style_xl_ilff
+    weight: 0.4
+  - name: SkindentationSlider
+    weight: 1.5
+  - name: Expressive_H_000001
+    weight: 0.5
+  preset_4:
+  - name: MoriiMee_Gothic_Niji_Style
+    weight: 0.7
+  - name: reiq_style_xl_ilff
+    weight: 0.8
+  - name: princess
+    weight: 0.3
+    clip: 0.3
+  - name: kingbang
+    weight: 0.3
+  - name: SkindentationSlider
+    weight: 1.0
+  - name: Expressive_H_000001
+    weight: 0.5
 
+  
 
 
 #art styles
 Akabur_IllustriousV1:
   file: '${styles}\Akabur_IllustriousV1.safetensors'
   source: https://civitai.red/models/349063?modelVersionId=1147346
-  prompt: Akaburstyle
+  prompt: Akaburstyle, hand drawn, cartoon
 
 AomizuanCE:
   file: '${styles}\AomizuanCE.safetensors'
@@ -108,15 +134,24 @@ Lunas_Sparrow_SDXL_A1:
   file: '${styles}\Lunas-Sparrow-SDXL-A1.safetensors'
   source: https://civitai.red/models/347128?modelVersionId=388378
   
+Melkor_Mancin_Style_V3:
+  file: '${styles}\Melkor_Mancin_Style_V3-000020.safetensors'
+  source: https://civitai.red/models/876652/melkor-mancin-style?modelVersionId=1194544
+  prompt: melkor_style
+
 Melkor_V4_Illustrious_20:
   file: '${styles}\Melkor_V4_Illustrious_20.safetensors'
   source: https://civitai.red/models/876652?modelVersionId=1535275
   prompt: melkor_style
-  
+
 Mixplin:
   file: '${styles}\Mixplin.safetensors'
   source: https://civitai.red/models/1700543
   
+MoriiMee_Gothic_Niji_Style:
+  file: '${styles}\MoriiMee_Gothic_Niji_Style__Pony_LoRA_V1_Redux.safetensors'
+  source: https://civitai.red/models/915918?modelVersionId=1122823
+
 NowaJoestar_Style:
   file: '${styles}\NowaJoestar_Style.safetensors'
   source: https://civitai.red/models/537408?modelVersionId=597422
@@ -129,9 +164,9 @@ Pony_XL_Kingbang_Style:
   file: '${styles}\Pony_XL_Kingbang_Style.safetensors'
   source: https://civitai.red/models/413050?modelVersionId=460335
   
-princess_xl_v2:
+princess:
   file: '${styles}\princess_xl_v2.safetensors'
-  source: https://civitai.red/models/212532?modelVersionId=244808
+  source: https://civitai.red/models/212532?modelVersionId=1467389
   
 rabiestlagomorph_guy_PONYv1:
   file: '${styles}\rabiestlagomorph-guy-PONYv1.safetensors'

@@ -41,6 +41,78 @@ queentyra:
     - QueenTyra_character_10
   default_display: "QUEEN TYRA"
 
+
+princess_rapunzel:
+  prompt: rapunzel, long blonde hair, green eyes, fair skin, slim body, perky boobs, thin legs
+  lora:
+    - princess
+  default_display: "PRINCESS RAPUNZEL"
+princess_snow_white:
+  prompt: snow white, black hair, fair skin, red lips, short hair, curvy body, 
+  lora:
+    - princess
+  default_display: "PRINCESS SNOW WHITE"
+princess_ariel:
+  prompt: ariel, red hair, blue eyes, fair skin athletic body
+  lora:
+    - princess
+  default_display: "PRINCESS ARIEL"
+princess_aurora:
+  prompt: aurora, long blonde hair, blue eyes, fair skin, 
+  lora:
+    - princess
+  default_display: "PRINCESS AURORA"
+princess_belle:
+  prompt: belle, brown hair, blue eyes, fair skin
+  lora:
+    - princess
+  default_display: "PRINCESS BELLE"
+princess_cinderella:
+  prompt: cinderella, blonde hair, blue eyes, fair skin
+  lora:
+    - princess
+  default_display: "PRINCESS CINDERELLA"
+princess_elsa:
+  prompt: elsa, platinum blonde hair, blue eyes, fair skin
+  lora:
+    - princess
+  default_display: "PRINCESS ELSA"
+princess_anna:
+  prompt: anna, red hair, blue eyes, fair skin
+  lora:
+    - princess
+  default_display: "PRINCESS ANNA"  
+princess_jasmine:
+  prompt: jasmine, black hair, brown eyes, tan skin, big boobs, curvy body
+  lora:
+    - princess
+  default_display: "PRINCESS JASMINE"
+princess_mulan:
+  prompt: mulan, black hair, brown eyes, fair skin
+  lora:
+    - princess
+  default_display: "PRINCESS MULAN"
+princess_merida:
+  prompt: merida, curly red hair, blue eyes, fair skin, freckles, 
+  lora:
+    - princess
+  default_display: "PRINCESS MERIDA"
+princess_tiana:
+  prompt: tiana, dark brown hair, brown eyes, dark skin
+  lora:
+    - princess
+  default_display: "PRINCESS TIANA"
+princess_pocahontas:
+  prompt: pocahontas, long black hair, brown eyes, tan skin, athletic body
+  lora:
+    - princess
+  default_display: "PRINCESS POCAHONTAS"
+princess_moana:
+  prompt: moana, long brown hair, brown eyes, tan skin, thick body, athletic bodoy, strong legs
+  lora:
+    - princess
+  default_display: "PRINCESS MOANA"
+
 raven:
   prompt: ravenDC, breasts, looking at viewer, blush, short hair, large breasts, purple eyes, purple hair, thighs,  shiny hair, shiny skin,colored skin, highleg, gem, grey skin, forehead jewel, perky boobs, round boobs
   lora:
@@ -64,3 +136,6 @@ wanda:
   lora:
     - Wanda
   default_display: "WANDA"
+
+
+  

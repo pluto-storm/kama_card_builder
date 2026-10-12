@@ -23,6 +23,10 @@ city:
   prompt: city background, buildings, streets, traffic
   default_display: "CITY"
 
+castle:
+  prompt: castle background, stone walls, towers, banners
+  default_display: "CASTLE"
+
 desert:
   prompt: desert background, sand dunes, cacti, clear sky
   default_display: "DESERT"
@@ -31,12 +35,16 @@ forest:
   prompt: forest background, trees, foliage, sunlight filtering through leaves
   default_display: "FOREST"
 
+girl_room:
+  prompt: girl room background, bed, desk, chair, pink room, girly room
+  default_display: "GIRL ROOM"
+
 gym:
-  prompt: gym background, exercise equipment, mirrors, wooden floor
+  prompt: gym background, exercise equipment, wooden floor
   default_display: "GYM"
 
 gym_shower:
-  prompt: gym shower background, shower stalls, tiled walls, mirrors
+  prompt: gym shower background, shower stalls, tiled walls
   default_display: "GYM SHOWER"
 
 mountain:
@@ -50,6 +58,10 @@ park:
 school:
   prompt: school background, classroom, desks, chalkboard
   default_display: "SCHOOL"
+
+shower:
+  prompt: taking a shower, in the shower, wet, water running, wet hair, wet body
+  default_display: "SHOWER"
 
 space:
   prompt: space background, stars, planets, nebulae

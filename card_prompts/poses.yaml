@@ -6,6 +6,10 @@
 
 #Pinup
 
+basic_0:
+  prompt: looking at viewer, happy expression, hands at sides
+  default_display: "BASIC 0"
+
 basic_1:
   prompt:  looking at viewer, bored, glare, seductive girl, focus, hands across chest, 
   default_display: "BASIC 1"
@@ -21,6 +25,10 @@ basic_3:
 proud: 
   prompt: confident smile, chest puffed out, head held high, hands on hips
   default_display: "PROUD"
+
+push_up_boobs:
+  prompt: accentuated cleavage, hands on chest, seductive pose
+  default_display: "PUSH UP BOOBS"
 
 surprised: 
   prompt: surprised, wide eyes, open mouth, eyebrows raised, hands up in surprise, open palms

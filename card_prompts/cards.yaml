@@ -29,38 +29,63 @@
 #   card_2:
 #     ...
 
+
+
+#Rapunzel, Snow White, Ariel, Aurora, Belle, Cinderella, Elsa, Anna, Jasmine, Mulan, Merida, Tiana, Moana, and Pocahontas
 set_1:
   set_defaults:
-    character: raven
-    prompt_pos: 1girl, sexy, anime, perky boobs, round boobs
+    lora_preset: preset_4
+    character: princess_rapunzel
+    prompt_pos: 1girl, sexy, perky boobs, round boobs
   card_1:
-    outfit: raven
-    pose: basic_1
-    place: city
+    outfit: princess_rapunzel
+    pose: basic_0
+    place: girl_room
   card_2:
+    outfit: princess_rapunzel
+    pose: thinking
+    place: girl_room
+    prompt_pos: leg exposed, sitting down, legs out
+  card_3:
+    outfit: naked
+    pose: basic_0
+    place: shower
+  card_4:
     outfit: bikini
     pose: basic_2
     place: beach
-    prompt_pos: black bikini, micro bikini, nip slip
-  card_3:
-    outfit: naked
-    pose: basic_3
-    place: bathroom
+    prompt_pos: pink bikini
+  card_5:
+    outfit: bikini
+    pose: surprised
+    place: beach
+    prompt_pos: pink bikini, bikini top falling off, exposed nipples
 
 set_2:
   set_defaults:
-    character: starfire
-    prompt_pos: 1girl, sexy, anime, perky boobs, round boobs
+    lora_preset: preset_4
+    character: princess_snow_white
+    prompt_pos: 1girl, sexy, perky boobs, round boobs
   card_1:
-    outfit: starfire
-    pose: basic_1
-    place: city
+    outfit: princess_snow_white
+    pose: basic_0
+    place: girl_room
   card_2:
+    outfit: princess_snow_white
+    pose: thinking
+    place: girl_room
+    prompt_pos: leg exposed, sitting down, legs out
+  card_3:
+    outfit: naked
+    pose: basic_2
+    place: shower
+  card_4:
     outfit: bikini
     pose: basic_2
     place: beach
-    prompt_pos: purple bikini, micro bikini, nip slip
-  card_3:
-    outfit: naked
-    pose: basic_3
-    place: bathroom
+    prompt_pos: blue bikini
+  card_5:
+    outfit: bikini
+    pose: surprised
+    place: beach
+    prompt_pos: blue bikini, bikini top falling off, exposed nipples

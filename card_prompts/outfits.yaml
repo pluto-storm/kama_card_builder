@@ -103,6 +103,49 @@ preppy:
   prompt: polo shirt, pleated skirt, loafers, knee-high socks, headband
   default_display: "PREPPY"
 
+princess_rapunzel:
+  prompt: rapunzel dress, long golden braid, purple princess gown, fitted bodice, deep plunge neckline, low-cut waist, flowing layered skirt, puffed sleeves, romantic fairytale dress, floral hair ribbon
+
+princess_snow_white:
+  prompt: snow white dress, classic blue and yellow princess dress, fitted bodice, low-cut neckline, deep cleavage, full skirt, puffed sleeves, lace trim, delicate apron, elegant fairytale gown
+
+princess_ariel:
+  prompt: ariel dress, pink mermaid princess gown, fitted shell bodice, plunging neckline, low-cut top, flowing skirt, layered tail fins, sea-inspired trim, romantic underwater princess dress
+
+princess_aurora:
+  prompt: aurora dress, rose-pink ball gown, fitted bodice, low-cut sweetheart neckline, deep cleavage, full layered skirt, puffed sleeves, delicate lace, soft tulle, romantic princess dress
+
+princess_belle:
+  prompt: belle dress, yellow ball gown, fitted bodice, low-cut corset, deep neckline, full skirt, lace-up corset, puffed sleeves, golden trim, elegant disney-inspired princess dress
+
+princess_cinderella:
+  prompt: cinderella dress, blue fairy-tale ball gown, fitted bodice, deep sweetheart neckline, low-cut bodice, full layered skirt, puffed sleeves, crystal embellishments, delicate gloves, elegant princess dress
+
+princess_elsa:
+  prompt: elsa dress, ice blue ball gown, fitted bodice, low-cut neckline, deep cleavage, long sleeves, cape, snowflake details, sparkling crystal trim, layered skirt
+
+princess_anna:
+  prompt: anna dress, warm burgundy gown, fitted bodice, deep neckline, puffy sleeves, layered skirt, snowflake embroidery, soft cape, princess dress, slight risky bodice
+
+princess_jasmine:
+  prompt: jasmine outfit, golden desert princess dress, jeweled bodice, fitted waist, plunging neckline, low-cut top, flowing skirt, sheer sleeves, ornate belt, arabian-inspired gown
+
+princess_mulan:
+  prompt: mulan dress, red and gold traditional dress, embroidered bodice, deep neckline, low-cut bodice, flowing sleeves, wrap waist, layered skirt, elegant warrior princess outfit
+
+princess_merida:
+  prompt: merida dress, green tartan dress, fitted bodice, low-cut neckline, layered skirt, lace-up bodice, long sleeves, rustic princess outfit, Scottish-inspired gown, daring sweetheart neckline
+
+princess_tiana:
+  prompt: tiana dress, soft green ball gown, fitted bodice, deep neckline, low-cut bodice, layered skirt, pearl accents, elegant sleeves, elegant disney princess dress
+
+princess_pocahontas:
+  prompt: pocahontas outfit, earthy brown and tan dress, beadwork, fringe trim, fitted bodice, deep neckline, low-cut top, layered skirt, native-inspired princess outfit
+
+princess_moana:
+  prompt: moana outfit, teal and coral island dress, wrap bodice, low-cut neckline, deep cleavage, flowing skirt, leaf accents, ocean-inspired princess gown 
+
+
 punk: 
   prompt: ripped jeans, band t shirt, leather jacket, studded belt, combat boots
   default_display: "PUNK"
@@ -156,3 +199,7 @@ wanda_1:
 wanda_2:
   prompt: yellow bra, pink panties, garter belt, garter straps, pink thighhighs, black heels
   default_display: "SEXY FAIRY"
+
+
+
+
