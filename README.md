@@ -193,7 +193,7 @@ Keep `comfyui_url` set to the address ComfyUI uses. If you run ComfyUI on anothe
 
 For image generation, the name in `checkpoint_to_use` must match an entry in `workflow/checkpoints.yaml`. That entry's `file` must identify an installed checkpoint under `checkpoints_dir`.
 
-Every LoRA referenced by a character, outfit, pose, place, card, or preset must have an entry in `workflow/loras.yaml`. Its `file` must point to an installed LoRA under `loras_dir`. Presets are groups of LoRA names defined under `lora_presets` in that same file.
+Every LoRA referenced by a character, outfit, pose, place, card, or preset must have an entry in `workflow/loras.yaml`. Its `file` must point to an installed LoRA under `loras_dir`. Presets are groups of LoRA names defined under `lora_presets` in that same file. A preset LoRA can specify `weight` for model strength and optional `clip` for CLIP strength; when `clip` is omitted, it defaults to `weight`.
 
 Example checkpoint entry:
 

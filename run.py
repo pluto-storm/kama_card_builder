@@ -47,6 +47,7 @@ workflow/loras.yaml
     kim_lora:
       file: characters/kim_v2.safetensors # relative to loras_dir
       base_model: sdxl                    # optional
+      prompt: kim style                   # optional positive-prompt text
       trigger_words: [kim_possible]       # optional (list or string)
     default_weight: 0.85                # optional (falls back to 0.7)
 
@@ -94,8 +95,8 @@ WORKFLOW_DIR = ROOT / "workflow"
 DEPTH_INPUT_DIR = ROOT / "depths" / "inputs"
 DEPTH_OUTPUT_DIR = ROOT / "depths" / "outputs"
 
-# Order matters: prompts are assembled in this order, and for LoRAs
-# the later (more specific) level overrides the weight of earlier ones.
+# Order matters: prompts are assembled in this order, and later LoRA
+# references override model and CLIP strengths from earlier ones.
 LIBRARY_KINDS = ["character", "outfit", "pose", "place"]
 LIBRARY_FILES = {
     "character": "characters.yaml",
@@ -216,18 +217,18 @@ def as_list(value) -> list:
 
 
 def normalize_lora_refs(refs, where: str) -> list:
-    """Accepts ['name', {name: x, weight: 0.5}] -> [(name, weight_or_None)]."""
+    """Normalize LoRA references into (name, weight, clip) tuples."""
     out = []
     if isinstance(refs, (str, dict)):
         refs = [refs]
     for ref in refs or []:
         if isinstance(ref, str):
-            out.append((ref, None))
+            out.append((ref, None, None))
         elif isinstance(ref, dict) and "name" in ref:
-            out.append((ref["name"], ref.get("weight")))
+            out.append((ref["name"], ref.get("weight"), ref.get("clip")))
         else:
             raise ConfigError(
-                f"{where}: lora entries must be a name or {{name:, weight:}}, got {ref!r}"
+                f"{where}: lora entries must be a name or {{name:, weight:, clip:}}, got {ref!r}"
             )
     return out
 
@@ -309,7 +310,7 @@ def validate_library(lib: dict) -> None:
                 continue
             if not isinstance(ref, dict) or "name" not in ref:
                 raise ConfigError(
-                    f"workflow/loras.yaml: preset '{preset_name}' entries must be strings or {{name, weight}}"
+                    f"workflow/loras.yaml: preset '{preset_name}' entries must be strings or mappings with a name field"
                 )
 
 
@@ -468,18 +469,20 @@ def build_card(where, card, gen, lib, loras_dir, ckpt, ckpt_name, paths) -> dict
     pos_parts.append(gen.get("prompt_pos_suffix"))
 
     # --- merge loras ------------------------------------------------------
-    merged = {}  # name -> weight (dict preserves first-seen order)
-    for name, weight in lora_refs:
+    merged = {}  # name -> (weight, clip); dict preserves first-seen order
+    for name, weight, clip in lora_refs:
         if name not in lib["loras"]:
             raise ConfigError(f"{where}: lora '{name}' not found in workflow/loras.yaml")
         entry = lib["loras"][name] or {}
         if weight is None:
             weight = entry.get("default_weight", 0.7)
-        merged[name] = float(weight)  # later (more specific) wins
+        weight = float(weight)
+        merged[name] = (weight, weight if clip is None else float(clip))
 
     lora_list = []
     trigger_words = []
-    for name, weight in merged.items():
+    lora_prompts = []
+    for name, (weight, clip) in merged.items():
         entry = lib["loras"][name] or {}
         if "file" not in entry:
             raise ConfigError(f"{where}: lora '{name}' has no 'file' field")
@@ -494,12 +497,24 @@ def build_card(where, card, gen, lib, loras_dir, ckpt, ckpt_name, paths) -> dict
         for word in as_list(entry.get("trigger_words")):
             if word not in trigger_words:
                 trigger_words.append(word)
+        for prompt in as_list(entry.get("prompt")):
+            if prompt not in lora_prompts:
+                lora_prompts.append(prompt)
 
         lora_path = expand_vars(entry["file"], paths, label=f"lora '{name}'")
-        lora_list.append({"name": name, "path": str(Path(loras_dir) / lora_path), "weight": weight})
+        lora_list.append(
+            {
+                "name": name,
+                "path": str(Path(loras_dir) / lora_path),
+                "weight": weight,
+                "clip": clip,
+            }
+        )
 
-    # trigger words go first so they are never lost behind a long prompt
-    positive = join_prompt([join_prompt(trigger_words)] + pos_parts)
+    # Trigger words and LoRA prompts go first so they are not lost behind a long prompt.
+    positive = join_prompt(
+        [join_prompt(trigger_words), join_prompt(lora_prompts)] + pos_parts
+    )
     negative = join_prompt(neg_parts)
 
     return {

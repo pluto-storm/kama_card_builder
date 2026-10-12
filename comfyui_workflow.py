@@ -167,7 +167,7 @@ def build_api_workflow(template, job, paths, run_id, date_name):
                     lora["path"], paths["loras_dir"], "LoRA", job_id
                 ),
                 "strength_model": lora["weight"],
-                "strength_clip": lora["weight"],
+                "strength_clip": lora.get("clip", lora["weight"]),
                 "model": [lora_source, 0],
                 "clip": [lora_source, 1],
             },
