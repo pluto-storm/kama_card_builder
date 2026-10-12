@@ -93,14 +93,10 @@ def _reserve_output_stem(set_name, base_stem, reserved_names):
     set_component = _safe_component(set_name)
     candidate = base_stem
     suffix = 2
-    while (
-        (set_component, candidate) in reserved_names
-        or (set_component, f"depth_{candidate}") in reserved_names
-    ):
+    while (set_component, candidate) in reserved_names:
         candidate = f"{base_stem}_{suffix}"
         suffix += 1
     reserved_names.add((set_component, candidate))
-    reserved_names.add((set_component, f"depth_{candidate}"))
     return candidate
 
 
@@ -157,7 +153,7 @@ def build_api_workflow(template, job, paths, run_id, date_name):
     ] = f"{set_prefix}/{_safe_component(job['card'])}"
     _required_node(workflow, NODE_IDS["save_depth"], job_id)["inputs"][
         "filename_prefix"
-    ] = f"{set_prefix}/depth_{_safe_component(job['card'])}"
+    ] = f"{set_prefix}/depths/{_safe_component(job['card'])}"
 
     loader_id = NODE_IDS["lora_loader"]
     _required_node(workflow, loader_id, job_id)
@@ -207,7 +203,7 @@ def build_depth_api_workflow(template, job, comfyui_image, run_id, date_name):
     set_prefix = f"{date_name}/{_safe_component(set_name)}"
     _required_node(workflow, NODE_IDS["save_depth"], job_id)["inputs"][
         "filename_prefix"
-    ] = f"{set_prefix}/depth_{_safe_component(job['card'])}"
+    ] = f"{set_prefix}/{_safe_component(job['card'])}"
     return workflow
 
 
@@ -361,10 +357,9 @@ def _save_completed_images(
 ):
     outputs = prompt_history.get("outputs", {})
     saved_paths = []
-    output_directory = None
-    for node_id, filename_prefix in (
-        (NODE_IDS["save_image"], ""),
-        (NODE_IDS["save_depth"], "depth_"),
+    for node_id, relative_directory in (
+        (NODE_IDS["save_image"], ()),
+        (NODE_IDS["save_depth"], ("depths",)),
     ):
         images = outputs.get(node_id, {}).get("images", [])
         if not images:
@@ -375,7 +370,10 @@ def _save_completed_images(
         for image_index, image in enumerate(images, start=1):
             set_name = f"{run_id}_{_safe_component(job['set'])}"
             index_suffix = f"_{image_index}" if len(images) > 1 else ""
-            filename = f"{filename_prefix}{filename_stem}{index_suffix}.png"
+            filename = f"{filename_stem}{index_suffix}.png"
+            destination = Path(output_root).joinpath(
+                date_name, set_name, *relative_directory, filename
+            )
             image_path = _move_completed_image(
                 image,
                 output_root,
@@ -383,8 +381,9 @@ def _save_completed_images(
                 date_name,
                 set_name,
                 filename,
+                expected_subfolder=[date_name, set_name, *relative_directory],
+                destination_path=destination,
             )
-            output_directory = image_path.parent
             saved_paths.append(image_path)
 
     source_set_directory = (
@@ -393,10 +392,17 @@ def _save_completed_images(
         / f"{run_id}_{_safe_component(job['set'])}"
     )
     try:
+        (source_set_directory / "depths").rmdir()
+    except OSError:
+        pass
+    try:
         source_set_directory.rmdir()
     except OSError:
         pass
 
+    output_directory = (
+        Path(output_root) / date_name / f"{run_id}_{_safe_component(job['set'])}"
+    )
     return output_directory, saved_paths
 
 

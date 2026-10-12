@@ -20,7 +20,7 @@ In `generate_images` mode, `run.py` loads the card sets and prompt dictionaries 
 
 The runner then passes those resolved jobs to `comfyui_workflow.py`. That helper fills the `workflow/image_gen_w_depth.json` API graph with each job's prompt, checkpoint, seed, dimensions, sampler settings, and LoRAs; submits it to ComfyUI; waits for completion; and moves the generated image and depth image into the configured output folder.
 
-In `depth_maps` mode, `run.py` skips the card and model catalogs. It finds supported images recursively in `depths/inputs`, and `comfyui_workflow.py` uploads each one to ComfyUI and runs `workflow/image_gen_depth.json`. The resulting depth image is saved under `depths/outputs` with the same relative folder and a `depth_` filename prefix.
+In `depth_maps` mode, `run.py` skips the card and model catalogs. It finds supported images recursively in `depths/inputs`, and `comfyui_workflow.py` uploads each one to ComfyUI and runs `workflow/image_gen_depth.json`. The resulting depth image is saved under `depths/outputs` with the same relative folder and filename stem.
 
 ## Why the Data Is Split This Way
 
@@ -258,7 +258,7 @@ To generate depth maps for existing images instead, set:
 mode: depth_maps
 ```
 
-Then put images in `depths/inputs`. Subfolders are supported. The runner processes PNG, JPG/JPEG, WEBP, and BMP files recursively and mirrors their folder locations under `depths/outputs`. For example, `depths/inputs/people/kim/pose.jpg` becomes `depths/outputs/people/kim/depth_pose.png`. If two source files have the same name but different extensions, the output names include the source extension to keep them unique.
+Then put images in `depths/inputs`. Subfolders are supported. The runner processes PNG, JPG/JPEG, WEBP, and BMP files recursively and mirrors their folder locations under `depths/outputs`. For example, `depths/inputs/people/kim/pose.jpg` becomes `depths/outputs/people/kim/pose.png`. If two source files have the same name but different extensions, the output names include the source extension to keep them unique.
 
 ## 6. Run the Project
 
@@ -302,9 +302,9 @@ python run.py --json jobs.json       # save the resolved job list as JSON
 
 ## Where Results Go
 
-Image-generation runs create a new dated, timestamped folder under the configured `output_dir`. Each card's generated image and depth map are saved there.
+Image-generation runs create a new dated, timestamped folder under the configured `output_dir`. Each card's generated image is saved there, and its same-named depth map is saved in that folder's `depths` subfolder.
 
-Depth-only runs save maps under `depths/outputs`, keeping the input folder structure and adding `depth_` to each filename. The original input images are not changed. If an output file already exists, the runner will not overwrite it; move or rename the existing output before retrying that image.
+Depth-only runs save maps under `depths/outputs`, keeping the input folder structure and filename stem. The original input images are not changed. If an output file already exists, the runner will not overwrite it; move or rename the existing output before retrying that image.
 
 ## Still in Progress
 - Make body data type so that each character can have different body types defined and easily switch 

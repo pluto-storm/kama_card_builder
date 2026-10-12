@@ -546,13 +546,13 @@ def build_depth_jobs() -> list:
     for image in images:
         relative_path = image.relative_to(DEPTH_INPUT_DIR)
         output_key = (
-            DEPTH_OUTPUT_DIR / relative_path.parent / f"depth_{image.stem}.png"
+            DEPTH_OUTPUT_DIR / relative_path.parent / f"{image.stem}.png"
         ).as_posix().casefold()
         output_name_counts[output_key] = output_name_counts.get(output_key, 0) + 1
 
     for image in images:
         relative_path = image.relative_to(DEPTH_INPUT_DIR)
-        output_stem = f"depth_{image.stem}"
+        output_stem = image.stem
         output_path = (
             DEPTH_OUTPUT_DIR
             / relative_path.parent
