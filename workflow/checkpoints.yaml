@@ -17,7 +17,7 @@ pony:
 
 cyberpony_real: 
   name: Cyber Pony Realistic
-  file: ${checkpoints_dir}/cyberrealisticPony_v125.safetensor
+  file: ${checkpoints_dir}/cyberrealisticPony_v125.safetensors
   base_model: pony
   source: https://huggingface.co/cyberdelia/CyberRealisticPony
   sampler_defaults:

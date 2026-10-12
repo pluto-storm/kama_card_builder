@@ -7,29 +7,6 @@
 
 lora_presets:
   preset_1:
-  - name: Mixplin
-    weight: 0.5
-  - name: incase_style_v3-1_ponyxl_ilff
-    weight: 0.2
-  - name: reiq_style_xl_ilff
-    weight: 0.6
-  preset_2:
-  - name: add_detail_xl
-    weight: 0.6
-  - name: anime_sdxl_v1
-    weight: 0.6
-  preset_3:
-  - name: Melkor_Mancin_Style_V3
-    weight: 0.6
-  - name: princess
-    weight: 0.4
-  - name: reiq_style_xl_ilff
-    weight: 0.4
-  - name: SkindentationSlider
-    weight: 1.5
-  - name: Expressive_H_000001
-    weight: 0.5
-  preset_4:
   - name: MoriiMee_Gothic_Niji_Style
     weight: 0.7
   - name: reiq_style_xl_ilff
@@ -43,6 +20,18 @@ lora_presets:
     weight: 1.0
   - name: Expressive_H_000001
     weight: 0.5
+  preset_2:
+  - name: princess
+    weight: 0.3
+    clip: 0.3
+  - name: SkindentationSlider
+    weight: 1.0
+  - name: Expressive_H_000001
+    weight: 0.5
+  - name: Breast_Slider_Pony_alpha1_0_rank4_noxattn_last
+    weight: 1.5
+  - name: Round_Breasts_XL_XV7_000038
+    weight: 1.0
 
   
 
