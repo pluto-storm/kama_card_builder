@@ -398,7 +398,7 @@ def build_jobs(gen: dict, paths: dict, lib: dict) -> tuple:
             card_name
             for set_name in sets
             for card_name in (lib["cards"].get(set_name) or {})
-            if re.fullmatch(r"card_(?:\d+|0_icon|0_poster)", str(card_name))
+            if re.fullmatch(r"card_(?:\d+|00_icon|00_poster)", str(card_name))
         }
         unknown_cards = sorted(set(selected_cards) - available_cards)
         if unknown_cards:

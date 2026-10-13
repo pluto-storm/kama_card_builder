@@ -198,7 +198,7 @@ class CardCreationMixin:
         for column in range(2):
             feature_row.columnconfigure(column, weight=1, uniform="feature_card")
         for column, (card_name, label) in enumerate(
-            (("card_0_icon", "Icon"), ("card_0_poster", "Poster"))
+            (("card_00_icon", "Icon"), ("card_00_poster", "Poster"))
         ):
             card_frame = ttk.LabelFrame(feature_row, text=label, padding=6)
             card_frame.grid(

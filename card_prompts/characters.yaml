@@ -87,7 +87,7 @@ princess_rapunzel:
   default_display: PRINCESS RAPUNZEL
   lora:
   - princess
-  prompt: rapunzel, long blonde hair, green eyes, fair skin, slim body, perky boobs,
+  prompt: rapunzel, long blonde hair, green eyes, fair skin, slim body, perky boobs, very long blond hair, hair down to her feet
     thin legs
 princess_snow_white:
   default_display: PRINCESS SNOW WHITE

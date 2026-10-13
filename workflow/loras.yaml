@@ -216,7 +216,8 @@ Fake_breasts_v3:
 Penis_Size_alpha1_0_rank4_noxattn_last:
   file: '${body}\Penis Size_alpha1.0_rank4_noxattn_last.safetensors'
   source: https://civitai.red/models/465379?modelVersionId=517898
-  
+  weight: -1.8
+
 puffytits_PONY_v1:
   file: '${body}\puffytits_PONY_v1.safetensors'
   source: https://civitai.red/models/1526286?modelVersionId=1726904
@@ -241,7 +242,7 @@ Concept_Slutty_Clothes:
   source: https://civitai.red/models/523290?modelVersionId=581380
 
 extreme_bukkake:
-  file: extreme_bukkake_v0.1-pony.safetensors
+  file: '${outfits}\extreme_bukkake_v0.1-pony.safetensors'
   source: https://civitai.com/models/109745?modelVersionId=595414
 
 harem_outfit_ponyxl_lora_nochekaiser:

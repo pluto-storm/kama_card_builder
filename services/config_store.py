@@ -69,11 +69,11 @@ def _cards_yaml_data(data):
                 sorted_set[key] = _sorted_yaml_data(value)
                 continue
             if not re.fullmatch(
-                r"card_(?:0[1-9]|1[0-8]|0_(?:icon|poster))", str(key)
+                r"card_(?:0[1-9]|1[0-8]|00_(?:icon|poster))", str(key)
             ):
                 raise yaml.YAMLError(
                     f"Invalid card name '{key}' in set '{set_name}'; "
-                    "expected card_01 through card_18, card_0_icon, or card_0_poster."
+                    "expected card_01 through card_18, card_00_icon, or card_00_poster."
                 )
             if not isinstance(value, dict):
                 raise yaml.YAMLError(

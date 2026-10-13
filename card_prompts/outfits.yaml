@@ -74,6 +74,9 @@ leia_white:
   lora:
   - Leia_DALLE_3_PonyXL
   prompt: Leiagolddg, double bun, white dress, belt, high heel boots, side slit, wide sleeves,
+lifeguard:
+  default_display: LIFEGUARD
+  prompt: red one piece swimsuit, red tank top, whistle, sunglasses, lifeguard logo, lifeguard uniform, lifeguard outfit, sexy, tanlines, cameltoe, cleavage, areola slip, 
 loungewear:
   default_display: LOUNGEWEAR
   prompt: soft hoodie, jogger pants, cozy socks, slippers, casual t shirt
@@ -186,6 +189,3 @@ wanda_2:
   default_display: SEXY FAIRY
   prompt: yellow bra, pink panties, garter belt, garter straps, pink thighhighs, black
     heels
-winter:
-  default_display: WINTER
-  prompt: wool coat, scarf, gloves, thermal sweater, dark jeans, leather boots

@@ -291,8 +291,8 @@ class GenerationControlsMixin:
         self.card_names = sorted(
             card_names,
             key=lambda name: (
-                0 if name == "card_0_icon" else
-                1 if name == "card_0_poster" else
+                0 if name == "card_00_icon" else
+                1 if name == "card_00_poster" else
                 2,
                 int(name.removeprefix("card_"))
                 if name.startswith("card_")

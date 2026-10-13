@@ -63,9 +63,9 @@ def _card_output_name(card_name):
 
 
 def _output_category(card_name):
-    if card_name == "card_0_icon":
+    if card_name == "card_00_icon":
         return "icons"
-    if card_name == "card_0_poster":
+    if card_name == "card_00_poster":
         return "posters"
     return "cards"
 

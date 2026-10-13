@@ -58,21 +58,41 @@ level_2_touching_self:
   default_display: TOUCHING SELF
   prompt: mouth open, looking down, one hand rubbing pussy, one hand touching boobs, sexy face
 #Level 3 - Hardcore 
+level_3_blowjob:
+  default_display: BLOWJOB
+  prompt: blowjob, oral sex, mouth around penis, looking up, looking at viewer, drooling, moaning, flushed face, 
 level_3_deepthroat:
   default_display: DEEPTHROAT
   lora:
-  - superdeep.safetensors
+  - superdeep
   prompt: deepthroat, mouth around penis, gagging, drooling, superdeep
 level_3_fucked_silly:
   default_display: FUCKED SILLY
   lora:
   - FUCKED_SILLY_Extreme_Rough_Sex_Best_Lewd_Expression_v1_0_Pony_XL
-  prompt: being fucked silly, intense pleasure, moaning, flushed face, disheveled hair, extreme sex
+  prompt: being fucked silly, intense pleasure, moaning, flushed face, disheveled hair, extreme sex, vaginal sex, being fucked by a man, 
+level_3_monstercock_bj:
+  default_display: MONSTER COCK
+  prompt: monster cock, huge penis, enormous dick, massive member, giant cock, blowjob
+  lora: 
+  - Penis_Size_alpha1_0_rank4_noxattn_last
+level_3_monstercock_vaginal:
+  default_display: MONSTER COCK
+  prompt: monster cock, huge penis, enormous dick, massive member, giant cock, vaginal sex
+  lora: 
+  - Penis_Size_alpha1_0_rank4_noxattn_last
+level_3_monstercock_anal:
+  default_display: MONSTER COCK
+  prompt: monster cock, huge penis, enormous dick, massive member, giant cock, anal sex
+  lora: 
+  - Penis_Size_alpha1_0_rank4_noxattn_last
+
 level_3_top_down_doggy:
   default_display: TOP DOWN DOGGY
   lora:
   - top_down_doggystyle_v0_2_pony
   prompt: top-down view, doggy style, doggystyle, ass, from behind
+
 #Level 4 - Intense
 level_4_airtight:
   default_display: AIRTIGHT
@@ -98,6 +118,16 @@ level_4_triple_penetration:
   - Triple_Penetration_V3_PonyXL_000009
   prompt: being penetrated by three people,
 #Level 5 - Afterwards
+level_5_facial_single:
+  default_display: FACIAL
+  prompt: penis visible deep in her mouth, leaning forward, oral, spit, saliva, dripping saliva, beautiful, sweaty skin, smiling, Looking at viewer, long penis ejaculating on face, large messy cumshot, facial, cum on tongue, mouth open, tongue out, cock cumming onto tongue, open mouth, facial, swallowing cum, drinking cum, cum in hair, cum on breasts, cum in eye, excessive cum, cum on face, cum on body, cum ropes,thick cum
+  lora:
+  - extreme_bukkake
+level_5_facial_multiple:
+  default_display: FACIAL
+  prompt: many penises, oral, spit, saliva, dripping saliva, beautiful, sweaty skin, smiling, Looking at viewer, long penis ejaculating on face, bukkake, multiple penises, large messy cumshot, facial, cum on tongue, mouth open, tongue out, cock cumming onto tongue, open mouth, facial, swallowing cum, drinking cum, cum in hair, cum on breasts, cum in eye, excessive cum, cum on face, cum on body, cum ropes,thick cum
+  lora:
+  - extreme_bukkake
 level_5_cum_covered:
   default_display: CUM COVERED
   prompt: covered in cum, cum on face, cum in hair, cum on tits, cum on body
