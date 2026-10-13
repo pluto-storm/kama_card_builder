@@ -1,31 +1,48 @@
-# Reusable LoRA groupings referenced by cards and image-generation runs.
-# Each entry accepts a LoRA name or a mapping with name, weight, and clip.
-# If clip is omitted, generation uses the weight for both strengths.
-
 preset_1:
-  - name: MoriiMee_Gothic_Niji_Style
-    weight: 0.7
-  - name: reiq_style_xl_ilff
-    weight: 0.8
-  - name: princess
-    weight: 0.3
-    clip: 0.3
-  - name: kingbang
-    weight: 0.3
-  - name: SkindentationSlider
-    weight: 1.0
-  - name: Expressive_H_000001
-    weight: 0.5
-
+- name: MoriiMee_Gothic_Niji_Style
+  weight: 0.7
+- name: reiq_style_xl_ilff
+  weight: 0.8
+- clip: 0.3
+  name: princess
+  weight: 0.3
+- name: kingbang
+  weight: 0.3
+- name: SkindentationSlider
+  weight: 1.0
+- name: Expressive_H_000001
+  weight: 0.5
 preset_2:
-  - name: princess
-    weight: 0.3
-    clip: 0.3
-  - name: SkindentationSlider
-    weight: 1.0
-  - name: Expressive_H_000001
-    weight: 0.5
-  - name: Breast_Slider_Pony_alpha1_0_rank4_noxattn_last
-    weight: 1.5
-  - name: Round_Breasts_XL_XV7_000038
-    weight: 1.0
+- clip: 0.3
+  name: princess
+  weight: 0.3
+- name: SkindentationSlider
+  weight: 1.0
+- name: Expressive_H_000001
+  weight: 0.5
+- name: Breast_Slider_Pony_alpha1_0_rank4_noxattn_last
+  weight: 1.5
+- name: Round_Breasts_XL_XV7_000038
+  weight: 1.0
+preset_3:
+- clip: 0.7
+  name: MoriiMee_Gothic_Niji_Style
+  weight: 0.7
+- clip: 0.8
+  name: reiq_style_xl_ilff
+  weight: 0.8
+- clip: 0.3
+  name: princess
+  weight: 0.3
+- clip: 0.3
+  name: kingbang
+  weight: 0.3
+- clip: 1.0
+  name: SkindentationSlider
+  weight: 1.0
+- clip: 0.5
+  name: Expressive_H_000001
+  weight: 0.5
+- clip: 0.5
+  name: Jabstyle_PNYV1_5
+  weight: 0.5

@@ -22,6 +22,97 @@ def _sorted_yaml_data(value):
     return value
 
 
+class _FlowMapping(dict):
+    pass
+
+
+class _CardsDumper(yaml.SafeDumper):
+    pass
+
+
+def _represent_card_string(dumper, value):
+    style = '"' if "\n" in value or "\r" in value else None
+    return dumper.represent_scalar("tag:yaml.org,2002:str", value, style=style)
+
+
+_CardsDumper.add_representer(
+    _FlowMapping,
+    lambda dumper, value: dumper.represent_mapping(
+        "tag:yaml.org,2002:map", value, flow_style=True
+    ),
+)
+_CardsDumper.add_representer(str, _represent_card_string)
+
+
+def _cards_yaml_data(data):
+    sorted_data = {}
+    for set_name in sorted(data, key=_yaml_sort_key):
+        set_data = data[set_name]
+        if not isinstance(set_data, dict):
+            sorted_data[set_name] = set_data
+            continue
+
+        normalized_set = {}
+        for key, value in set_data.items():
+            legacy_card = re.fullmatch(r"card_([1-9])", str(key))
+            if legacy_card:
+                padded_key = f"card_0{legacy_card.group(1)}"
+                if padded_key in set_data:
+                    continue
+                key = padded_key
+            normalized_set[key] = value
+
+        sorted_set = {}
+        for key in sorted(normalized_set, key=_yaml_sort_key):
+            value = normalized_set[key]
+            if key in {"_defaults", "set_defaults", "display_name"}:
+                sorted_set[key] = _sorted_yaml_data(value)
+                continue
+            if not re.fullmatch(r"card_(?:0[1-9]|1[0-8])", str(key)):
+                raise yaml.YAMLError(
+                    f"Invalid card name '{key}' in set '{set_name}'; "
+                    "expected card_01 through card_18."
+                )
+            if not isinstance(value, dict):
+                raise yaml.YAMLError(
+                    f"Card '{key}' in set '{set_name}' must be a mapping."
+                )
+            sorted_set[key] = _FlowMapping(_sorted_yaml_data(value))
+        sorted_data[set_name] = sorted_set
+    return sorted_data
+
+
+def _cards_yaml_text(text, data):
+    """Render card sets in key order with one flow-style row per card."""
+    if not isinstance(data, dict):
+        raise yaml.YAMLError("YAML document must contain a mapping at the top level.")
+
+    document = yaml.compose(text) if text else None
+    if document is None and not data:
+        return text
+
+    prefix = text if document is None else ""
+    comments = {}
+    if isinstance(document, MappingNode):
+        lines = text.splitlines(keepends=True)
+        first_key_line = document.value[0][0].start_mark.line if document.value else 0
+        prefix = "".join(lines[:first_key_line])
+        comments = _top_level_inline_comments(text)
+
+    rendered = yaml.dump(
+        _cards_yaml_data(data),
+        Dumper=_CardsDumper,
+        sort_keys=False,
+        allow_unicode=True,
+        default_flow_style=False,
+        width=100000,
+    )
+    rendered = _restore_top_level_inline_comments(rendered, comments)
+    if "\r\n" in text:
+        rendered = rendered.replace("\n", "\r\n")
+    return prefix + rendered
+
+
 def _top_level_inline_comments(text):
     document = yaml.compose(text)
     if not isinstance(document, MappingNode):

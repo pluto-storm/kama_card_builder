@@ -6,7 +6,7 @@ from tkinter import messagebox, simpledialog, ttk
 import yaml
 
 import generation
-from services.config_store import _patch_yaml_text
+from services.config_store import _cards_yaml_text, _patch_yaml_text
 
 
 class CardCreationMixin:
@@ -201,7 +201,7 @@ class CardCreationMixin:
         for column in range(3):
             grid.columnconfigure(column, weight=1, uniform="card_column")
         for index in range(1, 19):
-            card_name = f"card_{index}"
+            card_name = f"card_{index:02d}"
             card_frame = ttk.LabelFrame(grid, text=card_name, padding=6)
             card_frame.grid(
                 row=(index - 1) // 3,
@@ -294,8 +294,11 @@ class CardCreationMixin:
             return
         try:
             original_text = path.read_text(encoding="utf-8")
-            saved_text = _patch_yaml_text(
-                original_text, parsed if parsed is not None else {}
+            data = parsed if parsed is not None else {}
+            saved_text = (
+                _cards_yaml_text(original_text, data)
+                if path.name == "cards.yaml"
+                else _patch_yaml_text(original_text, data)
             )
         except OSError as error:
             messagebox.showerror("Could not load prompt file", str(error))
@@ -345,7 +348,11 @@ class CardCreationMixin:
         path = state["path"]
         try:
             original_text = path.read_text(encoding="utf-8")
-            saved_text = _patch_yaml_text(original_text, data)
+            saved_text = (
+                _cards_yaml_text(original_text, data)
+                if path.name == "cards.yaml"
+                else _patch_yaml_text(original_text, data)
+            )
         except (OSError, yaml.YAMLError) as error:
             messagebox.showerror("Could not save prompt file", str(error))
             return False
@@ -577,18 +584,11 @@ class CardCreationMixin:
         if not isinstance(set_data, dict):
             messagebox.showerror("Invalid card set", f"Set '{set_name}' must be a mapping.")
             return
-        set_data = dict(set_data)
+        set_data = {}
         display = state["display"].get().strip()
         if display:
             set_data["display_name"] = display
-        else:
-            set_data.pop("display_name", None)
 
-        defaults_key = "_defaults" if "_defaults" in set_data else "set_defaults"
-        old_defaults = set_data.get(defaults_key, {})
-        if not isinstance(old_defaults, dict):
-            messagebox.showerror("Invalid defaults", "Shared defaults must be a mapping.")
-            return
         defaults = {}
         for key, field in state["defaults"].items():
             if isinstance(field, tuple):
@@ -598,29 +598,16 @@ class CardCreationMixin:
             if value:
                 defaults[key] = value
 
-        set_data[defaults_key] = defaults
+        set_data["_defaults"] = defaults
         for card_name, card_state in state["cards"].items():
-            existing = set_data.get(card_name, {})
-            if not isinstance(existing, dict):
-                messagebox.showerror(
-                    "Invalid card", f"Card '{card_name}' must be a mapping."
-                )
-                return
-            card_data = dict(existing)
+            card_data = {}
             for key, field in card_state["fields"].items():
                 if isinstance(field, tuple):
                     value = field[0].get().strip()
                 else:
                     value = self._field_text(field)
-                if (
-                    key not in existing
-                    and value == (old_defaults.get(key) or "")
-                ):
-                    continue
                 if value and value != defaults.get(key):
                     card_data[key] = value
-                else:
-                    card_data.pop(key, None)
             set_data[card_name] = card_data
 
         data = dict(state["data"])

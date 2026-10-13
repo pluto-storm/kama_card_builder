@@ -350,7 +350,24 @@ def _move_completed_image(
             destination.unlink(missing_ok=True)
         raise WorkflowError(f"Could not move ComfyUI image to {destination}: {error}") from error
 
-    source_path.unlink()
+    retry_delays = (0.1, 0.25, 0.5, 1)
+    for attempt in range(len(retry_delays) + 1):
+        try:
+            source_path.unlink()
+            break
+        except FileNotFoundError:
+            break
+        except PermissionError as error:
+            if attempt == len(retry_delays):
+                print(
+                    "WARNING: Image was saved successfully, but could not remove "
+                    f"the ComfyUI source file because it is still in use: "
+                    f"{source_path} ({error})",
+                    file=sys.stderr,
+                    flush=True,
+                )
+                break
+            time.sleep(retry_delays[attempt])
     return destination
 
 
