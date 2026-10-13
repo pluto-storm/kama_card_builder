@@ -65,7 +65,7 @@ card_prompts/characters|outfits|poses|places.yaml
 card_prompts/cards.yaml
     set_0:
       display_name: "Example set"         # optional label displayed by the UI
-      set_defaults:
+      _defaults:
         character: kim_possible
         prompt_pos: "school uniform"
       card_1:
@@ -77,7 +77,7 @@ card_prompts/cards.yaml
         pose: proud
         place: blank
 
-    # card entries inherit set_defaults unless they override them; individual
+    # card entries inherit _defaults unless they override them; individual
     # card fields still win over the shared defaults.
 ------------------------------------------------------------------------------
 """
@@ -270,18 +270,18 @@ def validate_library(lib: dict) -> None:
                 f"cards.yaml set '{set_name}': display_name must be a string"
             )
 
-        defaults = set_data.get("set_defaults") or {}
+        defaults = set_data.get("_defaults", set_data.get("set_defaults")) or {}
         if defaults and not isinstance(defaults, dict):
-            raise ConfigError(f"cards.yaml set '{set_name}': set_defaults must be a mapping")
+            raise ConfigError(f"cards.yaml set '{set_name}': _defaults must be a mapping")
 
         unknown = sorted(set(defaults) - VALID_CARD_FIELDS)
         if unknown:
             raise ConfigError(
-                f"cards.yaml set '{set_name}': unsupported set_defaults field(s): {', '.join(unknown)}"
+                f"cards.yaml set '{set_name}': unsupported _defaults field(s): {', '.join(unknown)}"
             )
 
         for card_name, card in set_data.items():
-            if card_name in {"set_defaults", "display_name"}:
+            if card_name in {"_defaults", "set_defaults", "display_name"}:
                 continue
             if not isinstance(card, dict):
                 raise ConfigError(f"cards.yaml set '{set_name}' card '{card_name}' must be a mapping")
@@ -397,13 +397,13 @@ def build_jobs(gen: dict, paths: dict, lib: dict) -> tuple:
             continue
 
         set_data = lib["cards"][set_name] or {}
-        defaults = set_data.get("set_defaults") or {}
+        defaults = set_data.get("_defaults", set_data.get("set_defaults")) or {}
         if defaults and not isinstance(defaults, dict):
-            errors.append(f"set '{set_name}': set_defaults must be a mapping")
+            errors.append(f"set '{set_name}': _defaults must be a mapping")
             continue
 
         for card_name, card in set_data.items():
-            if card_name in {"set_defaults", "display_name"}:
+            if card_name in {"_defaults", "set_defaults", "display_name"}:
                 continue
             if not isinstance(card, dict):
                 errors.append(f"{set_name}/{card_name}: card must be a mapping")
@@ -448,6 +448,7 @@ def build_card(where, card, gen, lib, loras_dir, ckpt, ckpt_name, paths) -> dict
     neg_parts = [gen.get("global_negative"), gen.get("prompt_neg")]
     lora_refs = []  # ordered; later entries override earlier ones
     display = {}
+    disable_loras = gen.get("disable_loras", False)
 
     # library entries: character -> outfit -> pose -> place
     entries = []
@@ -466,20 +467,27 @@ def build_card(where, card, gen, lib, loras_dir, ckpt, ckpt_name, paths) -> dict
     for kind, key, entry in entries:
         pos_parts.append(entry.get("prompt"))
         neg_parts.append(entry.get("prompt_neg"))
-        lora_refs += normalize_lora_refs(entry.get("lora"), f"{where} ({kind} '{key}')")
-        lora_refs += normalize_lora_refs(entry.get("loras"), f"{where} ({kind} '{key}')")
+        if not disable_loras:
+            lora_refs += normalize_lora_refs(
+                entry.get("lora"), f"{where} ({kind} '{key}')"
+            )
+            lora_refs += normalize_lora_refs(
+                entry.get("loras"), f"{where} ({kind} '{key}')"
+            )
         display[kind] = {"key": key, "text": entry.get("default_display")}
 
-    for preset_name in as_list(gen.get("lora_presets")):
-        lora_refs += resolve_lora_preset(preset_name, lib, where)
+    if not disable_loras:
+        for preset_name in as_list(gen.get("lora_presets")):
+            lora_refs += resolve_lora_preset(preset_name, lib, where)
 
-    # Run-level presets apply to every selected set; card-level presets follow.
-    for preset_name in as_list(card.get("lora_preset")):
-        lora_refs += resolve_lora_preset(preset_name, lib, where)
+        # Run-level presets apply to every selected set; card-level presets follow.
+        for preset_name in as_list(card.get("lora_preset")):
+            lora_refs += resolve_lora_preset(preset_name, lib, where)
 
     pos_parts.append(card.get("prompt_pos"))
     neg_parts.append(card.get("prompt_neg"))
-    lora_refs += normalize_lora_refs(card.get("loras"), where)
+    if not disable_loras:
+        lora_refs += normalize_lora_refs(card.get("loras"), where)
     pos_parts.append(gen.get("prompt_pos_suffix"))
 
     # --- merge loras ------------------------------------------------------
@@ -681,6 +689,11 @@ def main():
         help="override the run-level LoRA presets for image generation",
     )
     ap.add_argument(
+        "--no-loras",
+        action="store_true",
+        help="disable all LoRAs, including references in card prompt data",
+    )
+    ap.add_argument(
         "--depth-input",
         type=Path,
         help="image file or folder to process in depth_maps mode",
@@ -708,6 +721,8 @@ def main():
             gen["checkpoint_to_use"] = args.checkpoint
         if args.lora_presets is not None:
             gen["lora_presets"] = args.lora_presets
+        if args.no_loras:
+            gen["disable_loras"] = True
         if mode == "generate_images":
             lib = load_library()
             validate_library(lib)

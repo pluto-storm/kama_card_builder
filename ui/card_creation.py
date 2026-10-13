@@ -6,7 +6,11 @@ from tkinter import messagebox, ttk
 import yaml
 
 import generation
-from services.config_store import _sorted_yaml_data
+from services.config_store import (
+    _restore_top_level_inline_comments,
+    _sorted_yaml_data,
+    _top_level_inline_comments,
+)
 
 
 class CardCreationMixin:
@@ -82,23 +86,38 @@ class CardCreationMixin:
                 f"{path.name} must contain a mapping at the top level.",
             )
             return
-        saved_text = (
-            yaml.safe_dump(
-                _sorted_yaml_data(parsed),
-                sort_keys=False,
-                allow_unicode=True,
-            )
-            if parsed is not None
-            else text
-        )
         try:
-            path.write_text(saved_text, encoding="utf-8")
+            comments = _top_level_inline_comments(text)
+            saved_text = (
+                yaml.safe_dump(
+                    _sorted_yaml_data(parsed),
+                    sort_keys=False,
+                    allow_unicode=True,
+                )
+                if parsed is not None
+                else text
+            )
+            saved_text = _restore_top_level_inline_comments(saved_text, comments)
+        except yaml.YAMLError as error:
+            messagebox.showerror("Invalid YAML", str(error))
+            return
+        destination = path.resolve()
+        try:
+            destination.write_text(saved_text, encoding="utf-8")
+            written_text = destination.read_text(encoding="utf-8")
+            if written_text != saved_text:
+                raise OSError(
+                    f"Saved contents did not match the editor contents in {destination}."
+                )
         except OSError as error:
             messagebox.showerror("Could not save prompt file", str(error))
             return
         editor.delete("1.0", "end")
         editor.insert("1.0", saved_text)
-        status.set(f"Saved {path}")
+        status.set(f"Saved {destination}")
         if path.name == "cards.yaml":
             self._load_sets()
-        messagebox.showinfo("Prompt file saved", f"Saved {path.name}.")
+        messagebox.showinfo(
+            "Prompt file saved",
+            f"Saved {path.name} to:\n{destination}",
+        )

@@ -40,6 +40,7 @@ class CardBuilderUI(
         self.path_entries = {}
         self.generate_file = tk.StringVar(value=str(DEFAULT_GENERATE_FILE))
         self.checkpoint_selection = tk.StringVar()
+        self.empty_preset_selected = tk.BooleanVar(value=False)
         self.depth_input = tk.StringVar()
         self.depth_output = tk.StringVar(value=str(generation.DEPTH_OUTPUT_DIR))
         self.selected_count = tk.StringVar(value="0 sets selected")
@@ -67,6 +68,7 @@ class CardBuilderUI(
         self.model_type = tk.StringVar(value="checkpoint")
         self.model_key = tk.StringVar()
         self.model_file = tk.StringVar()
+        self.scrollable_canvases = []
 
         self._build_ui()
         self._load_paths()
@@ -88,30 +90,26 @@ class CardBuilderUI(
         )
         self.theme_toggle.pack(side="right")
 
-        self.pages = ttk.Notebook(container)
-        self.pages.pack(fill="both", expand=True)
+        self.content_splitter = ttk.Panedwindow(container, orient=tk.VERTICAL)
+        self.content_splitter.pack(fill="both", expand=True)
 
-        setup = ttk.Frame(self.pages, padding=12)
-        depth = ttk.Frame(self.pages, padding=12)
-        image = ttk.Frame(self.pages, padding=12)
-        card_creation = ttk.Frame(self.pages, padding=12)
-        local_models = ttk.Frame(self.pages, padding=12)
-        lora_presets = ttk.Frame(self.pages, padding=12)
-        self.pages.add(setup, text="Setup")
-        self.pages.add(depth, text="Depth Generation")
-        self.pages.add(image, text="Image Generation")
-        self.pages.add(card_creation, text="Card Creation")
-        self.pages.add(lora_presets, text="LoRA Presets")
-        self.pages.add(local_models, text="Local Models")
+        self.pages = ttk.Notebook(self.content_splitter)
+        self.content_splitter.add(self.pages, weight=4)
+
+        setup = self._add_scrollable_tab(self.pages, "Setup")
+        depth = self._add_scrollable_tab(self.pages, "Depth Generation")
+        image = self._add_scrollable_tab(self.pages, "Image Generation")
+        card_creation = self._add_scrollable_tab(self.pages, "Card Creation")
+        lora_presets = self._add_scrollable_tab(self.pages, "LoRA Presets")
+        local_models = self._add_scrollable_tab(self.pages, "Local Models")
 
         self.local_model_pages = ttk.Notebook(local_models)
         self.local_model_pages.pack(fill="both", expand=True)
-        loras = ttk.Frame(self.local_model_pages, padding=12)
-        checkpoints = ttk.Frame(self.local_model_pages, padding=12)
-        add_model = ttk.Frame(self.local_model_pages, padding=12)
-        self.local_model_pages.add(loras, text="LoRAs")
-        self.local_model_pages.add(checkpoints, text="Checkpoints")
-        self.local_model_pages.add(add_model, text="Add Model")
+        loras = self._add_scrollable_tab(self.local_model_pages, "LoRAs")
+        checkpoints = self._add_scrollable_tab(
+            self.local_model_pages, "Checkpoints"
+        )
+        add_model = self._add_scrollable_tab(self.local_model_pages, "Add Model")
 
         self._build_setup_page(setup)
         self._build_depth_page(depth)
@@ -122,18 +120,58 @@ class CardBuilderUI(
         self._build_add_model_page(add_model)
         self._build_lora_presets_page(lora_presets)
 
-        status_row = ttk.Frame(container)
-        status_row.pack(fill="x", pady=(10, 4))
+        output_panel = ttk.Frame(self.content_splitter)
+        status_row = ttk.Frame(output_panel)
+        status_row.pack(fill="x", pady=(6, 4))
         ttk.Label(status_row, textvariable=self.status).pack(side="left")
         ttk.Label(status_row, text="Run output").pack(side="right")
 
-        output_frame = ttk.Frame(container)
+        output_frame = ttk.Frame(output_panel)
         output_frame.pack(fill="both", expand=True)
-        self.output = tk.Text(output_frame, height=12, wrap="word", state="disabled")
+        self.output = tk.Text(output_frame, height=6, wrap="word", state="disabled")
         self.output.pack(side="left", fill="both", expand=True)
         scrollbar = ttk.Scrollbar(output_frame, command=self.output.yview)
         self.output.configure(yscrollcommand=scrollbar.set)
         scrollbar.pack(side="right", fill="y")
+        self.content_splitter.add(output_panel, weight=1)
+        self.root.after_idle(self._set_initial_output_panel_size)
+
+    def _set_initial_output_panel_size(self):
+        height = self.content_splitter.winfo_height()
+        if height > 0:
+            self.content_splitter.sashpos(0, max(300, height - 190))
+
+    def _add_scrollable_tab(self, notebook, label):
+        page = ttk.Frame(notebook)
+        notebook.add(page, text=label)
+        canvas = tk.Canvas(
+            page,
+            highlightthickness=0,
+            background=ttk.Style(self.root).lookup("TFrame", "background"),
+        )
+        scrollbar = ttk.Scrollbar(page, orient="vertical", command=canvas.yview)
+        canvas.configure(yscrollcommand=scrollbar.set)
+        scrollbar.pack(side="right", fill="y")
+        canvas.pack(side="left", fill="both", expand=True)
+        content = ttk.Frame(canvas, padding=12)
+        window = canvas.create_window((0, 0), window=content, anchor="nw")
+        content.bind(
+            "<Configure>",
+            lambda _event, target=canvas: target.configure(
+                scrollregion=target.bbox("all")
+            ),
+        )
+        def resize_content(event):
+            canvas.itemconfigure(
+                window,
+                width=event.width,
+                height=max(event.height, content.winfo_reqheight()),
+            )
+            canvas.configure(scrollregion=canvas.bbox("all"))
+
+        canvas.bind("<Configure>", resize_content)
+        self.scrollable_canvases.append(canvas)
+        return content
 
     def _read_messages(self):
         try:

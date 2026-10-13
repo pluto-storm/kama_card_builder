@@ -1,91 +1,58 @@
-#Template
-# set_0:
-#   set_defaults: (optional, applies to all cards in the set unless overwritten by card data)
-#     character: character_name
-#     outfit: outfit_name
-#     pose: pose_name
-#     place: place_name
-#     prompt_pos: positive_prompt_here 
-#     prompt_neg: negative_prompt_here
-#     loras:
-#       - name: lora_name
-#         weight: 0.5
-#       - name: another_lora_name
-#         weight: 0.3
-#     lora_preset: preset_name
-#   card_1:
-#     character: character_name
-#     outfit: outfit_name
-#     pose: pose_name
-#     place: place_name
-#     prompt_pos: positive_prompt_here  
-#     prompt_neg: negative_prompt_here 
-#     loras:
-#       - name: lora_name
-#         weight: 0.5
-#       - name: another_lora_name
-#         weight: 0.3
-#     lora_preset: preset_name
-#   card_2:
-#     ...
-
-
-
-#Rapunzel, Snow White, Ariel, Aurora, Belle, Cinderella, Elsa, Anna, Jasmine, Mulan, Merida, Tiana, Moana, and Pocahontas
 set_1:
-  set_defaults:
-    lora_preset: preset_2
+  _defaults:
     character: princess_rapunzel
+    lora_preset: preset_2
     prompt_pos: 1girl, sexy, perky boobs, round boobs
   card_1:
     outfit: princess_rapunzel
-    pose: basic_0
     place: girl_room
+    pose: basic_0
   card_2:
     outfit: princess_rapunzel
-    pose: thinking
     place: girl_room
+    pose: thinking
     prompt_pos: leg exposed, sitting down, legs out
   card_3:
     outfit: naked
-    pose: basic_0
     place: shower
+    pose: basic_0
   card_4:
     outfit: bikini
-    pose: basic_2
     place: beach
+    pose: basic_2
     prompt_pos: pink bikini
   card_5:
     outfit: bikini
-    pose: surprised
     place: beach
-    prompt_pos: pink bikini, bikini top falling off, exposed nipples, topless, looking down at exposed boobs
-
+    pose: surprised
+    prompt_pos: pink bikini, bikini top falling off, exposed nipples, topless, looking
+      down at exposed boobs
 set_2:
-  set_defaults:
-    lora_preset: preset_2
+  _defaults:
     character: princess_snow_white
+    lora_preset: preset_2
     prompt_pos: 1girl, sexy, perky boobs, round boobs
   card_1:
     outfit: princess_snow_white
-    pose: basic_0
     place: girl_room
+    pose: basic_0
   card_2:
     outfit: princess_snow_white
-    pose: thinking
     place: girl_room
+    pose: thinking
     prompt_pos: leg exposed, sitting down, legs out
   card_3:
     outfit: naked
-    pose: basic_2
     place: shower
+    pose: basic_2
   card_4:
     outfit: bikini
-    pose: basic_2
     place: beach
+    pose: basic_2
     prompt_pos: blue bikini
   card_5:
     outfit: bikini
-    pose: surprised
     place: beach
-    prompt_pos: blue bikini, bikini top falling off, exposed nipples, topless, looking down at exposed boobs
+    pose: surprised
+    prompt_pos: blue bikini, bikini top falling off, exposed nipples, topless, looking
+      down at exposed boobs

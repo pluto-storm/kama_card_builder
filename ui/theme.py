@@ -28,8 +28,11 @@ class ThemeMixin:
             selected_tab = "#ffffff"
             active_tab = "#eceff2"
             scrollbar_trough = "#e8eaed"
+        self.ui_background = background
         style.theme_use("clam")
         self.root.configure(background=background)
+        for canvas in getattr(self, "scrollable_canvases", ()):
+            canvas.configure(background=background)
         style.configure(
             "Comfy.Online.TLabel",
             background=background,

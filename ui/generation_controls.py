@@ -8,7 +8,10 @@ import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog, messagebox, ttk
 
+import yaml
+
 import generation
+from services.config_store import _top_level_inline_comments, _update_yaml_scalars
 from ui.constants import PATHS_FILE, ROOT
 
 
@@ -93,9 +96,32 @@ class GenerationControlsMixin:
         preset_scrollbar.pack(side="right", fill="y")
         self.preset_list.configure(yscrollcommand=preset_scrollbar.set)
         self.preset_list.bind(
-            "<<ListboxSelect>>", self._update_selected_preset_count
+            "<<ListboxSelect>>", self._on_preset_list_selection
         )
-        ttk.Label(page, textvariable=self.selected_preset_count).pack(anchor="e")
+        preset_controls = ttk.Frame(page)
+        preset_controls.pack(fill="x")
+        ttk.Checkbutton(
+            preset_controls,
+            text="Empty preset (no LoRAs)",
+            variable=self.empty_preset_selected,
+            command=self._on_empty_preset_toggle,
+        ).pack(side="left")
+        ttk.Label(
+            preset_controls, textvariable=self.selected_preset_count
+        ).pack(side="right")
+        prompt_frame = ttk.LabelFrame(page, text="Global Prompts", padding=6)
+        prompt_frame.pack(fill="x", pady=(4, 0))
+        ttk.Label(prompt_frame, text="Global positive prompt").pack(anchor="w")
+        self.global_positive_editor = tk.Text(prompt_frame, height=3, wrap="word", undo=True)
+        self.global_positive_editor.pack(fill="x", pady=(2, 6))
+        ttk.Label(prompt_frame, text="Global negative prompt").pack(anchor="w")
+        self.global_negative_editor = tk.Text(prompt_frame, height=3, wrap="word", undo=True)
+        self.global_negative_editor.pack(fill="x", pady=(2, 4))
+        ttk.Button(
+            prompt_frame,
+            text="Save prompts",
+            command=self._save_global_prompts,
+        ).pack(anchor="e")
         ttk.Label(page, text="Card sets to generate").pack(anchor="w", pady=(8, 0))
         sets_frame = ttk.Frame(page)
         sets_frame.pack(fill="both", expand=True, pady=(4, 8))
@@ -174,6 +200,7 @@ class GenerationControlsMixin:
         )
         if preserve_selected is not None:
             selected_presets = set(preserve_selected)
+        self.empty_preset_selected.set(False)
         for index, name in enumerate(preset_names):
             if name in selected_presets:
                 self.preset_list.selection_set(index)
@@ -188,7 +215,10 @@ class GenerationControlsMixin:
 
     def _load_sets(self):
         try:
-            cards = generation.load_yaml(generation.CARD_DIR / "cards.yaml")
+            cards_path = generation.CARD_DIR / "cards.yaml"
+            cards_text = cards_path.read_text(encoding="utf-8")
+            cards = generation.load_yaml(cards_path)
+            inline_comments = _top_level_inline_comments(cards_text)
             gen_config = generation.load_yaml(Path(self.generate_file.get()).expanduser())
         except (generation.ConfigError, OSError) as error:
             self.set_list.delete(0, "end")
@@ -198,9 +228,17 @@ class GenerationControlsMixin:
 
         selected_sets = set(generation.as_list(gen_config.get("sets_to_generate", [])))
         self.set_list.delete(0, "end")
+        self._set_prompt_editor_text(
+            self.global_positive_editor, gen_config.get("global_positive", "")
+        )
+        self._set_prompt_editor_text(
+            self.global_negative_editor, gen_config.get("global_negative", "")
+        )
         self.set_display_names = {}
         for index, (name, data) in enumerate(cards.items()):
             display_name = data.get("display_name") if isinstance(data, dict) else None
+            if not display_name:
+                display_name = inline_comments.get(name)
             label = f"{name} — {display_name}" if display_name else name
             self.set_display_names[name] = label
             self.set_list.insert("end", label)
@@ -208,6 +246,34 @@ class GenerationControlsMixin:
                 self.set_list.selection_set(index)
         self._update_selected_count()
         self._load_image_choices(gen_config)
+
+    @staticmethod
+    def _set_prompt_editor_text(editor, value):
+        editor.delete("1.0", "end")
+        editor.insert("1.0", str(value) if value is not None else "")
+
+    def _save_global_prompts(self):
+        config_path = Path(self.generate_file.get()).expanduser()
+        if not config_path.is_absolute():
+            config_path = ROOT / config_path
+        try:
+            generation.load_yaml(config_path)
+            _update_yaml_scalars(
+                config_path,
+                {
+                    "global_positive": self.global_positive_editor.get(
+                        "1.0", "end-1c"
+                    ),
+                    "global_negative": self.global_negative_editor.get(
+                        "1.0", "end-1c"
+                    ),
+                },
+            )
+        except (generation.ConfigError, OSError, ValueError, yaml.YAMLError) as error:
+            messagebox.showerror("Could not save global prompts", str(error))
+            return False
+        self._append_output(f"Saved global prompts to {config_path.resolve()}\n")
+        return True
 
     def _browse_depth_file(self):
         selected = filedialog.askopenfilename(
@@ -278,17 +344,32 @@ class GenerationControlsMixin:
         self.set_list.selection_clear(0, "end")
         self._update_selected_count()
 
+    def _on_empty_preset_toggle(self):
+        if self.empty_preset_selected.get():
+            self.preset_list.selection_clear(0, "end")
+        self._update_selected_preset_count()
+
+    def _on_preset_list_selection(self, _event=None):
+        if self.preset_list.curselection():
+            self.empty_preset_selected.set(False)
+        self._update_selected_preset_count()
+
     def _update_selected_count(self, _event=None):
         count = len(self.set_list.curselection())
         self.selected_count.set(f"{count} set{'s' if count != 1 else ''} selected")
 
     def _update_selected_preset_count(self, _event=None):
+        if self.empty_preset_selected.get():
+            self.selected_preset_count.set("Empty preset selected (no LoRAs)")
+            return
         count = len(self.preset_list.curselection())
         self.selected_preset_count.set(
             f"{count} preset{'s' if count != 1 else ''} selected"
         )
 
     def _start_generation(self, mode):
+        if mode == "generate_images" and not self._save_global_prompts():
+            return
         if not self._save_paths(show_confirmation=False):
             return
         config_path = Path(self.generate_file.get()).expanduser()
@@ -347,7 +428,10 @@ class GenerationControlsMixin:
                 for index in self.preset_list.curselection()
             ]
             command.append("--lora-presets")
-            command.extend(selected_presets)
+            if not self.empty_preset_selected.get():
+                command.extend(selected_presets)
+            else:
+                command.append("--no-loras")
         self._append_output(f"> {mode.replace('_', ' ').title()}\n")
         self.status.set("Running...")
         for button in self.action_buttons:

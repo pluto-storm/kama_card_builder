@@ -25,14 +25,16 @@ Kama Card Builder is a desktop interface for preparing and running ComfyUI image
 - **Depth Generation** and **Image Generation** show whether the configured ComfyUI server is reachable and refresh that status automatically. Use **Check now** for an immediate check.
 - Those generation tabs also offer a launcher selector and **Launch ComfyUI**. On Windows, the UI searches the configured ComfyUI folder and nearby parent folders for `run*.bat` or `*comfy*.bat` files, then starts the selected script in a separate console. Choose the GPU or CPU script that matches your installation. If no launcher is found, start ComfyUI manually.
 - **Depth Generation** lets you select one image or a folder of images, choose where depth maps are saved, and open that output folder in your file explorer. Folder selection scans supported images recursively and preserves subfolders. Supported formats are PNG, JPG/JPEG, WEBP, and BMP.
-- **Image Generation** loads the set names from `card_prompts/cards.yaml`. Select one or more sets in the scrollable list and start generation. The list is initially selected from `generate.local.yaml`.
-- Image generation lets you choose one checkpoint and any run-level LoRA presets before selecting card sets; preset weights are combined with card-level LoRA references.
+- **Image Generation** loads the set names from `card_prompts/cards.yaml`. Select one or more sets in the scrollable list and start generation. The list is initially selected from `generate.local.yaml`. Edit the global positive and negative prompts between the LoRA presets and card-set list; use **Save prompts** to save them to the selected generation config. Starting image generation saves the prompt fields first.
+- Image generation lets you choose one checkpoint and any run-level LoRA presets before selecting card sets; preset weights are combined with card-level LoRA references. Select **Empty preset (no LoRAs)** to disable LoRAs from both the selected presets and card/prompt data for that run.
 - **Card Creation** provides a YAML editor tab for each file under `card_prompts/`. Save validates YAML before writing; Reload discards unsaved edits in that file.
 - **LoRA Presets** lets you build and save named groups of LoRAs with independent model and CLIP strengths.
 - **Local Models** is the last main tab and contains nested **LoRAs** and **Checkpoints** tabs. Installed model names are green and missing or unconfigured model names are red.
 - The **Add Model** sub-tab registers an already-installed checkpoint or LoRA. Choose its file from inside the configured model folder, enter its catalog key, and provide any additional catalog fields as a YAML mapping. The app writes the entry to the corresponding workflow catalog and refreshes model status.
 - Image Generation includes a button to open the configured image output folder.
 - Use the theme toggle in the top-right corner to switch between dark and light mode.
+- Tab pages include a vertical scrollbar when their contents extend beyond the visible area.
+- Drag the divider above **Run output** to adjust the space shared by the active tab and output log. Editors and data lists expand to use the available tab height; the Local Models list/details divider can be dragged to adjust those panes independently.
 
 Setup separates paths used by both generation types (the ComfyUI installation, output folder, and server URL) from paths needed only for image generation (checkpoint/LoRA folders, prompt aliases, and image output). Depth generation does not require the image-generation model folders.
 
@@ -57,7 +59,7 @@ The UI includes a YAML editor for the card prompt data files. The main catalogs 
 - `generate.local.yaml`: generation settings and the initially selected sets.
 - `paths.local.yaml`: machine-specific paths; do not share or commit this file.
 
-Card references such as character, outfit, pose, place, checkpoint, and LoRA names must match entries in their respective catalogs. Optional `display_name` text at a card-set level in `cards.yaml` is shown beside the set key in the UI. UI saves sort YAML mapping keys alphabetically; list order is preserved. `paths.local.yaml` and `generate.local.yaml` are ignored by Git and created from their example files on first launch.
+Card references such as character, outfit, pose, place, checkpoint, and LoRA names must match entries in their respective catalogs. Optional `display_name` text at a card-set level in `cards.yaml` is shown beside the set key in the UI. A trailing comment on a set key (for example, `set_1: #rapunzel`) is also shown in the Image Generation set list when `display_name` is absent, and is retained when saving from the YAML editor. Put shared per-set card fields in `_defaults`; it stays at the top of its card set when saved. UI saves sort other YAML mapping keys alphabetically; list order is preserved. `paths.local.yaml` and `generate.local.yaml` are ignored by Git and created from their example files on first launch.
 
 ## Command-line validation
 
