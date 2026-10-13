@@ -1,133 +1,91 @@
-# Contributor note:
-# - Each top-level key is a pose/expression slug referenced by cards.yaml.
-# - Keep pose entries focused on body language, expression, and camera framing.
-# - Optional `lora` accepts one or more names or `{name, weight}` mappings.
-# - Do not duplicate similar poses under multiple names unless they are intentionally distinct.
-
-#Pinup
-
-basic_0:
+level_1_basic_0:
+  default_display: BASIC 0
   prompt: looking at viewer, happy expression, hands at sides
-  default_display: "BASIC 0"
-
-basic_1:
-  prompt:  looking at viewer, bored, glare, seductive girl, focus, hands across chest, 
-  default_display: "BASIC 1"
-
-basic_2:
-  prompt:  looking at viewer, happy, hands above head, sexy pose, 
-  default_display: "BASIC 2"
-
-basic_3:
-  prompt:  looking at viewer, serious, hands on hips, sexy pose, legs crossed 
-  default_display: "BASIC 3"
-
-proud: 
+level_1_basic_1:
+  default_display: BASIC 1
+  prompt: looking at viewer, bored, glare, seductive girl, focus, hands across chest,
+level_1_basic_2:
+  default_display: BASIC 2
+  prompt: looking at viewer, happy, hands above head, sexy pose,
+level_1_basic_3:
+  default_display: BASIC 3
+  prompt: looking at viewer, serious, hands on hips, sexy pose, legs crossed
+level_1_proud:
+  default_display: PROUD
   prompt: confident smile, chest puffed out, head held high, hands on hips
-  default_display: "PROUD"
-
-push_up_boobs:
-  prompt: accentuated cleavage, hands on chest, seductive pose
-  default_display: "PUSH UP BOOBS"
-
-surprised: 
-  prompt: surprised, wide eyes, open mouth, eyebrows raised, hands up in surprise, open palms
-  default_display: "SURPRISED"
-
-thinking: 
+level_1_surprised:
+  default_display: SURPRISED
+  prompt: surprised, wide eyes, open mouth, eyebrows raised, hands up in surprise,
+    open palms
+level_1_thinking:
+  default_display: THINKING
   prompt: pensive expression, hand on chin, slightly furrowed brow
-  default_display: "THINKING"
-
-
-#Sexy
-touching_self: 
-  prompt: mouth open, looking down, one hand rubbing pussy, one hand touching boobs, sexy face
-  default_display: "TOUCHING SELF"
-
-
-#Erotic
-flashing_tits: 
+level_2_anus_peek:
+  default_display: ANUS PEEK
+  lora:
+  - anuspeek_v2
+  prompt: anus peek, partially exposed anus, looking back, hands on hips, anuspeekILL,
+    anus, anus peek,
+level_2_flashing_tits:
+  default_display: FLASHING TITS
+  lora:
+  - shirtlift_pony
   prompt: flashing tits, flashing boobs, hands pulling away top, exposed boobs, shirtlift
-  lora:
-    - shirtlift_pony
-  default_display: "FLASHING TITS"
-
-groped_boobs: 
-  prompt: being groped on the boobs, having boobs touched, hands on hips
-  default_display: "GROPED BOOBS"
-
-groped_ass_behind: 
-  prompt: view from behind, back shot, being groped on the ass, being touched on the ass, hands to the side
-  default_display: "GROPED ASS"
-
-groped_ass_front: 
+level_2_groped_ass_behind:
+  default_display: GROPED ASS
+  prompt: view from behind, back shot, being groped on the ass, being touched on the
+    ass, hands to the side
+level_2_groped_ass_front:
+  default_display: GROPED ASS
   prompt: being groped on the ass, being touched on the ass, looking forward
-  default_display: "GROPED ASS"
-
-multigrope: 
-  prompt: being groped by multiple people, hands on various parts of the body, overwhelmed expression, multigrope, breast_grab
+level_2_groped_boobs:
+  default_display: GROPED BOOBS
+  prompt: being groped on the boobs, having boobs touched, hands on hips
+level_2_multigrope:
+  default_display: MULTIGROPE
   lora:
-    - Multigrope
-  default_display: "MULTIGROPE"
-
-#Pornographic
-anus_peek:
-  prompt: anus peek, partially exposed anus, looking back, hands on hips, anuspeekILL, anus, anus peek,
+  - Multigrope
+  prompt: being groped by multiple people, hands on various parts of the body, overwhelmed
+    expression, multigrope, breast_grab
+level_2_push_up_boobs:
+  default_display: PUSH UP BOOBS
+  prompt: accentuated cleavage, hands on chest, seductive pose
+level_2_touching_self:
+  default_display: TOUCHING SELF
+  prompt: mouth open, looking down, one hand rubbing pussy, one hand touching boobs,
+    sexy face
+level_3_deepthroat:
+  default_display: DEEPTHROAT
   lora:
-    - anuspeek_v2
-  default_display: "ANUS PEEK"
-
-deepthroat:
+  - superdeep.safetensors
   prompt: deepthroat, mouth around penis, gagging, drooling, superdeep
+level_3_fucked_silly:
+  default_display: FUCKED SILLY
   lora:
-    - superdeep.safetensors
-  default_display: "DEEPTHROAT"
-
-fucked_silly: 
-  prompt: being fucked silly, intense pleasure, moaning, flushed face, disheveled hair, extreme sex
+  - FUCKED_SILLY_Extreme_Rough_Sex_Best_Lewd_Expression_v1_0_Pony_XL
+  prompt: being fucked silly, intense pleasure, moaning, flushed face, disheveled
+    hair, extreme sex
+level_3_top_down_doggy:
+  default_display: TOP DOWN DOGGY
   lora:
-    - FUCKED_SILLY_Extreme_Rough_Sex_Best_Lewd_Expression_v1_0_Pony_XL
-  default_display: "FUCKED SILLY"
-
-top_down_doggy:
+  - top_down_doggystyle_v0_2_pony
   prompt: top-down view, doggy style, doggystyle, ass, from behind
+level_4_airtight:
+  default_display: AIRTIGHT
   lora:
-    - top_down_doggystyle_v0_2_pony
-  default_display: "TOP DOWN DOGGY"
-
-
-#Extreme
-airtight: 
-  prompt: 1girl, large breasts, pussy, oral, anal, vaginal, 3boys, multiple men, triple_penetration, group sex, irrumatio, testicles, large_penis
+  - poses_airtight_000008
+  prompt: 1girl, large breasts, pussy, oral, anal, vaginal, 3boys, multiple men, triple_penetration,
+    group sex, irrumatio, testicles, large_penis
+level_4_triple_penetration:
+  default_display: TRIPLE PENETRATION
   lora:
-    - poses_airtight_000008
-  default_display: "AIRTIGHT"
-
-cum_covered: 
+  - Triple_Penetration_V3_PonyXL_000009
+  prompt: being penetrated by three people,
+level_5_cum_covered:
+  default_display: CUM COVERED
   prompt: covered in cum, cum on face, cum in hair, cum on tits, cum on body
-  default_display: "CUM COVERED"
-
-trashcan:
+level_5_trashcan:
+  default_display: TRASHCAN
+  lora:
+  - poses_0570_trash_can_v1_pony
   prompt: ruanyi0570,after sex,anus,in container,pussy,stuck,trash can
-  lora:
-    - poses_0570_trash_can_v1_pony
-  default_display: "TRASHCAN"
-
-triple_penetration:
-  prompt: being penetrated by three people, 
-  lora:
-    - Triple_Penetration_V3_PonyXL_000009
-  default_display: "TRIPLE PENETRATION"
-
-
-
-  
-
-
-
-
-
-
-
-
-

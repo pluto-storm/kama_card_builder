@@ -1,205 +1,180 @@
-# Contributor note:
-# - Each top-level key is an outfit slug referenced from cards.yaml.
-# - Keep outfit prompts focused on clothing and accessories.
-# - Use `default_display` for a short label when the outfit should appear on the card UI.
-# - Optional `lora` accepts one or more names or `{name, weight}` mappings.
-
-# Outfit prompts for different styles
-athleisure: 
-  prompt: leggings, sports bra, oversized hoodie, running shoes, baseball cap 
-  default_display: "ATHLEISURE"
-
-beach: 
+athleisure:
+  default_display: ATHLEISURE
+  prompt: leggings, sports bra, oversized hoodie, running shoes, baseball cap
+beach:
+  default_display: BEACH
   prompt: swimsuit, cover-up, flip flops, sun hat, sunglasses
-  default_display: "BEACH"
-
 bikini:
+  default_display: BIKINI
   prompt: bikini, micro bikini, small bikini, sexy, thong
-  default_display: "BIKINI"
-
-bohemian: 
+bohemian:
+  default_display: BOHEMIAN
   prompt: flowy maxi dress, fringe bag, layered necklaces, wide-brim hat, sandals
-  default_display: "BOHEMIAN"
-
-casual: 
-  prompt: t shirt, plain white t shirt, shirt tucked into pants, blue jeans, black backpack, long blue jeans, black and grey sneakers, brown belt
-  default_display: "CASUAL"
-
-cheerleader: 
+casual:
+  default_display: CASUAL
+  prompt: t shirt, plain white t shirt, shirt tucked into pants, blue jeans, black
+    backpack, long blue jeans, black and grey sneakers, brown belt
+cheerleader:
+  default_display: CHEERLEADER
   prompt: pleated skirt, fitted top, sneakers, pom poms, hair bow
-  default_display: "CHEERLEADER"
-
 chel:
+  default_display: TRIBAL
   prompt: white bandeau top with red and pink lines, loincloth
-  default_display: "TRIBAL"
-
-chic: 
+chic:
+  default_display: CHIC
   prompt: blazer, tailored pants, pointed-toe heels, statement bag, minimalist jewelry
-  default_display: "CHIC"
-
-edgy: 
+edgy:
+  default_display: EDGY
   prompt: leather jacket, ripped skinny jeans, ankle boots, graphic tee, bold accessories
-  default_display: "EDGY"
-
-evening: 
+evening:
+  default_display: EVENING
   prompt: cocktail dress, high heels, clutch bag, statement necklace, shawl
-  default_display: "EVENING"
-
-festival: 
+festival:
+  default_display: FESTIVAL
   prompt: bohemian dress, fringe vest, ankle boots, wide-brim hat, layered jewelry
-  default_display: "FESTIVAL"
-
-formal: 
-  prompt: white dress shirt, black dress pants, black leather shoes, black belt, navy blazer, silk tie
-  default_display: "FORMAL"
-
-gothic: 
+formal:
+  default_display: FORMAL
+  prompt: white dress shirt, black dress pants, black leather shoes, black belt, navy
+    blazer, silk tie
+gothic:
+  default_display: GOTHIC
   prompt: black lace dress, combat boots, dark makeup, silver jewelry, leather jacket
-  default_display: "GOTHIC"
-
-grunge: 
+grunge:
+  default_display: GRUNGE
   prompt: flannel shirt, ripped jeans, combat boots, beanie, layered necklaces
-  default_display: "GRUNGE"
-
 harem_outfit:
-  prompt: <lora:harem-outfit-ponyxl-lora-nochekaiser:1>, harem outfit, white veil, arabian clothes, neck ring, mouth veil, circlet, harem pants, thighlet, gold trim, dancer,
+  default_display: HAREM OUTFIT
   lora:
-    - harem_outfit_ponyxl_lora_nochekaiser
-  default_display: "HAREM OUTFIT"
-
+  - harem_outfit_ponyxl_lora_nochekaiser
+  prompt: <lora:harem-outfit-ponyxl-lora-nochekaiser:1>, harem outfit, white veil,
+    arabian clothes, neck ring, mouth veil, circlet, harem pants, thighlet, gold trim,
+    dancer,
 kim_possible_spy:
-  prompt: black tank long sleeve shirt, crop top, green cargo pants, black shoes, black gloves, black belt
-  default_display: "SPY"
-
-kim_possible_student: 
+  default_display: SPY
+  prompt: black tank long sleeve shirt, crop top, green cargo pants, black shoes,
+    black gloves, black belt
+kim_possible_student:
+  default_display: ' STUDENT'
   prompt: pink crop top, baggy blue jeans,
-  default_display: " STUDENT"
-
 leia_slave:
-  prompt: Leiagolddg, pelvic curtain, gold bikini top, braid, collar, 
+  default_display: LEIA
   lora:
-    - Leia_DALLE_3_PonyXL
-  default_display: "LEIA"
-
+  - Leia_DALLE_3_PonyXL
+  prompt: Leiagolddg, pelvic curtain, gold bikini top, braid, collar,
 leia_white:
-  prompt: Leiagolddg, double bun, white dress, belt, high heel boots, side slit, wide sleeves, 
+  default_display: LEIA
   lora:
-    - Leia_DALLE_3_PonyXL
-  default_display: "LEIA"
-
-loungewear: 
+  - Leia_DALLE_3_PonyXL
+  prompt: Leiagolddg, double bun, white dress, belt, high heel boots, side slit, wide
+    sleeves,
+loungewear:
+  default_display: LOUNGEWEAR
   prompt: soft hoodie, jogger pants, cozy socks, slippers, casual t shirt
-  default_display: "LOUNGEWEAR"
-
 naked:
+  default_display: NAKED
   prompt: bare skin, no clothing, natural pose, sexy, uncensored, nipples
-  default_display: "NAKED"
-
-party: 
+party:
+  default_display: PARTY
   prompt: sequin dress, stilettos, clutch bag, statement earrings, bold makeup
-  default_display: "PARTY"
-
-preppy: 
+preppy:
+  default_display: PREPPY
   prompt: polo shirt, pleated skirt, loafers, knee-high socks, headband
-  default_display: "PREPPY"
-
-princess_rapunzel:
-  prompt: rapunzel dress, long golden braid, purple princess gown, fitted bodice, deep plunge neckline, low-cut waist, flowing layered skirt, puffed sleeves, romantic fairytale dress, floral hair ribbon
-
-princess_snow_white:
-  prompt: snow white dress, classic blue and yellow princess dress, fitted bodice, low-cut neckline, deep cleavage, full skirt, puffed sleeves, lace trim, delicate apron, elegant fairytale gown
-
-princess_ariel:
-  prompt: ariel dress, pink mermaid princess gown, fitted shell bodice, plunging neckline, low-cut top, flowing skirt, layered tail fins, sea-inspired trim, romantic underwater princess dress
-
-princess_aurora:
-  prompt: aurora dress, rose-pink ball gown, fitted bodice, low-cut sweetheart neckline, deep cleavage, full layered skirt, puffed sleeves, delicate lace, soft tulle, romantic princess dress
-
-princess_belle:
-  prompt: belle dress, yellow ball gown, fitted bodice, low-cut corset, deep neckline, full skirt, lace-up corset, puffed sleeves, golden trim, elegant disney-inspired princess dress
-
-princess_cinderella:
-  prompt: cinderella dress, blue fairy-tale ball gown, fitted bodice, deep sweetheart neckline, low-cut bodice, full layered skirt, puffed sleeves, crystal embellishments, delicate gloves, elegant princess dress
-
-princess_elsa:
-  prompt: elsa dress, ice blue ball gown, fitted bodice, low-cut neckline, deep cleavage, long sleeves, cape, snowflake details, sparkling crystal trim, layered skirt
-
 princess_anna:
-  prompt: anna dress, warm burgundy gown, fitted bodice, deep neckline, puffy sleeves, layered skirt, snowflake embroidery, soft cape, princess dress, slight risky bodice
-
+  prompt: anna dress, warm burgundy gown, fitted bodice, deep neckline, puffy sleeves,
+    layered skirt, snowflake embroidery, soft cape, princess dress, slight risky bodice
+princess_ariel:
+  prompt: ariel dress, pink mermaid princess gown, fitted shell bodice, plunging neckline,
+    low-cut top, flowing skirt, layered tail fins, sea-inspired trim, romantic underwater
+    princess dress
+princess_aurora:
+  prompt: aurora dress, rose-pink ball gown, fitted bodice, low-cut sweetheart neckline,
+    deep cleavage, full layered skirt, puffed sleeves, delicate lace, soft tulle,
+    romantic princess dress
+princess_belle:
+  prompt: belle dress, yellow ball gown, fitted bodice, low-cut corset, deep neckline,
+    full skirt, lace-up corset, puffed sleeves, golden trim, elegant disney-inspired
+    princess dress
+princess_cinderella:
+  prompt: cinderella dress, blue fairy-tale ball gown, fitted bodice, deep sweetheart
+    neckline, low-cut bodice, full layered skirt, puffed sleeves, crystal embellishments,
+    delicate gloves, elegant princess dress
+princess_elsa:
+  prompt: elsa dress, ice blue ball gown, fitted bodice, low-cut neckline, deep cleavage,
+    long sleeves, cape, snowflake details, sparkling crystal trim, layered skirt
 princess_jasmine:
-  prompt: jasmine outfit, golden desert princess dress, jeweled bodice, fitted waist, plunging neckline, low-cut top, flowing skirt, sheer sleeves, ornate belt, arabian-inspired gown
-
-princess_mulan:
-  prompt: mulan dress, red and gold traditional dress, embroidered bodice, deep neckline, low-cut bodice, flowing sleeves, wrap waist, layered skirt, elegant warrior princess outfit
-
+  prompt: jasmine outfit, golden desert princess dress, jeweled bodice, fitted waist,
+    plunging neckline, low-cut top, flowing skirt, sheer sleeves, ornate belt, arabian-inspired
+    gown
 princess_merida:
-  prompt: merida dress, green tartan dress, fitted bodice, low-cut neckline, layered skirt, lace-up bodice, long sleeves, rustic princess outfit, Scottish-inspired gown, daring sweetheart neckline
-
-princess_tiana:
-  prompt: tiana dress, soft green ball gown, fitted bodice, deep neckline, low-cut bodice, layered skirt, pearl accents, elegant sleeves, elegant disney princess dress
-
-princess_pocahontas:
-  prompt: pocahontas outfit, earthy brown and tan dress, beadwork, fringe trim, fitted bodice, deep neckline, low-cut top, layered skirt, native-inspired princess outfit
-
+  prompt: merida dress, green tartan dress, fitted bodice, low-cut neckline, layered
+    skirt, lace-up bodice, long sleeves, rustic princess outfit, Scottish-inspired
+    gown, daring sweetheart neckline
 princess_moana:
-  prompt: moana outfit, teal and coral island dress, wrap bodice, low-cut neckline, deep cleavage, flowing skirt, leaf accents, ocean-inspired princess gown 
-
-
-punk: 
+  prompt: moana outfit, teal and coral island dress, wrap bodice, low-cut neckline,
+    deep cleavage, flowing skirt, leaf accents, ocean-inspired princess gown
+princess_mulan:
+  prompt: mulan dress, red and gold traditional dress, embroidered bodice, deep neckline,
+    low-cut bodice, flowing sleeves, wrap waist, layered skirt, elegant warrior princess
+    outfit
+princess_pocahontas:
+  prompt: pocahontas outfit, earthy brown and tan dress, beadwork, fringe trim, fitted
+    bodice, deep neckline, low-cut top, layered skirt, native-inspired princess outfit
+princess_rapunzel:
+  prompt: rapunzel dress, long golden braid, purple princess gown, fitted bodice,
+    deep plunge neckline, low-cut waist, flowing layered skirt, puffed sleeves, romantic
+    fairytale dress, floral hair ribbon
+princess_snow_white:
+  prompt: snow white dress, classic blue and yellow princess dress, fitted bodice,
+    low-cut neckline, deep cleavage, full skirt, puffed sleeves, lace trim, delicate
+    apron, elegant fairytale gown
+princess_tiana:
+  prompt: tiana dress, soft green ball gown, fitted bodice, deep neckline, low-cut
+    bodice, layered skirt, pearl accents, elegant sleeves, elegant disney princess
+    dress
+punk:
+  default_display: PUNK
   prompt: ripped jeans, band t shirt, leather jacket, studded belt, combat boots
-  default_display: "PUNK"
-
 raven:
-  prompt: blue cape, impossible leotard, boots, shiny, belt, cape,leotard, covered navel, black leotard, highleg leotard, blue footwear, impossible clothes
-  default_display: "RAVEN"
-
-retro: 
+  default_display: RAVEN
+  prompt: blue cape, impossible leotard, boots, shiny, belt, cape,leotard, covered
+    navel, black leotard, highleg leotard, blue footwear, impossible clothes
+retro:
+  default_display: RETRO
   prompt: high-waisted jeans, graphic t shirt, bomber jacket, sneakers, round sunglasses
-  default_display: "RETRO"
-
-romantic: 
-  prompt: flowy dress, ballet flats, delicate jewelry, soft cardigan, floral hair accessory
-  default_display: "ROMANTIC"
-
-secretary: 
+romantic:
+  default_display: ROMANTIC
+  prompt: flowy dress, ballet flats, delicate jewelry, soft cardigan, floral hair
+    accessory
+secretary:
+  default_display: SECRETARY
   prompt: pencil skirt, blouse, blazer, pumps, simple jewelry
-  default_display: "SECRETARY"
-
 slingshot_bikini:
-  prompt: slingshot swimsuit, slingshot bikini, high-cut, minimal coverage, thong back, halter neck, bold colors
+  default_display: SLINGSHOT BIKINI
   lora:
-    - slingshotPony_resize.safetensors
-  default_display: "SLINGSHOT BIKINI"
-
-sporty: 
-  prompt: athletic shorts, moisture-wicking t shirt, running shoes, sports watch, baseball cap
-  default_display: "SPORTY"
-
-starfire: 
-  prompt: armlet, gorget, crop top, midriff, purple skirt, green sclera, breasts, purple footwear, bracer
-  default_display: "STARFIRE"
-
-summer: 
+  - slingshotPony_resize.safetensors
+  prompt: slingshot swimsuit, slingshot bikini, high-cut, minimal coverage, thong
+    back, halter neck, bold colors
+sporty:
+  default_display: SPORTY
+  prompt: athletic shorts, moisture-wicking t shirt, running shoes, sports watch,
+    baseball cap
+starfire:
+  default_display: STARFIRE
+  prompt: armlet, gorget, crop top, midriff, purple skirt, green sclera, breasts,
+    purple footwear, bracer
+summer:
+  default_display: SUMMER
   prompt: tank top, denim shorts, flip flops, sunglasses, straw hat
-  default_display: "SUMMER"
-
-vintage: 
+vintage:
+  default_display: VINTAGE
   prompt: floral dress, cardigan, Mary Jane shoes, pearl necklace, vintage handbag
-  default_display: "VINTAGE"
-
-winter: 
-  prompt: wool coat, scarf, gloves, thermal sweater, dark jeans, leather boots
-  default_display: "WINTER"
-
 wanda_1:
+  default_display: CASUAL FAIRY
   prompt: yellow crop top, black panties, side-tie panties, black heels
-  default_display: "CASUAL FAIRY"
-
 wanda_2:
-  prompt: yellow bra, pink panties, garter belt, garter straps, pink thighhighs, black heels
-  default_display: "SEXY FAIRY"
-
-
-
-
+  default_display: SEXY FAIRY
+  prompt: yellow bra, pink panties, garter belt, garter straps, pink thighhighs, black
+    heels
+winter:
+  default_display: WINTER
+  prompt: wool coat, scarf, gloves, thermal sweater, dark jeans, leather boots

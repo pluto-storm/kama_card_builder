@@ -1,141 +1,132 @@
-# Contributor note:
-# - Each top-level key is a character slug used by cards.yaml.
-# - Keep prompts descriptive and reusable; do not bake in a specific card title.
-# - `prompt` is the positive prompt text used during generation.
-# - `default_display` is optional label text for UI or card naming.
-# - Optional `lora` accepts one or more names or `{name, weight}` mappings.
-
-alice: 
-  prompt: 1girl, 18yo, blonde hair, long hair, lips, curvy, hair bow,  bow,  ,  mini_skirt,  white_thighhighs,  crop_top,  pink_laced_thong,  gigantic_breasts,   breasts, cleavage, navel, midriff, camel_toe,
+alice:
+  default_display: ALICE
   lora:
-    - alice_tf_plus_v1
-  default_display: "ALICE"
-
+  - alice_tf_plus_v1
+  prompt: 1girl, 18yo, blonde hair, long hair, lips, curvy, hair bow,  bow,  mini_skirt,  white_thighhighs,  crop_top,  pink_laced_thong,  gigantic_breasts,   breasts,
+    cleavage, navel, midriff, camel_toe,
 chel:
+  default_display: CHEL
+  lora:
+  - chel
   prompt: sh_el, 1girl, black hair, tanned skin, brown eyes, jade bracelet
-  lora:
-    - chel
-  default_display: "CHEL"
-
 kim_possible:
-  prompt: kim_possible, young woman, red hair, green eyes, thin, perky boobs, thick lips, pale skin
+  default_display: KIM POSSIBLE
   lora:
-    - kim_possible
-  default_display: "KIM POSSIBLE"
-
+  - kim_possible
+  prompt: kim_possible, young woman, red hair, green eyes, thin, perky boobs, thick
+    lips, pale skin
 megara:
-  prompt: brown hair, m_ra, 1girl, brown hair, purple eyes, big boobs, ponytail hair, thin body, big waist, pale skin
+  default_display: MEGARA
   lora:
-    - MegaraCivitai
-  default_display: "MEGARA"
-
+  - MegaraCivitai
+  prompt: brown hair, m_ra, 1girl, brown hair, purple eyes, big boobs, ponytail hair,
+    thin body, big waist, pale skin
 meru:
-  prompt: succubus, red skin, horns, meru, perky boobs, thick thighs, short, devil tail, yellow eyes, dark lips, long dark hair, black hair, bangs, 
+  default_display: MERU
   lora:
-    - meru_succubus_ponyxl_v1_unet_resized
-  default_display: "MERU"
-
-queentyra:
-  prompt: QueenTyra, colored skin, black skin, white hair, purple eyes, no mouth, jewelry, makeup, forehead jewel, egyptian clothes, bikini, necklace, gem, loincloth, bracer, bracelet,
-  lora:
-    - QueenTyra_character_10
-  default_display: "QUEEN TYRA"
-
-
-princess_rapunzel:
-  prompt: rapunzel, long blonde hair, green eyes, fair skin, slim body, perky boobs, thin legs
-  lora:
-    - princess
-  default_display: "PRINCESS RAPUNZEL"
-princess_snow_white:
-  prompt: snow white, black hair, fair skin, red lips, short hair, curvy body, 
-  lora:
-    - princess
-  default_display: "PRINCESS SNOW WHITE"
-princess_ariel:
-  prompt: ariel, red hair, blue eyes, fair skin athletic body
-  lora:
-    - princess
-  default_display: "PRINCESS ARIEL"
-princess_aurora:
-  prompt: aurora, long blonde hair, blue eyes, fair skin, 
-  lora:
-    - princess
-  default_display: "PRINCESS AURORA"
-princess_belle:
-  prompt: belle, brown hair, blue eyes, fair skin
-  lora:
-    - princess
-  default_display: "PRINCESS BELLE"
-princess_cinderella:
-  prompt: cinderella, blonde hair, blue eyes, fair skin
-  lora:
-    - princess
-  default_display: "PRINCESS CINDERELLA"
-princess_elsa:
-  prompt: elsa, platinum blonde hair, blue eyes, fair skin
-  lora:
-    - princess
-  default_display: "PRINCESS ELSA"
+  - meru_succubus_ponyxl_v1_unet_resized
+  prompt: succubus, red skin, horns, meru, perky boobs, thick thighs, short, devil
+    tail, yellow eyes, dark lips, long dark hair, black hair, bangs,
 princess_anna:
+  default_display: PRINCESS ANNA
+  lora:
+  - princess
   prompt: anna, red hair, blue eyes, fair skin
+princess_ariel:
+  default_display: PRINCESS ARIEL
   lora:
-    - princess
-  default_display: "PRINCESS ANNA"  
+  - princess
+  prompt: ariel, red hair, blue eyes, fair skin athletic body
+princess_aurora:
+  default_display: PRINCESS AURORA
+  lora:
+  - princess
+  prompt: aurora, long blonde hair, blue eyes, fair skin,
+princess_belle:
+  default_display: PRINCESS BELLE
+  lora:
+  - princess
+  prompt: belle, brown hair, blue eyes, fair skin
+princess_cinderella:
+  default_display: PRINCESS CINDERELLA
+  lora:
+  - princess
+  prompt: cinderella, blonde hair, blue eyes, fair skin
+princess_elsa:
+  default_display: PRINCESS ELSA
+  lora:
+  - princess
+  prompt: elsa, platinum blonde hair, blue eyes, fair skin
 princess_jasmine:
+  default_display: PRINCESS JASMINE
+  lora:
+  - princess
   prompt: jasmine, black hair, brown eyes, tan skin, big boobs, curvy body
-  lora:
-    - princess
-  default_display: "PRINCESS JASMINE"
-princess_mulan:
-  prompt: mulan, black hair, brown eyes, fair skin
-  lora:
-    - princess
-  default_display: "PRINCESS MULAN"
 princess_merida:
-  prompt: merida, curly red hair, blue eyes, fair skin, freckles, 
+  default_display: PRINCESS MERIDA
   lora:
-    - princess
-  default_display: "PRINCESS MERIDA"
-princess_tiana:
-  prompt: tiana, dark brown hair, brown eyes, dark skin
-  lora:
-    - princess
-  default_display: "PRINCESS TIANA"
-princess_pocahontas:
-  prompt: pocahontas, long black hair, brown eyes, tan skin, athletic body
-  lora:
-    - princess
-  default_display: "PRINCESS POCAHONTAS"
+  - princess
+  prompt: merida, curly red hair, blue eyes, fair skin, freckles,
 princess_moana:
-  prompt: moana, long brown hair, brown eyes, tan skin, thick body, athletic bodoy, strong legs
+  default_display: PRINCESS MOANA
   lora:
-    - princess
-  default_display: "PRINCESS MOANA"
-
+  - princess
+  prompt: moana, long brown hair, brown eyes, tan skin, thick body, athletic bodoy,
+    strong legs
+princess_mulan:
+  default_display: PRINCESS MULAN
+  lora:
+  - princess
+  prompt: mulan, black hair, brown eyes, fair skin
+princess_pocahontas:
+  default_display: PRINCESS POCAHONTAS
+  lora:
+  - princess
+  prompt: pocahontas, long black hair, brown eyes, tan skin, athletic body
+princess_rapunzel:
+  default_display: PRINCESS RAPUNZEL
+  lora:
+  - princess
+  prompt: rapunzel, long blonde hair, green eyes, fair skin, slim body, perky boobs,
+    thin legs
+princess_snow_white:
+  default_display: PRINCESS SNOW WHITE
+  lora:
+  - princess
+  prompt: snow white, black hair, fair skin, red lips, short hair, curvy body,
+princess_tiana:
+  default_display: PRINCESS TIANA
+  lora:
+  - princess
+  prompt: tiana, dark brown hair, brown eyes, dark skin
+queentyra:
+  default_display: QUEEN TYRA
+  lora:
+  - QueenTyra_character_10
+  prompt: QueenTyra, colored skin, black skin, white hair, purple eyes, no mouth,
+    jewelry, makeup, forehead jewel, egyptian clothes, bikini, necklace, gem, loincloth,
+    bracer, bracelet,
 raven:
-  prompt: ravenDC, breasts, looking at viewer, blush, short hair, large breasts, purple eyes, purple hair, thighs,  shiny hair, shiny skin,colored skin, highleg, gem, grey skin, forehead jewel, perky boobs, round boobs
+  default_display: RAVEN
   lora:
-    - raven
-  default_display: "RAVEN"
-
+  - raven
+  prompt: ravenDC, breasts, looking at viewer, blush, short hair, large breasts, purple
+    eyes, purple hair, thighs,  shiny hair, shiny skin,colored skin, highleg, gem,
+    grey skin, forehead jewel, perky boobs, round boobs
 starfire:
-  prompt: starfirett, red hair, solo, long hair, green eyes, orange skin, perky breasts, round boobs
+  default_display: STARFIRE
   lora:
-    - starfire
-  default_display: "STARFIRE"
-
+  - starfire
+  prompt: starfirett, red hair, solo, long hair, green eyes, orange skin, perky breasts,
+    round boobs
 syx:
-  prompt: syx purple skin elf, syx outfit, white hair, purple outfit, collar, anklets, bracelets,long gloves, hoop earrings, multiple earrings, gigantic breasts
+  default_display: SYX
   lora:
-    - syx
-  default_display: "SYX"
-
+  - syx
+  prompt: syx purple skin elf, syx outfit, white hair, purple outfit, collar, anklets,
+    bracelets,long gloves, hoop earrings, multiple earrings, gigantic breasts
 wanda:
-  prompt: w4nd4, pink hair, pink eyes, lipstick, crown, wings
+  default_display: WANDA
   lora:
-    - Wanda
-  default_display: "WANDA"
-
-
-  
+  - Wanda
+  prompt: w4nd4, pink hair, pink eyes, lipstick, crown, wings

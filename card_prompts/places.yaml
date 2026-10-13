@@ -1,72 +1,51 @@
-# Contributor note:
-# - Each top-level key is a scene/location slug referenced by cards.yaml.
-# - Keep these as environment prompts only; avoid mixing in character pose details.
-# - `default_display` is optional and should be short for UI labels.
-
 bathroom:
+  default_display: BATHROOM
   prompt: bathroom picture, white tiles, sink, mirror
-  default_display: "BATHROOM"
-
 beach:
+  default_display: BEACH
   prompt: beach background, sand, ocean, clear sky
-  default_display: "BEACH"
-
 bedroom:
+  default_display: BEDROOM
   prompt: bedroom background, bed, nightstand, lamp
-  default_display: "BEDROOM"
-
 blank:
+  default_display: ''
   prompt: blank background
-  default_display: ""
-
-city:
-  prompt: city background, buildings, streets, traffic
-  default_display: "CITY"
-
 castle:
+  default_display: CASTLE
   prompt: castle background, stone walls, towers, banners
-  default_display: "CASTLE"
-
+city:
+  default_display: CITY
+  prompt: city background, buildings, streets, traffic
 desert:
+  default_display: DESERT
   prompt: desert background, sand dunes, cacti, clear sky
-  default_display: "DESERT"
-
 forest:
+  default_display: FOREST
   prompt: forest background, trees, foliage, sunlight filtering through leaves
-  default_display: "FOREST"
-
 girl_room:
+  default_display: GIRL ROOM
   prompt: girl room background, bed, desk, chair, pink room, girly room
-  default_display: "GIRL ROOM"
-
 gym:
+  default_display: GYM
   prompt: gym background, exercise equipment, wooden floor
-  default_display: "GYM"
-
 gym_shower:
+  default_display: GYM SHOWER
   prompt: gym shower background, shower stalls, tiled walls
-  default_display: "GYM SHOWER"
-
 mountain:
+  default_display: MOUNTAIN
   prompt: mountain background, peaks, rocky terrain, clear sky
-  default_display: "MOUNTAIN"
-
 park:
+  default_display: PARK
   prompt: park background, trees, grass, benches
-  default_display: "PARK"
-
 school:
+  default_display: SCHOOL
   prompt: school background, classroom, desks, chalkboard
-  default_display: "SCHOOL"
-
 shower:
+  default_display: SHOWER
   prompt: taking a shower, in the shower, wet, water running, wet hair, wet body
-  default_display: "SHOWER"
-
 space:
+  default_display: SPACE
   prompt: space background, stars, planets, nebulae
-  default_display: "SPACE"
-
 underwater:
+  default_display: UNDERWATER
   prompt: underwater background, coral reefs, fish, bubbles
-  default_display: "UNDERWATER"
