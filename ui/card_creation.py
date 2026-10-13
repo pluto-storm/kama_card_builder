@@ -171,22 +171,19 @@ class CardCreationMixin:
         ).pack(
             anchor="w", pady=(0, 4)
         )
-        for kind in generation.LIBRARY_KINDS:
-            if kind == "place":
-                continue
-            self._form_label(page, kind.replace("_", " ").title())
-            variable = tk.StringVar()
-            selector = ttk.Combobox(page, textvariable=variable, state="readonly")
-            selector.pack(fill="x", pady=(0, 8))
-            state["defaults"][kind] = (variable, selector)
-
-        self._form_label(page, "LoRA preset")
-        preset_variable = tk.StringVar()
-        preset_selector = ttk.Combobox(
-            page, textvariable=preset_variable, state="readonly"
+        defaults_grid = ttk.Frame(page)
+        defaults_grid.pack(fill="x", pady=(0, 4))
+        defaults_grid.columnconfigure(1, weight=1)
+        default_kinds = [
+            kind for kind in generation.LIBRARY_KINDS if kind != "place"
+        ]
+        for row, kind in enumerate(default_kinds):
+            state["defaults"][kind] = self._labeled_combobox(
+                defaults_grid, row, kind.replace("_", " ").title(), pady=4
+            )
+        state["defaults"]["lora_preset"] = self._labeled_combobox(
+            defaults_grid, len(default_kinds), "LoRA preset", pady=4
         )
-        preset_selector.pack(fill="x", pady=(0, 8))
-        state["defaults"]["lora_preset"] = (preset_variable, preset_selector)
         self._form_label(page, "Custom positive prompt")
         state["defaults"]["prompt_pos"] = self._text_field(page, height=3)
         self._form_label(page, "Custom negative prompt")
@@ -196,6 +193,24 @@ class CardCreationMixin:
         ttk.Label(page, text="Cards 1–18", font=("TkDefaultFont", 11, "bold")).pack(
             anchor="w", pady=(0, 4)
         )
+        feature_row = ttk.Frame(page)
+        feature_row.pack(fill="x", pady=(0, 4))
+        for column in range(2):
+            feature_row.columnconfigure(column, weight=1, uniform="feature_card")
+        for column, (card_name, label) in enumerate(
+            (("card_0_icon", "Icon"), ("card_0_poster", "Poster"))
+        ):
+            card_frame = ttk.LabelFrame(feature_row, text=label, padding=6)
+            card_frame.grid(
+                row=0,
+                column=column,
+                sticky="nsew",
+                padx=(0, 4) if column == 0 else (4, 0),
+            )
+            card_state = {"fields": {}}
+            self._build_card_fields(card_frame, card_state)
+            state["cards"][card_name] = card_state
+
         grid = ttk.Frame(page)
         grid.pack(fill="both", expand=True)
         for column in range(3):
@@ -211,34 +226,7 @@ class CardCreationMixin:
                 pady=4,
             )
             card_state = {"fields": {}}
-            for kind in generation.LIBRARY_KINDS:
-                ttk.Label(
-                    card_frame, text=kind.replace("_", " ").title()
-                ).pack(anchor="w")
-                variable = tk.StringVar()
-                selector = ttk.Combobox(
-                    card_frame, textvariable=variable, state="readonly"
-                )
-                selector.pack(fill="x", pady=2)
-                card_state["fields"][kind] = (variable, selector)
-            ttk.Label(card_frame, text="LoRA preset").pack(anchor="w")
-            preset_variable = tk.StringVar()
-            preset_selector = ttk.Combobox(
-                card_frame, textvariable=preset_variable, state="readonly"
-            )
-            preset_selector.pack(fill="x", pady=2)
-            card_state["fields"]["lora_preset"] = (
-                preset_variable,
-                preset_selector,
-            )
-            ttk.Label(card_frame, text="Positive prompt").pack(anchor="w")
-            positive = self._text_field(card_frame, height=2)
-            positive.pack_configure(pady=2)
-            ttk.Label(card_frame, text="Negative prompt").pack(anchor="w")
-            negative = self._text_field(card_frame, height=2)
-            negative.pack_configure(pady=2)
-            card_state["fields"]["prompt_pos"] = positive
-            card_state["fields"]["prompt_neg"] = negative
+            self._build_card_fields(card_frame, card_state)
             state["cards"][card_name] = card_state
 
         ttk.Button(
@@ -248,6 +236,42 @@ class CardCreationMixin:
         ).pack(anchor="e", pady=(8, 0))
         self.card_prompt_forms[path] = ("cards", state)
         self._load_cards_form(state)
+
+    def _build_card_fields(self, card_frame, card_state):
+        card_frame.columnconfigure(1, weight=1)
+        row = 0
+        for kind in generation.LIBRARY_KINDS:
+            card_state["fields"][kind] = self._labeled_combobox(
+                card_frame, row, kind.replace("_", " ").title()
+            )
+            row += 1
+        card_state["fields"]["lora_preset"] = self._labeled_combobox(
+            card_frame, row, "LoRA preset"
+        )
+        row += 1
+        # Prompts stay full-width below the dropdowns so the text boxes keep
+        # their usable width inside the narrow card columns.
+        for key, text in (("prompt_pos", "Positive prompt"), ("prompt_neg", "Negative prompt")):
+            ttk.Label(card_frame, text=text).grid(
+                row=row, column=0, columnspan=2, sticky="w"
+            )
+            field = tk.Text(card_frame, height=2, wrap="word", undo=True)
+            field.grid(row=row + 1, column=0, columnspan=2, sticky="ew", pady=2)
+            card_state["fields"][key] = field
+            row += 2
+
+    @staticmethod
+    def _labeled_combobox(parent, row, text, pady=2):
+        """Grid a label on the left and a readonly dropdown on the right."""
+        ttk.Label(parent, text=text).grid(
+            row=row, column=0, sticky="w", padx=(0, 8), pady=pady
+        )
+        variable = tk.StringVar()
+        selector = ttk.Combobox(
+            parent, textvariable=variable, state="readonly", width=12
+        )
+        selector.grid(row=row, column=1, sticky="ew", pady=pady)
+        return variable, selector
 
     @staticmethod
     def _form_label(parent, text):

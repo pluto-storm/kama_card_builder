@@ -384,6 +384,28 @@ def build_jobs(gen: dict, paths: dict, lib: dict) -> tuple:
     if not sets:
         raise ConfigError("generate.local.yaml: 'sets_to_generate' is required")
     sets = as_list(sets)
+    selected_cards = gen.get("cards_to_generate")
+    if selected_cards is not None:
+        selected_cards = as_list(selected_cards)
+        if not selected_cards or any(
+            not isinstance(card_name, str) for card_name in selected_cards
+        ):
+            raise ConfigError(
+                "generate.local.yaml: 'cards_to_generate' must be a non-empty list "
+                "of card keys"
+            )
+        available_cards = {
+            card_name
+            for set_name in sets
+            for card_name in (lib["cards"].get(set_name) or {})
+            if re.fullmatch(r"card_(?:\d+|0_icon|0_poster)", str(card_name))
+        }
+        unknown_cards = sorted(set(selected_cards) - available_cards)
+        if unknown_cards:
+            raise ConfigError(
+                "generate.local.yaml: unknown selected card(s): "
+                + ", ".join(unknown_cards)
+            )
 
     seeds = resolve_seeds(gen)
     jobs = []
@@ -404,6 +426,8 @@ def build_jobs(gen: dict, paths: dict, lib: dict) -> tuple:
 
         for card_name, card in set_data.items():
             if card_name in {"_defaults", "set_defaults", "display_name"}:
+                continue
+            if selected_cards is not None and card_name not in selected_cards:
                 continue
             if not isinstance(card, dict):
                 errors.append(f"{set_name}/{card_name}: card must be a mapping")
@@ -714,6 +738,11 @@ def main():
         help="override the selected card sets for image generation",
     )
     ap.add_argument(
+        "--cards",
+        nargs="+",
+        help="override the selected card keys for image generation",
+    )
+    ap.add_argument(
         "--checkpoint",
         help="override checkpoint_to_use for image generation",
     )
@@ -751,6 +780,8 @@ def main():
         mode = args.mode or gen.get("mode", "generate_images")
         if args.sets is not None:
             gen["sets_to_generate"] = args.sets
+        if args.cards is not None:
+            gen["cards_to_generate"] = args.cards
         if args.checkpoint is not None:
             gen["checkpoint_to_use"] = args.checkpoint
         if args.lora_presets is not None:

@@ -62,10 +62,55 @@ def _card_output_name(card_name):
     return f"card_{int(match.group(1)):02d}"
 
 
-def _reserve_set_directories(output_root, sets):
+def _output_category(card_name):
+    if card_name == "card_0_icon":
+        return "icons"
+    if card_name == "card_0_poster":
+        return "posters"
+    return "cards"
+
+
+def _card_stem(job):
+    return f"{_safe_component(job['set'])}_{_card_output_name(job['card'])}"
+
+
+def _generates_depth(job):
+    """Only regular cards get a depth map; icons and posters do not."""
+    return _output_category(job["card"]) == "cards"
+
+
+def _prune_unreachable_nodes(workflow, output_ids):
+    """Drop nodes that no remaining output node depends on."""
+    reachable = set()
+    pending = [node_id for node_id in output_ids if node_id in workflow]
+    while pending:
+        node_id = pending.pop()
+        if node_id in reachable:
+            continue
+        reachable.add(node_id)
+        for input_value in workflow[node_id].get("inputs", {}).values():
+            if (
+                isinstance(input_value, list)
+                and input_value
+                and isinstance(input_value[0], str)
+                and input_value[0] in workflow
+            ):
+                pending.append(input_value[0])
+    for node_id in list(workflow):
+        if node_id not in reachable:
+            del workflow[node_id]
+
+
+def _image_stem(job):
+    """Icons and posters are named after their set; cards keep the card number."""
+    if _output_category(job["card"]) in ("icons", "posters"):
+        return _safe_component(job["set"])
+    return _card_stem(job)
+
+
+def _reserve_run_directory(output_root):
     output_root = Path(output_root)
     output_root.mkdir(parents=True, exist_ok=True)
-    set_components = list(dict.fromkeys(_safe_component(name) for name in sets))
     while True:
         now = datetime.now()
         date_directory = output_root / now.strftime("%Y-%m-%d")
@@ -79,31 +124,27 @@ def _reserve_set_directories(output_root, sets):
             time.sleep(0.001)
             continue
 
-        set_directories = {}
         try:
-            for set_component in set_components:
-                set_directory = date_directory / f"{run_id}_{set_component}"
-                set_directory.mkdir()
-                set_directories[set_component] = set_directory
+            run_directory = date_directory / run_id
+            run_directory.mkdir()
         except FileExistsError:
-            for set_directory in set_directories.values():
-                set_directory.rmdir()
             reservation.unlink()
             time.sleep(0.001)
             continue
 
         reservation.unlink()
-        return run_id, date_directory, set_directories
+        for category in ("cards", "depth", "icons", "posters"):
+            (run_directory / category).mkdir()
+        return run_id, date_directory, run_directory
 
 
-def _reserve_output_stem(set_name, base_stem, reserved_names):
-    set_component = _safe_component(set_name)
+def _reserve_output_stem(base_stem, reserved_names):
     candidate = base_stem
     suffix = 2
-    while (set_component, candidate) in reserved_names:
+    while candidate in reserved_names:
         candidate = f"{base_stem}_{suffix}"
         suffix += 1
-    reserved_names.add((set_component, candidate))
+    reserved_names.add(candidate)
     return candidate
 
 
@@ -154,14 +195,16 @@ def build_api_workflow(template, job, paths, run_id, date_name):
         raise WorkflowError(f"Invalid numeric run timestamp: {run_id!r}")
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date_name):
         raise WorkflowError(f"Invalid output date directory: {date_name!r}")
-    set_prefix = f"{date_name}/{run_id}_{_safe_component(job['set'])}"
-    card_output_name = _card_output_name(job["card"])
+    category = _output_category(job["card"])
+    set_prefix = f"{date_name}/{run_id}/{category}/{_image_stem(job)}"
     _required_node(workflow, NODE_IDS["save_image"], job_id)["inputs"][
         "filename_prefix"
-    ] = f"{set_prefix}/{card_output_name}"
+    ] = set_prefix
     _required_node(workflow, NODE_IDS["save_depth"], job_id)["inputs"][
         "filename_prefix"
-    ] = f"{set_prefix}/depths/{card_output_name}"
+    ] = f"{date_name}/{run_id}/depth/{_card_stem(job)}"
+    if not _generates_depth(job):
+        del workflow[NODE_IDS["save_depth"]]
 
     loader_id = NODE_IDS["lora_loader"]
     _required_node(workflow, loader_id, job_id)
@@ -191,6 +234,8 @@ def build_api_workflow(template, job, paths, run_id, date_name):
                 input_value[0] = lora_source
     del workflow[loader_id]
     workflow.update(lora_nodes)
+    if not _generates_depth(job):
+        _prune_unreachable_nodes(workflow, [NODE_IDS["save_image"]])
     return workflow
 
 
@@ -378,14 +423,17 @@ def _save_completed_images(
     comfyui_output_root,
     date_name,
     run_id,
-    filename_stem,
+    image_stem,
+    depth_stem,
 ):
     outputs = prompt_history.get("outputs", {})
     saved_paths = []
-    for node_id, relative_directory in (
-        (NODE_IDS["save_image"], ()),
-        (NODE_IDS["save_depth"], ("depths",)),
-    ):
+    expected_outputs = [
+        (NODE_IDS["save_image"], (_output_category(job["card"]),), image_stem),
+    ]
+    if depth_stem is not None:
+        expected_outputs.append((NODE_IDS["save_depth"], ("depth",), depth_stem))
+    for node_id, relative_directory, filename_stem in expected_outputs:
         images = outputs.get(node_id, {}).get("images", [])
         if not images:
             raise WorkflowError(
@@ -393,41 +441,24 @@ def _save_completed_images(
             )
 
         for image_index, image in enumerate(images, start=1):
-            set_name = f"{run_id}_{_safe_component(job['set'])}"
             index_suffix = f"_{image_index}" if len(images) > 1 else ""
             filename = f"{filename_stem}{index_suffix}.png"
             destination = Path(output_root).joinpath(
-                date_name, set_name, *relative_directory, filename
+                date_name, run_id, *relative_directory, filename
             )
             image_path = _move_completed_image(
                 image,
                 output_root,
                 comfyui_output_root,
                 date_name,
-                set_name,
+                run_id,
                 filename,
-                expected_subfolder=[date_name, set_name, *relative_directory],
+                expected_subfolder=[date_name, run_id, *relative_directory],
                 destination_path=destination,
             )
             saved_paths.append(image_path)
 
-    source_set_directory = (
-        Path(comfyui_output_root)
-        / date_name
-        / f"{run_id}_{_safe_component(job['set'])}"
-    )
-    try:
-        (source_set_directory / "depths").rmdir()
-    except OSError:
-        pass
-    try:
-        source_set_directory.rmdir()
-    except OSError:
-        pass
-
-    output_directory = (
-        Path(output_root) / date_name / f"{run_id}_{_safe_component(job['set'])}"
-    )
+    output_directory = Path(output_root) / date_name / run_id
     return output_directory, saved_paths
 
 
@@ -437,14 +468,12 @@ def submit_api_workflows(jobs, template, paths, comfyui_url):
         raise WorkflowError("paths.local.yaml must define 'comfyui_url' to generate images")
 
     base_url = comfyui_url.rstrip("/")
-    run_id, date_directory, set_directories = _reserve_set_directories(
-        paths["output_dir"], [job["set"] for job in jobs]
-    )
+    run_id, date_directory, run_directory = _reserve_run_directory(paths["output_dir"])
     date_name = date_directory.name
     comfyui_output_root = paths.get(
         "comfyui_output_dir", Path(paths["comfyui_root"]) / "output"
     )
-    print(f"Run output date: {date_directory}", flush=True)
+    print(f"Run output: {run_directory}", flush=True)
     card_counts = {}
     for job in jobs:
         card_key = (job["set"], job["card"])
@@ -478,12 +507,19 @@ def submit_api_workflows(jobs, template, paths, comfyui_url):
                         raise WorkflowError(
                             f"ComfyUI failed {job['job_id']}: {json.dumps(status)}"
                         )
-                    filename_stem = _card_output_name(job["card"])
+                    seed_suffix = ""
                     if card_counts[(job["set"], job["card"])] > 1:
-                        filename_stem += f"_seed{_safe_component(job['seed'])}"
-                    filename_stem = _reserve_output_stem(
-                        job["set"], filename_stem, reserved_names
-                    )
+                        seed_suffix = f"_seed{_safe_component(job['seed'])}"
+                    category = _output_category(job["card"])
+                    image_stem = _reserve_output_stem(
+                        f"{category}/{_image_stem(job)}{seed_suffix}",
+                        reserved_names,
+                    ).split("/", 1)[1]
+                    depth_stem = None
+                    if _generates_depth(job):
+                        depth_stem = _reserve_output_stem(
+                            f"depth/{_card_stem(job)}{seed_suffix}", reserved_names
+                        ).split("/", 1)[1]
                     destination, saved_paths = _save_completed_images(
                         job,
                         prompt_history,
@@ -491,7 +527,8 @@ def submit_api_workflows(jobs, template, paths, comfyui_url):
                         comfyui_output_root,
                         date_name,
                         run_id,
-                        filename_stem,
+                        image_stem,
+                        depth_stem,
                     )
                     print(f"Completed {index}/{len(jobs)}: {job['job_id']}", flush=True)
                     print(f"Saved images to {destination}: {', '.join(p.name for p in saved_paths)}", flush=True)
@@ -501,6 +538,17 @@ def submit_api_workflows(jobs, template, paths, comfyui_url):
             raise WorkflowError(
                 f"Timed out waiting for ComfyUI to finish {job['job_id']}"
             )
+
+    comfyui_run_directory = Path(comfyui_output_root) / date_name / run_id
+    for category in ("cards", "depth", "icons", "posters"):
+        try:
+            (comfyui_run_directory / category).rmdir()
+        except OSError:
+            pass
+    try:
+        comfyui_run_directory.rmdir()
+    except OSError:
+        pass
 
 
 def _save_completed_depth(

@@ -1,15 +1,6 @@
-athleisure:
-  default_display: ATHLEISURE
-  prompt: leggings, sports bra, oversized hoodie, running shoes, baseball cap
-beach:
-  default_display: BEACH
-  prompt: swimsuit, cover-up, flip flops, sun hat, sunglasses
 bikini:
   default_display: BIKINI
   prompt: bikini, micro bikini, small bikini, sexy, thong
-bohemian:
-  default_display: BOHEMIAN
-  prompt: flowy maxi dress, fringe bag, layered necklaces, wide-brim hat, sandals
 casual:
   default_display: CASUAL
   prompt: t shirt, plain white t shirt, shirt tucked into pants, blue jeans, black
@@ -20,28 +11,21 @@ cheerleader:
 chel:
   default_display: TRIBAL
   prompt: white bandeau top with red and pink lines, loincloth
-chic:
-  default_display: CHIC
-  prompt: blazer, tailored pants, pointed-toe heels, statement bag, minimalist jewelry
 edgy:
   default_display: EDGY
   prompt: leather jacket, ripped skinny jeans, ankle boots, graphic tee, bold accessories
-evening:
-  default_display: EVENING
-  prompt: cocktail dress, high heels, clutch bag, statement necklace, shawl
-festival:
-  default_display: FESTIVAL
-  prompt: bohemian dress, fringe vest, ankle boots, wide-brim hat, layered jewelry
-formal:
-  default_display: FORMAL
-  prompt: white dress shirt, black dress pants, black leather shoes, black belt, navy
-    blazer, silk tie
-gothic:
+gothic_outfit:
   default_display: GOTHIC
-  prompt: black lace dress, combat boots, dark makeup, silver jewelry, leather jacket
+  prompt: black lace dress, combat boots, dark makeup, silver jewelry, dark makeup, black lipsick, black eyeliner, black eyeshadow, black nail polish, spikes, corset, fishnet stockings, black chocker
+gothic_accessories:
+  default_display: GOTHIC HEAVY
+  prompt: dark makeup, silver jewelry, dark makeup, black lipsick, black eyeliner, black eyeshadow, black nail polish, tattoos, piercings, chains, fishnet stockings, nipple piercings, nose piercing, 
 grunge:
   default_display: GRUNGE
   prompt: flannel shirt, ripped jeans, combat boots, beanie, layered necklaces
+gym_outfit:
+  default_display: GYM
+  prompt: leggings, sports bra, running shoes
 harem_outfit:
   default_display: HAREM OUTFIT
   lora:
@@ -49,8 +33,8 @@ harem_outfit:
   prompt: <lora:harem-outfit-ponyxl-lora-nochekaiser:1>, harem outfit, white veil,
     arabian clothes, neck ring, mouth veil, circlet, harem pants, thighlet, gold trim,
     dancer,
-kim_possible_spy:
-  default_display: SPY
+kim_possible_agent:
+  default_display: AGENT
   prompt: black tank long sleeve shirt, crop top, green cargo pants, black shoes,
     black gloves, black belt
 kim_possible_student:
@@ -138,13 +122,6 @@ raven:
   default_display: RAVEN
   prompt: blue cape, impossible leotard, boots, shiny, belt, cape,leotard, covered
     navel, black leotard, highleg leotard, blue footwear, impossible clothes
-retro:
-  default_display: RETRO
-  prompt: high-waisted jeans, graphic t shirt, bomber jacket, sneakers, round sunglasses
-romantic:
-  default_display: ROMANTIC
-  prompt: flowy dress, ballet flats, delicate jewelry, soft cardigan, floral hair
-    accessory
 secretary:
   default_display: SECRETARY
   prompt: pencil skirt, blouse, blazer, pumps, simple jewelry
@@ -154,14 +131,10 @@ slingshot_bikini:
   - slingshotPony_resize.safetensors
   prompt: slingshot swimsuit, slingshot bikini, high-cut, minimal coverage, thong
     back, halter neck, bold colors
-sporty:
-  default_display: SPORTY
-  prompt: athletic shorts, moisture-wicking t shirt, running shoes, sports watch,
-    baseball cap
 starfire:
   default_display: STARFIRE
   prompt: armlet, gorget, crop top, midriff, purple skirt, green sclera, breasts,
-    purple footwear, bracer
+    purple footwear, bracer, starfire outfit, 
 summer:
   default_display: SUMMER
   prompt: tank top, denim shorts, flip flops, sunglasses, straw hat
