@@ -34,55 +34,30 @@ set_1:
   _defaults:
     character: princess_rapunzel
     prompt_pos: 1girl, sexy, perky boobs, round boobs
-  card_1:
-    outfit: princess_rapunzel
-    place: girl_room
-    pose: basic_0
-  card_2:
-    outfit: princess_rapunzel
-    place: girl_room
-    pose: thinking
-    prompt_pos: leg exposed, sitting down, legs out
-  card_3:
-    outfit: naked
-    place: shower
-    pose: basic_0
-  card_4:
-    outfit: bikini
-    place: beach
-    pose: basic_2
-    prompt_pos: pink bikini
-  card_5:
-    outfit: bikini
-    place: beach
-    pose: surprised
-    prompt_pos: pink bikini, bikini top falling off, exposed nipples, topless, looking
-      down at exposed boobs
+  card_01: {outfit: princess_rapunzel, place: girl_room, pose: basic_0}
+  card_02: {outfit: princess_rapunzel, place: girl_room, pose: thinking, prompt_pos: 'leg exposed, sitting down, legs out'}
+  card_03: {outfit: naked, place: shower, pose: basic_0}
+  card_04: {outfit: bikini, place: beach, pose: basic_2, prompt_pos: 'pink bikini'}
+  card_05: {outfit: bikini, place: beach, pose: surprised, prompt_pos: 'pink bikini, bikini top falling off, exposed nipples, topless, looking down at exposed boobs'}
 set_2:
   _defaults:
     character: princess_snow_white
     prompt_pos: 1girl, sexy, perky boobs, round boobs
-  card_1:
-    outfit: princess_snow_white
-    place: girl_room
-    pose: basic_0
-  card_2:
-    outfit: princess_snow_white
-    place: girl_room
-    pose: thinking
-    prompt_pos: leg exposed, sitting down, legs out
-  card_3:
-    outfit: naked
-    place: shower
-    pose: basic_2
-  card_4:
-    outfit: bikini
-    place: beach
-    pose: basic_2
-    prompt_pos: blue bikini
-  card_5:
-    outfit: bikini
-    place: beach
-    pose: surprised
-    prompt_pos: blue bikini, bikini top falling off, exposed nipples, topless, looking
-      down at exposed boobs
+  card_01: {outfit: princess_snow_white, place: girl_room, pose: level_1_basic_0}
+  card_02: {outfit: princess_snow_white, place: girl_room, pose: level_1_thinking, prompt_pos: 'leg exposed, sitting down, legs out'}
+  card_03: {outfit: naked, place: shower, pose: level_1_basic_2}
+  card_04: {outfit: bikini, place: beach, pose: level_1_basic_2, prompt_pos: 'blue bikini'}
+  card_05: {outfit: bikini, place: beach, pose: level_1_surprised, prompt_pos: 'blue bikini, bikini top falling off, exposed nipples, topless, looking down at exposed boobs'}
+  card_06: {outfit: bikini, place: beach, prompt_pos: 'laying down, ass view, ass up, big ass, sun bathing, topless'}
+  card_07: {outfit: cheerleader, prompt_pos: 'sexy cheer leader, football field, short skirt, mini skirt, blue and yellow cheerleader outift'}
+  card_08: {outfit: gothic, place: castle}
+  card_09: {outfit: naked, pose: level_2_push_up_boobs, place: park}
+  card_10: {outfit: naked, pose: level_2_multigrope, place: park}
+  card_11: {pose: level_3_fucked_silly, place: park}
+  card_12: {pose: level_3_top_down_doggy, place: park}
+  card_13: {pose: level_4_airtight, place: park}
+  card_14: {pose: level_4_triple_penetration, place: park}
+  card_15: {pose: level_5_cum_covered, place: park}
+  card_16: {pose: level_5_trashcan, place: park}
+  card_17: {pose: level_5_cum_covered, place: school}
+  card_18: {pose: level_5_cum_covered, place: gym_shower}

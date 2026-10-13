@@ -412,7 +412,18 @@ def build_jobs(gen: dict, paths: dict, lib: dict) -> tuple:
             merged_card = {**defaults, **card}
             where = f"{set_name}/{card_name}"
             try:
-                base = build_card(where, merged_card, gen, lib, loras_dir, ckpt, ckpt_name, paths)
+                base = build_card(
+                    where,
+                    merged_card,
+                    gen,
+                    lib,
+                    loras_dir,
+                    ckpt,
+                    ckpt_name,
+                    paths,
+                    defaults=defaults,
+                    card_overrides=card,
+                )
             except ConfigError as e:
                 errors.append(str(e))
                 continue
@@ -438,7 +449,19 @@ def build_jobs(gen: dict, paths: dict, lib: dict) -> tuple:
     return jobs, errors
 
 
-def build_card(where, card, gen, lib, loras_dir, ckpt, ckpt_name, paths) -> dict:
+def build_card(
+    where,
+    card,
+    gen,
+    lib,
+    loras_dir,
+    ckpt,
+    ckpt_name,
+    paths,
+    *,
+    defaults=None,
+    card_overrides=None,
+) -> dict:
     """Resolve one card into prompts, loras, and display text (seed-independent)."""
     if not isinstance(card, dict):
         raise ConfigError(f"{where}: card must be a mapping")
@@ -453,16 +476,27 @@ def build_card(where, card, gen, lib, loras_dir, ckpt, ckpt_name, paths) -> dict
     # library entries: character -> outfit -> pose -> place
     entries = []
     for kind in LIBRARY_KINDS:
-        key = card.get(kind)
-        if key is None:
-            continue
         table = lib[kind]
-        if key not in table:
-            raise ConfigError(
-                f"{where}: {kind} '{key}' not found in {LIBRARY_FILES[kind]}"
-            )
-        entry = table[key] or {}
-        entries.append((kind, key, entry))
+        keys = []
+        if kind == "character" and defaults:
+            default_character = defaults.get(kind)
+            card_character = (card_overrides or {}).get(kind)
+            if default_character is not None:
+                keys.append(default_character)
+            if card_character is not None and card_character not in keys:
+                keys.append(card_character)
+        else:
+            key = card.get(kind)
+            if key is not None:
+                keys.append(key)
+
+        for key in keys:
+            if key not in table:
+                raise ConfigError(
+                    f"{where}: {kind} '{key}' not found in {LIBRARY_FILES[kind]}"
+                )
+            entry = table[key] or {}
+            entries.append((kind, key, entry))
 
     for kind, key, entry in entries:
         pos_parts.append(entry.get("prompt"))

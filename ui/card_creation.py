@@ -145,11 +145,9 @@ class CardCreationMixin:
             "path": path,
             "data": {},
             "set": tk.StringVar(),
-            "card": tk.StringVar(),
             "display": tk.StringVar(),
-            "references": {},
-            "prompt_pos": None,
-            "prompt_neg": None,
+            "defaults": {},
+            "cards": {},
         }
         self._form_label(page, "Card set")
         row = ttk.Frame(page)
@@ -167,40 +165,85 @@ class CardCreationMixin:
 
         self._form_label(page, "Set display name (optional)")
         ttk.Entry(page, textvariable=state["display"]).pack(fill="x", pady=(0, 8))
-        self._form_label(page, "Card / shared defaults")
-        row = ttk.Frame(page)
-        row.pack(fill="x", pady=(0, 8))
-        state["card_selector"] = ttk.Combobox(
-            row, textvariable=state["card"], state="readonly"
+        ttk.Separator(page).pack(fill="x", pady=8)
+        ttk.Label(
+            page, text="Set global defaults", font=("TkDefaultFont", 11, "bold")
+        ).pack(
+            anchor="w", pady=(0, 4)
         )
-        state["card_selector"].pack(side="left", fill="x", expand=True)
-        state["card_selector"].bind(
-            "<<ComboboxSelected>>", lambda _event, s=state: self._select_card(s)
-        )
-        ttk.Button(
-            row, text="New card", command=lambda s=state: self._new_card(s)
-        ).pack(side="left", padx=(8, 0))
-
         for kind in generation.LIBRARY_KINDS:
+            if kind == "place":
+                continue
             self._form_label(page, kind.replace("_", " ").title())
             variable = tk.StringVar()
             selector = ttk.Combobox(page, textvariable=variable, state="readonly")
             selector.pack(fill="x", pady=(0, 8))
-            state["references"][kind] = (variable, selector)
+            state["defaults"][kind] = (variable, selector)
 
-        self._form_label(page, "LoRA preset (optional)")
-        state["lora_preset"] = tk.StringVar()
-        state["lora_preset_selector"] = ttk.Combobox(
-            page, textvariable=state["lora_preset"], state="readonly"
+        self._form_label(page, "LoRA preset")
+        preset_variable = tk.StringVar()
+        preset_selector = ttk.Combobox(
+            page, textvariable=preset_variable, state="readonly"
         )
-        state["lora_preset_selector"].pack(fill="x", pady=(0, 8))
-        self._form_label(page, "Custom positive prompt (optional)")
-        state["prompt_pos"] = self._text_field(page, height=4)
-        self._form_label(page, "Custom negative prompt (optional)")
-        state["prompt_neg"] = self._text_field(page, height=3)
+        preset_selector.pack(fill="x", pady=(0, 8))
+        state["defaults"]["lora_preset"] = (preset_variable, preset_selector)
+        self._form_label(page, "Custom positive prompt")
+        state["defaults"]["prompt_pos"] = self._text_field(page, height=3)
+        self._form_label(page, "Custom negative prompt")
+        state["defaults"]["prompt_neg"] = self._text_field(page, height=3)
+
+        ttk.Separator(page).pack(fill="x", pady=8)
+        ttk.Label(page, text="Cards 1–18", font=("TkDefaultFont", 11, "bold")).pack(
+            anchor="w", pady=(0, 4)
+        )
+        grid = ttk.Frame(page)
+        grid.pack(fill="both", expand=True)
+        for column in range(3):
+            grid.columnconfigure(column, weight=1, uniform="card_column")
+        for index in range(1, 19):
+            card_name = f"card_{index}"
+            card_frame = ttk.LabelFrame(grid, text=card_name, padding=6)
+            card_frame.grid(
+                row=(index - 1) // 3,
+                column=(index - 1) % 3,
+                sticky="nsew",
+                padx=4,
+                pady=4,
+            )
+            card_state = {"fields": {}}
+            for kind in generation.LIBRARY_KINDS:
+                ttk.Label(
+                    card_frame, text=kind.replace("_", " ").title()
+                ).pack(anchor="w")
+                variable = tk.StringVar()
+                selector = ttk.Combobox(
+                    card_frame, textvariable=variable, state="readonly"
+                )
+                selector.pack(fill="x", pady=2)
+                card_state["fields"][kind] = (variable, selector)
+            ttk.Label(card_frame, text="LoRA preset").pack(anchor="w")
+            preset_variable = tk.StringVar()
+            preset_selector = ttk.Combobox(
+                card_frame, textvariable=preset_variable, state="readonly"
+            )
+            preset_selector.pack(fill="x", pady=2)
+            card_state["fields"]["lora_preset"] = (
+                preset_variable,
+                preset_selector,
+            )
+            ttk.Label(card_frame, text="Positive prompt").pack(anchor="w")
+            positive = self._text_field(card_frame, height=2)
+            positive.pack_configure(pady=2)
+            ttk.Label(card_frame, text="Negative prompt").pack(anchor="w")
+            negative = self._text_field(card_frame, height=2)
+            negative.pack_configure(pady=2)
+            card_state["fields"]["prompt_pos"] = positive
+            card_state["fields"]["prompt_neg"] = negative
+            state["cards"][card_name] = card_state
+
         ttk.Button(
             page,
-            text="Save card",
+            text="Save set",
             command=lambda s=state: self._save_card_form(s),
         ).pack(anchor="e", pady=(8, 0))
         self.card_prompt_forms[path] = ("cards", state)
@@ -425,34 +468,42 @@ class CardCreationMixin:
     def _load_cards_form(self, state):
         try:
             state["data"] = generation.load_yaml(state["path"])
-            for kind, (_variable, selector) in state["references"].items():
-                options = sorted(
-                    generation.load_yaml(
-                        generation.CARD_DIR / generation.LIBRARY_FILES[kind]
-                    )
+            libraries = {
+                kind: generation.load_yaml(
+                    generation.CARD_DIR / generation.LIBRARY_FILES[kind]
                 )
-                selector.configure(values=["", *options])
+                for kind in generation.LIBRARY_KINDS
+            }
             presets_path = generation.WORKFLOW_DIR / "loras_preset.yaml"
             presets = generation.load_yaml(presets_path) if presets_path.exists() else {}
-            state["lora_preset_selector"].configure(values=["", *sorted(presets)])
         except (generation.ConfigError, OSError) as error:
             messagebox.showerror("Could not load card data", str(error))
             return
+
+        for kind, field in state["defaults"].items():
+            if isinstance(field, tuple):
+                _variable, selector = field
+                choices = sorted(libraries[kind]) if kind in libraries else sorted(presets)
+                selector.configure(values=["", *choices])
+        for card_state in state["cards"].values():
+            for kind, field in card_state["fields"].items():
+                if isinstance(field, tuple):
+                    _variable, selector = field
+                    choices = (
+                        sorted(libraries[kind]) if kind in libraries else sorted(presets)
+                    )
+                    selector.configure(values=["", *choices])
+
         names = sorted(state["data"])
         state["set_selector"].configure(values=names)
         if names:
-            state["set"].set(names[0])
+            selected = state["set"].get()
+            state["set"].set(selected if selected in state["data"] else names[0])
             self._select_card_set(state)
         else:
             state["set"].set("")
-            state["card"].set("_defaults")
             state["display"].set("")
-            state["card_selector"].configure(values=["_defaults"])
-            for variable, _selector in state["references"].values():
-                variable.set("")
-            state["lora_preset"].set("")
-            self._set_field_text(state["prompt_pos"], "")
-            self._set_field_text(state["prompt_neg"], "")
+            self._set_card_form_values(state, {}, {})
 
     def _select_card_set(self, state):
         set_name = state["set"].get()
@@ -463,45 +514,46 @@ class CardCreationMixin:
             )
             return
         state["display"].set(str(set_data.get("display_name", "")))
-        card_names = [
-            name
-            for name, value in set_data.items()
-            if name not in {"_defaults", "set_defaults", "display_name"}
-            and isinstance(value, dict)
-        ]
-        state["card_selector"].configure(values=["_defaults", *sorted(card_names)])
-        defaults_key = "_defaults" if "_defaults" in set_data else "set_defaults"
-        state["card"].set(
-            "_defaults" if defaults_key in set_data else (
-                sorted(card_names)[0] if card_names else "_defaults"
-            )
-        )
-        self._select_card(state)
-
-    def _select_card(self, state):
-        set_data = state["data"].get(state["set"].get(), {})
-        card_name = state["card"].get()
         defaults_key = "_defaults" if "_defaults" in set_data else "set_defaults"
         defaults = set_data.get(defaults_key, {})
-        defaults = defaults if isinstance(defaults, dict) else {}
-        card_data = set_data.get(card_name, {}) if card_name != "_defaults" else defaults
-        if not isinstance(card_data, dict):
-            card_data = {}
-        effective = {**defaults, **card_data} if card_name != "_defaults" else card_data
-        for kind, (variable, selector) in state["references"].items():
-            value = effective.get(kind, "")
-            options = list(selector.cget("values"))
-            if value and value not in options:
-                selector.configure(values=[*options, value])
-            variable.set(str(value or ""))
-        preset = effective.get("lora_preset", "")
-        preset_selector = state["lora_preset_selector"]
-        preset_options = list(preset_selector.cget("values"))
-        if preset and preset not in preset_options:
-            preset_selector.configure(values=[*preset_options, preset])
-        state["lora_preset"].set(str(preset or ""))
-        self._set_field_text(state["prompt_pos"], effective.get("prompt_pos"))
-        self._set_field_text(state["prompt_neg"], effective.get("prompt_neg"))
+        if not isinstance(defaults, dict):
+            messagebox.showerror(
+                "Invalid card set", f"Set '{set_name}' defaults must be a mapping."
+            )
+            return
+        self._set_card_form_values(state, defaults, set_data)
+
+    def _set_card_form_values(self, state, defaults, set_data):
+        for key, field in state["defaults"].items():
+            value = defaults.get(key)
+            if isinstance(field, tuple):
+                variable, selector = field
+                self._select_form_reference(selector, variable, value)
+            else:
+                self._set_field_text(field, value)
+
+        for card_name, card_state in state["cards"].items():
+            card_data = set_data.get(card_name, {})
+            if not isinstance(card_data, dict):
+                card_data = {}
+            for key, field in card_state["fields"].items():
+                value = card_data.get(key)
+                if value == defaults.get(key):
+                    value = None
+                if isinstance(field, tuple):
+                    variable, selector = field
+                    self._select_form_reference(selector, variable, value)
+                else:
+                    self._set_field_text(field, value)
+
+    @staticmethod
+    def _select_form_reference(selector, variable, value):
+        choices = list(selector.cget("values"))
+        selected = "" if value is None else str(value)
+        if selected and selected not in choices:
+            choices.append(selected)
+            selector.configure(values=choices)
+        variable.set(selected)
 
     def _new_card_set(self, state):
         name = simpledialog.askstring("New card set", "Set key:")
@@ -516,30 +568,10 @@ class CardCreationMixin:
         state["set"].set(name)
         self._select_card_set(state)
 
-    def _new_card(self, state):
-        set_name = state["set"].get()
-        if not set_name:
-            messagebox.showerror("New card", "Create or select a card set first.")
-            return
-        name = simpledialog.askstring("New card", "Card key:")
-        if not name:
-            return
-        name = name.strip()
-        set_data = state["data"][set_name]
-        reserved = {"_defaults", "set_defaults", "display_name"}
-        if not name or name in reserved or name in set_data:
-            messagebox.showerror("Invalid card", f"Card key '{name}' is empty or exists.")
-            return
-        set_data[name] = {}
-        self._select_card_set(state)
-        state["card"].set(name)
-        self._select_card(state)
-
     def _save_card_form(self, state):
         set_name = state["set"].get()
-        card_name = state["card"].get()
-        if not set_name or set_name not in state["data"] or not card_name:
-            messagebox.showerror("Invalid card", "Select a card set and card first.")
+        if not set_name or set_name not in state["data"]:
+            messagebox.showerror("Invalid card set", "Select or create a card set first.")
             return
         set_data = state["data"][set_name]
         if not isinstance(set_data, dict):
@@ -553,53 +585,46 @@ class CardCreationMixin:
             set_data.pop("display_name", None)
 
         defaults_key = "_defaults" if "_defaults" in set_data else "set_defaults"
-        defaults = set_data.get(defaults_key, {})
-        defaults = defaults if isinstance(defaults, dict) else {}
-        if card_name == "_defaults":
-            target = set_data.get(defaults_key, {})
-            if not isinstance(target, dict):
-                messagebox.showerror("Invalid defaults", "Shared defaults must be a mapping.")
-                return
-        else:
-            target = set_data.get(card_name, {})
-            if not isinstance(target, dict):
-                messagebox.showerror("Invalid card", f"Card '{card_name}' must be a mapping.")
-                return
-        target = dict(target)
-        for kind, (variable, _selector) in state["references"].items():
-            value = variable.get().strip()
-            if value:
-                target[kind] = value
-            elif card_name != "_defaults" and kind in defaults:
-                target[kind] = None
+        old_defaults = set_data.get(defaults_key, {})
+        if not isinstance(old_defaults, dict):
+            messagebox.showerror("Invalid defaults", "Shared defaults must be a mapping.")
+            return
+        defaults = {}
+        for key, field in state["defaults"].items():
+            if isinstance(field, tuple):
+                value = field[0].get().strip()
             else:
-                target.pop(kind, None)
-        lora_preset = state["lora_preset"].get().strip()
-        if lora_preset:
-            target["lora_preset"] = lora_preset
-        else:
-            target.pop("lora_preset", None)
-        for key, field in (
-            ("prompt_pos", state["prompt_pos"]),
-            ("prompt_neg", state["prompt_neg"]),
-        ):
-            value = self._field_text(field)
+                value = self._field_text(field)
             if value:
-                target[key] = value
-            elif card_name != "_defaults" and key in defaults:
-                target[key] = None
-            else:
-                target.pop(key, None)
-        if card_name == "_defaults":
-            set_data[defaults_key] = target
-        else:
-            set_data[card_name] = target
+                defaults[key] = value
+
+        set_data[defaults_key] = defaults
+        for card_name, card_state in state["cards"].items():
+            existing = set_data.get(card_name, {})
+            if not isinstance(existing, dict):
+                messagebox.showerror(
+                    "Invalid card", f"Card '{card_name}' must be a mapping."
+                )
+                return
+            card_data = dict(existing)
+            for key, field in card_state["fields"].items():
+                if isinstance(field, tuple):
+                    value = field[0].get().strip()
+                else:
+                    value = self._field_text(field)
+                if (
+                    key not in existing
+                    and value == (old_defaults.get(key) or "")
+                ):
+                    continue
+                if value and value != defaults.get(key):
+                    card_data[key] = value
+                else:
+                    card_data.pop(key, None)
+            set_data[card_name] = card_data
+
         data = dict(state["data"])
         data[set_name] = set_data
         if self._save_form_data(state, data):
             state["data"] = data
-            self._load_cards_form(state)
-            state["set"].set(set_name)
             self._select_card_set(state)
-            state["card"].set(card_name)
-            self._select_card(state)

@@ -55,6 +55,13 @@ def _safe_component(value):
     return component
 
 
+def _card_output_name(card_name):
+    match = re.fullmatch(r"card_(\d+)", str(card_name))
+    if not match:
+        return _safe_component(card_name)
+    return f"card_{int(match.group(1)):02d}"
+
+
 def _reserve_set_directories(output_root, sets):
     output_root = Path(output_root)
     output_root.mkdir(parents=True, exist_ok=True)
@@ -148,12 +155,13 @@ def build_api_workflow(template, job, paths, run_id, date_name):
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date_name):
         raise WorkflowError(f"Invalid output date directory: {date_name!r}")
     set_prefix = f"{date_name}/{run_id}_{_safe_component(job['set'])}"
+    card_output_name = _card_output_name(job["card"])
     _required_node(workflow, NODE_IDS["save_image"], job_id)["inputs"][
         "filename_prefix"
-    ] = f"{set_prefix}/{_safe_component(job['card'])}"
+    ] = f"{set_prefix}/{card_output_name}"
     _required_node(workflow, NODE_IDS["save_depth"], job_id)["inputs"][
         "filename_prefix"
-    ] = f"{set_prefix}/depths/{_safe_component(job['card'])}"
+    ] = f"{set_prefix}/depths/{card_output_name}"
 
     loader_id = NODE_IDS["lora_loader"]
     _required_node(workflow, loader_id, job_id)
@@ -453,7 +461,7 @@ def submit_api_workflows(jobs, template, paths, comfyui_url):
                         raise WorkflowError(
                             f"ComfyUI failed {job['job_id']}: {json.dumps(status)}"
                         )
-                    filename_stem = _safe_component(job["card"])
+                    filename_stem = _card_output_name(job["card"])
                     if card_counts[(job["set"], job["card"])] > 1:
                         filename_stem += f"_seed{_safe_component(job['seed'])}"
                     filename_stem = _reserve_output_stem(
