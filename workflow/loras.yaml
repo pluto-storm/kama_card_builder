@@ -1,40 +1,7 @@
 # Contributor note:
-# - `lora_presets` is a reusable grouping of LoRA entries that can be referenced from cards.yaml.
-# - Preset entries may be plain names or `{name, weight, clip}` objects; `clip` is optional and defaults to `weight`.
 # - The top-level entries below are individual LoRA definitions keyed by their exact name.
 # - Keep file paths relative to the configured `loras_dir` and support `${...}` variables when needed.
 # - `source` is an optional URL to the source model page; prefer the exact version when known.
-
-lora_presets:
-  preset_1:
-  - name: MoriiMee_Gothic_Niji_Style
-    weight: 0.7
-  - name: reiq_style_xl_ilff
-    weight: 0.8
-  - name: princess
-    weight: 0.3
-    clip: 0.3
-  - name: kingbang
-    weight: 0.3
-  - name: SkindentationSlider
-    weight: 1.0
-  - name: Expressive_H_000001
-    weight: 0.5
-  preset_2:
-  - name: princess
-    weight: 0.3
-    clip: 0.3
-  - name: SkindentationSlider
-    weight: 1.0
-  - name: Expressive_H_000001
-    weight: 0.5
-  - name: Breast_Slider_Pony_alpha1_0_rank4_noxattn_last
-    weight: 1.5
-  - name: Round_Breasts_XL_XV7_000038
-    weight: 1.0
-
-  
-
 
 #art styles
 Akabur_IllustriousV1:

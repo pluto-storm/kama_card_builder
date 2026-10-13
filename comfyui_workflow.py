@@ -524,7 +524,8 @@ def submit_depth_api_workflows(jobs, template, paths, comfyui_url):
     comfyui_output_root = paths.get(
         "comfyui_output_dir", Path(paths["comfyui_root"]) / "output"
     )
-    print(f"Depth outputs: {DEPTH_OUTPUT_DIR}", flush=True)
+    depth_output_dir = Path(paths.get("depth_output_dir", DEPTH_OUTPUT_DIR))
+    print(f"Depth outputs: {depth_output_dir}", flush=True)
     reserved_names = set()
 
     for index, job in enumerate(jobs, start=1):
@@ -568,7 +569,7 @@ def submit_depth_api_workflows(jobs, template, paths, comfyui_url):
                     destination, saved_paths = _save_completed_depth(
                         job,
                         prompt_history,
-                        DEPTH_OUTPUT_DIR,
+                        depth_output_dir,
                         comfyui_output_root,
                         date_name,
                         set_name,

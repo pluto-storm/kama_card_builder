@@ -91,7 +91,7 @@
   },
   "134": {
     "inputs": {
-      "filename_prefix": "2026-10-09/comfyui",
+      "filename_prefix": "",
       "images": [
         "194",
         0
@@ -235,7 +235,7 @@
   },
   "232": {
     "inputs": {
-      "filename_prefix": "2026-10-09/depth",
+      "filename_prefix": "",
       "images": [
         "246:1",
         0

@@ -26,5 +26,4 @@ sets_to_generate:
   - set_1
   - set_2
 
-# Used only with mode: depth_maps. Put images under depths/inputs; nested
-# folders are mirrored under depths/outputs with depth_ prefixed to each name.
+# Depth-mode input and output locations are selected in the UI.

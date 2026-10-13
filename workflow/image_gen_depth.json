@@ -1,7 +1,7 @@
 {
   "232": {
     "inputs": {
-      "filename_prefix": "2026-10-09/143004483955_set_1/depth_card_1",
+      "filename_prefix": "",
       "images": [
         "246:1",
         0
@@ -14,7 +14,7 @@
   },
   "251": {
     "inputs": {
-      "image": "cammy_00001_.png"
+      "image": ""
     },
     "class_type": "LoadImage",
     "_meta": {
