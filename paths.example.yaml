@@ -1,8 +1,7 @@
 comfyui_root: /home/you/ComfyUI
 checkpoints_dir: ${comfyui_root}/models/checkpoints
 loras_dir: ${comfyui_root}/models/loras
-ge_dir: ${comfyui_root}/models/geometry_estimation
-ge_model: ${ge_dir}/depth_anything_3_mono_large.safetensors
+ge_model: ${comfyui_root}/models/geometry_estimation/depth_anything_3_mono_large.safetensors
 comfyui_output_dir: ${comfyui_root}/output
 output_dir: ./output
 comfyui_url: http://127.0.0.1:8188

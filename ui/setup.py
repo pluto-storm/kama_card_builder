@@ -74,12 +74,23 @@ class SetupMixin:
 
         config.pop("depth_input_dir", None)
         config.pop("depth_output_dir", None)
+        config.pop("ge_dir", None)
+        ge_model = config.get("ge_model")
+        if isinstance(ge_model, str) and ge_model.startswith("${ge_dir}"):
+            config["ge_model"] = (
+                "${comfyui_root}/models/geometry_estimation"
+                + ge_model[len("${ge_dir}"):]
+            )
+        config.setdefault(
+            "ge_model",
+            "${comfyui_root}/models/geometry_estimation/"
+            "depth_anything_3_mono_large.safetensors",
+        )
         self.path_entries = {"_summaries": self.path_entries.get("_summaries", {})}
         shared_keys = {
             "comfyui_root",
             "comfyui_output_dir",
             "comfyui_url",
-            "ge_dir",
             "ge_model",
         }
         self._render_path_group(
@@ -105,7 +116,8 @@ class SetupMixin:
         for key, value in config.items():
             if key not in keys:
                 continue
-            ttk.Label(frame, text=f"{key}:").grid(
+            label = "Geometry Estimation" if key == "ge_model" else f"{key}:"
+            ttk.Label(frame, text=label).grid(
                 row=row, column=0, sticky="w", padx=(0, 8), pady=4
             )
             variable = tk.StringVar(value=str(value))
@@ -113,7 +125,16 @@ class SetupMixin:
                 row=row, column=1, sticky="ew", pady=4
             )
             self.path_entries[key] = variable
-            if key.endswith(("_dir", "_root")):
+            if key == "ge_model":
+                ttk.Button(
+                    frame,
+                    text="Browse...",
+                    command=lambda var=variable: self._browse_ge_model(var),
+                ).grid(row=row, column=2, padx=(8, 0), pady=4)
+            elif key.endswith(("_dir", "_root")) and key not in {
+                "checkpoints_dir",
+                "loras_dir",
+            }:
                 ttk.Button(
                     frame,
                     text="Browse...",
@@ -169,6 +190,34 @@ class SetupMixin:
         if not initial_dir.is_dir():
             initial_dir = ROOT
         selected = filedialog.askdirectory(initialdir=str(initial_dir))
+        if selected:
+            variable.set(selected)
+            self._update_summaries()
+
+    def _browse_ge_model(self, variable):
+        try:
+            raw_paths = self._raw_ui_paths()
+            comfyui_root = Path(
+                generation.expand_vars(
+                    raw_paths.get("comfyui_root", ""),
+                    raw_paths,
+                    label="paths.local.yaml 'comfyui_root'",
+                )
+            ).expanduser()
+            if not comfyui_root.is_absolute():
+                comfyui_root = ROOT / comfyui_root
+            initial_dir = comfyui_root / "models" / "geometry_estimation"
+        except (generation.ConfigError, OSError, ValueError):
+            initial_dir = ROOT
+        current_model = Path(variable.get()).expanduser()
+        if current_model.parent.is_dir():
+            initial_dir = current_model.parent
+        elif not initial_dir.is_dir():
+            initial_dir = ROOT
+        selected = filedialog.askopenfilename(
+            initialdir=str(initial_dir),
+            filetypes=(("Model files", "*.safetensors *.ckpt *.pt *.pth"), ("All files", "*.*")),
+        )
         if selected:
             variable.set(selected)
             self._update_summaries()

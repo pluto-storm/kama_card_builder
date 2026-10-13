@@ -21,7 +21,7 @@ Kama Card Builder is a desktop interface for preparing and running ComfyUI image
 
 ## Use the UI
 
-- **Setup** edits paths used by both workflows separately from image-only checkpoint, LoRA, and image-output paths. The ComfyUI root, ComfyUI output, server URL, Geometry Estimation folder, and `ge_model` are shared settings required for depth and image generation.
+- **Setup** edits paths used by both workflows separately from image-only checkpoint, LoRA, and image-output paths. The ComfyUI root, ComfyUI output, server URL, and Geometry Estimation model file are shared settings required for depth and image generation. The model browser starts at `<comfyui_root>/models/geometry_estimation`.
 - **Depth Generation** and **Image Generation** show whether the configured ComfyUI server is reachable and refresh that status automatically. Use **Check now** for an immediate check.
 - Those generation tabs also offer a launcher selector and **Launch ComfyUI**. On Windows, the UI searches the configured ComfyUI folder and nearby parent folders for `run*.bat` or `*comfy*.bat` files, then starts the selected script in a separate console. Choose the GPU or CPU script that matches your installation. If no launcher is found, start ComfyUI manually.
 - **Depth Generation** lets you select one image or a folder of images, choose where depth maps are saved, and open that output folder in your file explorer. Folder selection scans supported images recursively and preserves subfolders. Supported formats are PNG, JPG/JPEG, WEBP, and BMP.
