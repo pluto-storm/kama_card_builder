@@ -235,10 +235,15 @@ titsonastickv2_PONY:
   
 
 #clothes
+
 Concept_Slutty_Clothes:
   file: '${outfits}\Concept_Slutty_Clothes.safetensors'
   source: https://civitai.red/models/523290?modelVersionId=581380
-  
+
+extreme_bukkake:
+  file: extreme_bukkake_v0.1-pony.safetensors
+  source: https://civitai.com/models/109745?modelVersionId=595414
+
 harem_outfit_ponyxl_lora_nochekaiser:
   file: '${outfits}\harem-outfit-ponyxl-lora-nochekaiser.safetensors'
   source: https://civitai.red/models/544681?modelVersionId=605726
@@ -343,8 +348,11 @@ top_down_doggystyle_v0_2_pony:
 Triple_Penetration_V3_PonyXL_000009:
   file: '${poses}\Triple_Penetration_V3_-_PonyXL-000009.safetensors'
   source: https://civitai.red/models/609865?modelVersionId=681697
-  
 
+tentacles:
+  file: '${poses}\tentacle-pony-xl.safetensors'
+  source: https://civitai.red/models/388453?modelVersionId=462151
+  prompt: tentacle,
   
 #enhancement visual styles
 add_detail_xl:

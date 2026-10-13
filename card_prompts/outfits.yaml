@@ -1,25 +1,46 @@
+0_naked:
+  default_display: NAKED
+  prompt: bare skin, no clothing, uncensored
+bukkake:
+  default_display: BUKKAKE
+  prompt: bukkake, cum on face, cum on body, multiple men, facial cumshot, cum dripping,
+    cum on breasts, cum on pussy, cum on ass, cum on legs
+  lora:
+  - extreme_bukkake
 bikini:
   default_display: BIKINI
   prompt: bikini, micro bikini, small bikini, sexy, thong
+cat_girl:
+  default_display: CAT GIRL
+  prompt: cat ears, cat tail, feline features, cute, furry cat ears, ribbon in hair, white tank top, crop top, cleavage, cat choker collar,tiny pink pleated skirt, long thin tail
 casual:
   default_display: CASUAL
   prompt: t shirt, plain white t shirt, shirt tucked into pants, blue jeans, black
     backpack, long blue jeans, black and grey sneakers, brown belt
 cheerleader:
   default_display: CHEERLEADER
-  prompt: pleated skirt, fitted top, sneakers, pom poms, hair bow
+  prompt: pleated skirt, fitted top, sneakers, pom poms, hair bow, extremely skimpy cheerleader outfit, short skirt, mini skirt, sexy cheerleader outfit, midriff, micro skirt, thong straps
 chel:
   default_display: TRIBAL
   prompt: white bandeau top with red and pink lines, loincloth
+club_slut:  
+  default_display: CLUB SLUT
+  prompt: slutty tube top, areola slip, tiny skirt, micro skirt, black g string thong, cleavage,
 edgy:
   default_display: EDGY
   prompt: leather jacket, ripped skinny jeans, ankle boots, graphic tee, bold accessories
-gothic_outfit:
-  default_display: GOTHIC
-  prompt: black lace dress, combat boots, dark makeup, silver jewelry, dark makeup, black lipsick, black eyeliner, black eyeshadow, black nail polish, spikes, corset, fishnet stockings, black chocker
+fox_girl:
+  default_display: FOX GIRL
+  prompt: fox ears, fox tail, feline features, cute, furry fox ears,ribbon in hair, white tank top, crop top, cleavage, cat choker collar, long black gloves, tiny black pleated skirt, fluffy tail
 gothic_accessories:
   default_display: GOTHIC HEAVY
   prompt: dark makeup, silver jewelry, dark makeup, black lipsick, black eyeliner, black eyeshadow, black nail polish, tattoos, piercings, chains, fishnet stockings, nipple piercings, nose piercing, 
+goth_club:
+  default_display: GOTH CLUB
+  prompt: tight mini dress, high heels, fishnet stockings, bold makeup, revealing outfit, black tube top, skintight tube top, black mini skirt, pencil mini skirt, (neon pink thong), cameltoe, under boob, cleavage, spiked wrist cuffs, black choker, goth make up, mascara
+gothic_outfit:
+  default_display: GOTHIC
+  prompt: black lace dress, combat boots, dark makeup, silver jewelry, dark makeup, black lipsick, black eyeliner, black eyeshadow, black nail polish, spikes, corset, fishnet stockings, black chocker
 grunge:
   default_display: GRUNGE
   prompt: flannel shirt, ripped jeans, combat boots, beanie, layered necklaces
@@ -33,6 +54,9 @@ harem_outfit:
   prompt: <lora:harem-outfit-ponyxl-lora-nochekaiser:1>, harem outfit, white veil,
     arabian clothes, neck ring, mouth veil, circlet, harem pants, thighlet, gold trim,
     dancer,
+hoooters_girl:
+  default_display: HOOTERS GIRL
+  prompt: orange tank top, white shorts, white sneakers, hooters uniform, hooters logo,  hooters outfit, hooters girl uniform,  hooters, white crop top, white tank top, navel piercing, pokies, tiny orange booty shorts, cameltoe, cleavage, areola slip
 kim_possible_agent:
   default_display: AGENT
   prompt: black tank long sleeve shirt, crop top, green cargo pants, black shoes,
@@ -49,20 +73,22 @@ leia_white:
   default_display: LEIA
   lora:
   - Leia_DALLE_3_PonyXL
-  prompt: Leiagolddg, double bun, white dress, belt, high heel boots, side slit, wide
-    sleeves,
+  prompt: Leiagolddg, double bun, white dress, belt, high heel boots, side slit, wide sleeves,
 loungewear:
   default_display: LOUNGEWEAR
   prompt: soft hoodie, jogger pants, cozy socks, slippers, casual t shirt
-naked:
-  default_display: NAKED
-  prompt: bare skin, no clothing, natural pose, sexy, uncensored, nipples
+maid:
+  default_display: MAID
+  prompt: frilly apron, lace headband, short skirt, thigh high stockings, high heels, sexy maid outfit, frilly cuffs, lace trim ruffled skirt, frilly collar
+nurse:
+  default_display: NURSE
+  prompt: white nurse dress, nurse cap, stethoscope, medical gloves, high heels, nurse hat, sexy nurse, black stockings, sexy nurse uniform
 party:
   default_display: PARTY
   prompt: sequin dress, stilettos, clutch bag, statement earrings, bold makeup
-preppy:
-  default_display: PREPPY
-  prompt: polo shirt, pleated skirt, loafers, knee-high socks, headband
+playboy_bunny:
+  default_display: PLAYBOY BUNNY
+  prompt: bunny ears, corset, fishnet stockings, high heels, bow tie, cuffs, tail, sexy bunny outfit, fishnet leggings, black high heels,
 princess_anna:
   prompt: anna dress, warm burgundy gown, fitted bodice, deep neckline, puffy sleeves,
     layered skirt, snowflake embroidery, soft cape, princess dress, slight risky bodice
@@ -118,10 +144,16 @@ princess_tiana:
 punk:
   default_display: PUNK
   prompt: ripped jeans, band t shirt, leather jacket, studded belt, combat boots
+rave:
+  default_display: RAVE
+  prompt: raver girl outift, body paint,neon crop top, holographic shorts, platform sneakers, glow sticks, colorful accessories
 raven:
   default_display: RAVEN
   prompt: blue cape, impossible leotard, boots, shiny, belt, cape,leotard, covered
     navel, black leotard, highleg leotard, blue footwear, impossible clothes
+schoool_uniform:
+  default_display: SCHOOL UNIFORM
+  prompt: pleated skirt, button-up shirt, cleavage, midriff, crop top, knee-high socks, white shirt, green skirt, g string thong
 secretary:
   default_display: SECRETARY
   prompt: pencil skirt, blouse, blazer, pumps, simple jewelry
@@ -135,12 +167,18 @@ starfire:
   default_display: STARFIRE
   prompt: armlet, gorget, crop top, midriff, purple skirt, green sclera, breasts,
     purple footwear, bracer, starfire outfit, 
+streetwhore:
+  default_display: STREETWHORE
+  prompt:  fishnets, high heels, garther belt, gstring thong, fishnets gloves, choker, big earrings, makeup, pink lips, short skirt, small undersized bra, underboob, wavy mouth, waiting for the bus, trembling, sideboob, areola slip,
 summer:
   default_display: SUMMER
   prompt: tank top, denim shorts, flip flops, sunglasses, straw hat
-vintage:
-  default_display: VINTAGE
-  prompt: floral dress, cardigan, Mary Jane shoes, pearl necklace, vintage handbag
+teacher:
+  default_display: TEACHER
+  prompt: pencil skirt, button-up blouse, glasses, heels, ponytail, blue mini skirt, blue blazer, pink stockings, pink high heels, lace thong,
+texas_lingerie:
+  default_display: TEXAS LINGERIE
+  prompt: pink fur jacket, open jacket, large breasts, shiny skin, pale skin, star pasties, panties, simple background, yellow background, fishnet thighhighs, garter straps, cowboy boots, white border, cowboy hat, pink haties
 wanda_1:
   default_display: CASUAL FAIRY
   prompt: yellow crop top, black panties, side-tie panties, black heels

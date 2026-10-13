@@ -1,17 +1,16 @@
 preset_1:
-- name: MoriiMee_Gothic_Niji_Style
+- name: RoccoV1
   weight: 0.7
-- name: reiq_style_xl_ilff
-  weight: 0.8
-- clip: 0.3
-  name: princess
-  weight: 0.3
+- name: officialpit_style_v2_ponyxl_ilff
+  weight: 0.5
 - name: kingbang
   weight: 0.3
 - name: SkindentationSlider
   weight: 1.0
 - name: Expressive_H_000001
   weight: 0.5
+- name: princess
+  weight: 0.3
 preset_2:
 - clip: 0.3
   name: princess

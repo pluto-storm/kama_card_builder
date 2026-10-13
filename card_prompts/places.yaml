@@ -1,6 +1,9 @@
 bathroom:
   default_display: BATHROOM
-  prompt: bathroom picture, white tiles, sink, mirror
+  prompt: bathroom picture, white tiles, sink
+bar:
+  default_display: BAR
+  prompt: bar background, bar counter, stools, bottles
 beach:
   default_display: BEACH
   prompt: beach background, sand, ocean, clear sky
@@ -10,12 +13,18 @@ bedroom:
 blank:
   default_display: ''
   prompt: blank background
+casino:
+  default_display: CASINO
+  prompt: casino background, slot machines, poker tables, neon lights
 castle:
   default_display: CASTLE
   prompt: castle background, stone walls, towers, banners
 city:
   default_display: CITY
   prompt: city background, buildings, streets, traffic
+club:
+  default_display: CLUB
+  prompt: club background, dance floor, disco lights, DJ booth
 desert:
   default_display: DESERT
   prompt: desert background, sand dunes, cacti, clear sky
@@ -31,12 +40,18 @@ gym:
 gym_shower:
   default_display: GYM SHOWER
   prompt: gym shower background, shower stalls, tiled walls
+library:
+  default_display: LIBRARY
+  prompt: library background, bookshelves, reading tables, warm lighting
 mountain:
   default_display: MOUNTAIN
   prompt: mountain background, peaks, rocky terrain, clear sky
 park:
   default_display: PARK
   prompt: park background, trees, grass, benches
+pyramid:
+  default_display: PYRAMID
+  prompt: pyramid background, desert, sand, ancient structures, ancient egypt
 school:
   default_display: SCHOOL
   prompt: school background, classroom, desks, chalkboard
@@ -46,6 +61,9 @@ shower:
 space:
   default_display: SPACE
   prompt: space background, stars, planets, nebulae
+strip_club:
+  default_display: STRIP CLUB
+  prompt: strip club background, stage, pole, neon lights
 underwater:
   default_display: UNDERWATER
   prompt: underwater background, coral reefs, fish, bubbles

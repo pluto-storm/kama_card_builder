@@ -1,59 +1,63 @@
-level_1_basic_0:
-  default_display: BASIC 0
-  prompt: looking at viewer, happy expression, hands at sides
-level_1_basic_1:
-  default_display: BASIC 1
-  prompt: looking at viewer, bored, glare, seductive girl, focus, hands across chest,
-level_1_basic_2:
-  default_display: BASIC 2
-  prompt: looking at viewer, happy, hands above head, sexy pose,
-level_1_basic_3:
-  default_display: BASIC 3
-  prompt: looking at viewer, serious, hands on hips, sexy pose, legs crossed
-level_1_proud:
-  default_display: PROUD
-  prompt: confident smile, chest puffed out, head held high, hands on hips
-level_1_surprised:
-  default_display: SURPRISED
-  prompt: surprised, wide eyes, open mouth, eyebrows raised, hands up in surprise,
-    open palms
+#Level 1 - Pinups
+level_1_arms_crossed:
+  default_display: CROSSED ARMS
+  prompt: looking at viewer, confident expression, arms crossed, standing pose, assertive posture,  bored, glare, seductive girl
+level_1_ass:
+  default_display: ASS
+  prompt: from behind, looking back, arched back, accentuated ass, seductive pose, sexy expression, backshot, looking over shoulder, ass up, ass out, ass view
+level_1_happy_arms_up:
+  default_display: HAPPY
+  prompt: looking at viewer, happy, hands above head, sexy pose, legs apart, playful expression
+level_1_sitting:
+  default_display: SITTING
+  prompt: looking at viewer, serious, sitting down, legs crossed, hands on knees, sexy pose, seductive expression
+level_1_sitting_legs_open:
+  default_display: SITTING LEGS OPEN
+  prompt: looking at viewer, seductive expression, sitting down, legs apart, hands on thighs, sexy pose, legs open
+level_1_standing:
+  default_display: STANDING
+  prompt: looking at viewer, happy expression, hands at sides, standing pose, relaxed posture
 level_1_thinking:
   default_display: THINKING
-  prompt: pensive expression, hand on chin, slightly furrowed brow
+  prompt: sitting down, thinking, pensive expression, hand on chin, slightly furrowed brow, legs crossed, looking away, thoughtful pose
+#Level 2 - Erotic
 level_2_anus_peek:
   default_display: ANUS PEEK
   lora:
   - anuspeek_v2
-  prompt: anus peek, partially exposed anus, looking back, hands on hips, anuspeekILL,
-    anus, anus peek,
+  prompt: anus peek, partially exposed anus, looking back, hands on hips, anuspeekILL, anus, anus peek, back view, from behind
 level_2_flashing_tits:
   default_display: FLASHING TITS
   lora:
   - shirtlift_pony
-  prompt: flashing tits, flashing boobs, hands pulling away top, exposed boobs, shirtlift
+  prompt: standing upright,flashing tits, flashing boobs, hands pulling away top, exposed boobs, shirtlift
 level_2_groped_ass_behind:
   default_display: GROPED ASS
-  prompt: view from behind, back shot, being groped on the ass, being touched on the
-    ass, hands to the side
+  prompt: view from behind, back shot, being groped on the ass, being touched on the ass, hands to the side
 level_2_groped_ass_front:
   default_display: GROPED ASS
   prompt: being groped on the ass, being touched on the ass, looking forward
 level_2_groped_boobs:
   default_display: GROPED BOOBS
   prompt: being groped on the boobs, having boobs touched, hands on hips
+level_2_low_ass_shot:
+  default_display: LOW ASS SHOT
+  prompt: low angle, looking up, from below, accentuated ass, arched back, ass up, ass out, ass view
 level_2_multigrope:
   default_display: MULTIGROPE
   lora:
   - Multigrope
-  prompt: being groped by multiple people, hands on various parts of the body, overwhelmed
-    expression, multigrope, breast_grab
+  prompt: being groped by multiple people, hands on various parts of the body, overwhelmed expression, multigrope, breast_grab
+level_2_playing_with_pussy:
+  default_display: PLAYING WITH PUSSY
+  prompt: looking at viewer, seductive expression, sitting down, legs apart, hands on pussy, sexy pose, legs open, laying down, playing with pussy, touching pussy, touching self
 level_2_push_up_boobs:
   default_display: PUSH UP BOOBS
   prompt: accentuated cleavage, hands on chest, seductive pose
 level_2_touching_self:
   default_display: TOUCHING SELF
-  prompt: mouth open, looking down, one hand rubbing pussy, one hand touching boobs,
-    sexy face
+  prompt: mouth open, looking down, one hand rubbing pussy, one hand touching boobs, sexy face
+#Level 3 - Hardcore 
 level_3_deepthroat:
   default_display: DEEPTHROAT
   lora:
@@ -63,24 +67,37 @@ level_3_fucked_silly:
   default_display: FUCKED SILLY
   lora:
   - FUCKED_SILLY_Extreme_Rough_Sex_Best_Lewd_Expression_v1_0_Pony_XL
-  prompt: being fucked silly, intense pleasure, moaning, flushed face, disheveled
-    hair, extreme sex
+  prompt: being fucked silly, intense pleasure, moaning, flushed face, disheveled hair, extreme sex
 level_3_top_down_doggy:
   default_display: TOP DOWN DOGGY
   lora:
   - top_down_doggystyle_v0_2_pony
   prompt: top-down view, doggy style, doggystyle, ass, from behind
+#Level 4 - Intense
 level_4_airtight:
   default_display: AIRTIGHT
   lora:
   - poses_airtight_000008
-  prompt: 1girl, large breasts, pussy, oral, anal, vaginal, 3boys, multiple men, triple_penetration,
-    group sex, irrumatio, testicles, large_penis
+  prompt: 1girl, large breasts, pussy, oral, anal, vaginal, 3boys, multiple men, triple_penetration, group sex, irrumatio, testicles, large_penis
+level_4_anal_gangbang:
+  default_display: ANAL GANGBANG
+  prompt: anal sex, (gangbang) perfect round ass, (getting fucked), pulling hair back, realistic looking penis, anal sex, fierce fucking, chocking on penis, deepthroat, blowjob, grabbing ass, pushing head into crotch, spit drooling from mouth, lots of spit, drooling, spit dropping from mouth, spank marks
+level_4_cum_bath:
+  default_display: CUM BATH
+  prompt: covered in cum, in a cum bathtub, looking at up at viewer, smile, legs out to the side, arms out to the side, laying in bathtub, relaxing, cum overload, cum everywhete, bathroom, multiple large dicks cumming into bathtub, multiple large dicks cumming on girl
+  lora:
+  - extreme_bukkake
+level_4_tentacles:
+  default_display: TENTACLES
+  prompt: tentacles, multiple arms, grabbing, pulling, engulfing, writhing
+  lora:
+  - tentacles
 level_4_triple_penetration:
   default_display: TRIPLE PENETRATION
   lora:
   - Triple_Penetration_V3_PonyXL_000009
   prompt: being penetrated by three people,
+#Level 5 - Afterwards
 level_5_cum_covered:
   default_display: CUM COVERED
   prompt: covered in cum, cum on face, cum in hair, cum on tits, cum on body
@@ -89,3 +106,8 @@ level_5_trashcan:
   lora:
   - poses_0570_trash_can_v1_pony
   prompt: ruanyi0570,after sex,anus,in container,pussy,stuck,trash can, legs hanging down from trash can
+level_5_used_slut:
+  default_display: USED SLUT
+  prompt: ripped clothes, dirty body, sweaty body, oily body, bruised knees,brruised body, laying on floor, runny makeup, cum in pussy, cum on breasts, cum on stomach, passed out, used condom, tally marks, dripping njose, messy hair
+  lora: 
+  - extreme_bukkake
