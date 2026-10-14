@@ -246,7 +246,16 @@ class GenerationControlsMixin:
         self.checkpoint_selection.set(checkpoint_name)
         self._set_checkpoint_style(checkpoint_name)
 
-    def _load_sets(self):
+    def _load_sets(self, preserve_selection=False):
+        if preserve_selection:
+            selected_sets = {
+                name
+                for index, name in enumerate(self.set_display_names)
+                if index in self.set_list.curselection()
+            }
+            selected_cards = {
+                self.card_names[index] for index in self.card_list.curselection()
+            }
         try:
             cards_path = generation.CARD_DIR / "cards.yaml"
             cards_text = cards_path.read_text(encoding="utf-8")
@@ -255,20 +264,25 @@ class GenerationControlsMixin:
             gen_config = generation.load_yaml(Path(self.generate_file.get()).expanduser())
         except (generation.ConfigError, OSError) as error:
             self.set_list.delete(0, "end")
+            self.card_list.delete(0, "end")
+            self.set_display_names = {}
+            self.card_names = []
             self.selected_count.set("0 sets selected")
+            self.selected_card_count.set("0 cards selected")
             messagebox.showerror("Could not load card sets", str(error))
-            return
+            return False
 
-        selected_sets = set(generation.as_list(gen_config.get("sets_to_generate", [])))
-        selected_cards = set(generation.as_list(gen_config.get("cards_to_generate", [])))
+        if not preserve_selection:
+            selected_sets = set(generation.as_list(gen_config.get("sets_to_generate", [])))
+            selected_cards = set(generation.as_list(gen_config.get("cards_to_generate", [])))
+            self._set_prompt_editor_text(
+                self.global_positive_editor, gen_config.get("global_positive", "")
+            )
+            self._set_prompt_editor_text(
+                self.global_negative_editor, gen_config.get("global_negative", "")
+            )
         self.set_list.delete(0, "end")
         self.card_list.delete(0, "end")
-        self._set_prompt_editor_text(
-            self.global_positive_editor, gen_config.get("global_positive", "")
-        )
-        self._set_prompt_editor_text(
-            self.global_negative_editor, gen_config.get("global_negative", "")
-        )
         self.set_display_names = {}
         card_names = set()
         for index, (name, data) in enumerate(cards.items()):
@@ -303,11 +317,13 @@ class GenerationControlsMixin:
         )
         for index, name in enumerate(self.card_names):
             self.card_list.insert("end", name)
-            if not selected_cards or name in selected_cards:
+            if name in selected_cards or (not preserve_selection and not selected_cards):
                 self.card_list.selection_set(index)
         self._update_selected_count()
         self._update_selected_card_count()
-        self._load_image_choices(gen_config)
+        if not preserve_selection:
+            self._load_image_choices(gen_config)
+        return True
 
     @staticmethod
     def _set_prompt_editor_text(editor, value):
@@ -444,8 +460,13 @@ class GenerationControlsMixin:
         )
 
     def _start_generation(self, mode):
-        if mode == "generate_images" and not self._save_global_prompts():
-            return
+        if mode == "generate_images":
+            # YAML can change while the app is open. Reload before using the
+            # selection so removed card keys are never passed to generation.
+            if not self._load_sets(preserve_selection=True):
+                return
+            if not self._save_global_prompts():
+                return
         if not self._save_paths(show_confirmation=False):
             return
         config_path = Path(self.generate_file.get()).expanduser()

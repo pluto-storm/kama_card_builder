@@ -61,69 +61,69 @@ set_2_princess_snow_white:
     prompt_pos: 1girl, sexy, perky boobs, round boobs
   card_00_icon: {outfit: princess_snow_white, place: blank, pose: level_1_arms_crossed}
   card_00_poster: {outfit: bukkake, place: blank, pose: level_5_cum_covered}
-  card_01: {outfit: princess_snow_white, place: girl_room, pose: level_1_basic_0}
+  card_01: {outfit: princess_snow_white, place: girl_room, pose: level_1_sitting}
   card_02: {outfit: princess_snow_white, place: girl_room, pose: level_1_thinking, prompt_pos: 'leg exposed, sitting down, legs out'}
-  card_03: {outfit: naked, place: shower, pose: level_1_basic_2}
-  card_04: {outfit: bikini, place: beach, pose: level_1_basic_2, prompt_pos: blue bikini}
-  card_05: {outfit: bikini, place: beach, pose: level_1_surprised, prompt_pos: 'blue bikini, bikini top falling off, exposed nipples, topless, looking down at exposed boobs'}
-  card_06: {outfit: bikini, place: beach, prompt_pos: 'laying down, ass view, ass up, big ass, sun bathing, topless'}
-  card_07: {outfit: cheerleader, prompt_pos: 'sexy cheer leader, football field, short skirt, mini skirt, blue and yellow cheerleader outift'}
-  card_08: {outfit: gothic, place: castle}
-  card_09: {outfit: naked, place: park, pose: level_2_push_up_boobs}
-  card_10: {outfit: naked, place: park, pose: level_2_multigrope}
-  card_11: {place: park, pose: level_3_fucked_silly}
-  card_12: {place: park, pose: level_3_top_down_doggy}
-  card_13: {place: park, pose: level_4_airtight}
-  card_14: {place: park, pose: level_4_triple_penetration}
-  card_15: {place: park, pose: level_5_cum_covered}
-  card_16: {place: park, pose: level_5_trashcan}
-  card_17: {place: school, pose: level_5_cum_covered}
-  card_18: {place: gym_shower, pose: level_5_cum_covered}
+  card_03: {outfit: princess_snow_white, place: girl_room, pose: level_2_flashing_tits}
+  card_04: {outfit: bikini, place: beach, pose: level_1_standing, prompt_pos: blue bikini}
+  card_05: {outfit: bikini, place: beach, pose: level_1_standing, prompt_pos: 'blue bikini, bikini top falling off, exposed nipples, topless, surprised, looking down at exposed boobs'}
+  card_06: {outfit: bikini, place: beach, pose: level_1_ass, prompt_pos: 'laying down, ass view, ass up, big ass, sun bathing, topless'}
+  card_07: {outfit: cheerleader, pose: level_1_standing, prompt_pos: 'sexy cheer leader, football field, short skirt, mini skirt, blue and yellow cheerleader outift'}
+  card_08: {outfit: gothic_outfit, place: castle, pose: level_1_standing}
+  card_09: {outfit: streetwhore, place: park, pose: level_2_push_up_boobs}
+  card_10: {outfit: gym_outfit, place: park, pose: level_2_multigrope, prompt_pos: purple gym outfit}
+  card_11: {outfit: princess_snow_white, place: park, pose: level_3_blowjob}
+  card_12: {outfit: 0_naked, place: park, pose: level_3_deepthroat}
+  card_13: {outfit: 0_naked, place: park, pose: level_4_anal_gangbang}
+  card_14: {outfit: 0_naked, place: park, pose: level_4_airtight}
+  card_15: {outfit: 0_naked, place: park, pose: level_4_triple_penetration}
+  card_16: {outfit: bukkake, place: park, pose: level_5_trashcan}
+  card_17: {outfit: bukkake, place: school, pose: level_5_cum_covered}
+  card_18: {outfit: bukkake, place: bathroom, pose: level_4_cum_bath}
 set_3_princess_aurora:
   _defaults:
     character: princess_aurora
     prompt_pos: 1girl, sexy, big boobs boobs, round boobs
   card_00_icon: {outfit: princess_aurora, place: blank, pose: level_1_arms_crossed}
   card_00_poster: {outfit: bukkake, place: blank, pose: level_5_cum_covered}
-  card_01: {outfit: princess_aurora, place: girl_room, pose: level_1_basic_0}
+  card_01: {outfit: princess_aurora, place: girl_room, pose: level_1_sitting}
   card_02: {outfit: princess_aurora, place: girl_room, pose: level_1_thinking, prompt_pos: 'leg exposed, sitting down, legs out'}
-  card_03: {outfit: naked, place: shower, pose: level_1_basic_2}
-  card_04: {outfit: bikini, place: beach, pose: level_1_basic_2, prompt_pos: pink bikini}
-  card_05: {outfit: bikini, place: beach, pose: level_1_surprised, prompt_pos: 'pink bikini, bikini top falling off, exposed nipples, topless, looking down at exposed boobs'}
-  card_06: {outfit: bikini, place: beach, prompt_pos: 'laying down, ass view, ass up, big ass, sun bathing, topless'}
-  card_07: {outfit: cheerleader, prompt_pos: 'sexy cheer leader, football field, short skirt, mini skirt, pink cheerleader outift'}
-  card_08: {outfit: gothic, place: castle}
-  card_09: {outfit: naked, place: park, pose: level_2_push_up_boobs}
-  card_10: {outfit: naked, place: park, pose: level_2_multigrope}
-  card_11: {place: park, pose: level_3_fucked_silly}
-  card_12: {place: park, pose: level_3_top_down_doggy}
-  card_13: {place: park, pose: level_4_airtight}
-  card_14: {place: park, pose: level_4_triple_penetration}
-  card_15: {place: park, pose: level_5_cum_covered}
-  card_16: {place: park, pose: level_5_trashcan}
-  card_17: {place: school, pose: level_5_cum_covered}
-  card_18: {place: gym_shower, pose: level_5_cum_covered}
+  card_03: {outfit: princess_aurora, place: girl_room, pose: level_2_flashing_tits}
+  card_04: {outfit: bikini, place: beach, pose: level_1_standing, prompt_pos: pink bikini}
+  card_05: {outfit: bikini, place: beach, pose: level_1_standing, prompt_pos: 'pink bikini, bikini top falling off, exposed nipples, topless, surprised, looking down at exposed boobs'}
+  card_06: {outfit: bikini, place: beach, pose: level_1_ass, prompt_pos: 'laying down, ass view, ass up, big ass, sun bathing, topless'}
+  card_07: {outfit: cheerleader, pose: level_1_standing, prompt_pos: 'sexy cheer leader, football field, short skirt, mini skirt, pink cheerleader outift'}
+  card_08: {outfit: gothic_outfit, place: castle, pose: level_1_standing}
+  card_09: {outfit: streetwhore, place: park, pose: level_2_push_up_boobs}
+  card_10: {outfit: gym_outfit, place: park, pose: level_2_multigrope, prompt_pos: purple gym outfit}
+  card_11: {outfit: princess_aurora, place: park, pose: level_3_blowjob}
+  card_12: {outfit: 0_naked, place: park, pose: level_3_deepthroat}
+  card_13: {outfit: 0_naked, place: park, pose: level_4_anal_gangbang}
+  card_14: {outfit: 0_naked, place: park, pose: level_4_airtight}
+  card_15: {outfit: 0_naked, place: park, pose: level_4_triple_penetration}
+  card_16: {outfit: bukkake, place: park, pose: level_5_trashcan}
+  card_17: {outfit: bukkake, place: school, pose: level_5_cum_covered}
+  card_18: {outfit: bukkake, place: bathroom, pose: level_4_cum_bath}
 set_4_princess_cinderella:
   _defaults:
     character: princess_cinderella
     prompt_pos: 1girl, sexy, big boobs boobs, round boobs
-  card_00_icon: {outfit: princess_aurora, place: blank, pose: level_1_arms_crossed}
+  card_00_icon: {outfit: princess_cinderella, place: blank, pose: level_1_arms_crossed}
   card_00_poster: {outfit: bukkake, place: blank, pose: level_5_cum_covered}
-  card_00: {outfit: princess_cinderella, place: girl_room, pose: level_1_basic_0}
-  card_01: {outfit: princess_cinderella, place: girl_room, pose: level_1_thinking, prompt_pos: 'leg exposed, sitting down, legs out'}
-  card_02: {outfit: naked, place: shower, pose: level_1_basic_2}
-  card_03: {outfit: bikini, place: beach, pose: level_1_basic_2, prompt_pos: white bikini}
-  card_04: {outfit: bikini, place: beach, pose: level_1_surprised, prompt_pos: 'white bikini, bikini top falling off, exposed nipples, topless, looking down at exposed boobs'}
-  card_05: {outfit: bikini, place: beach, prompt_pos: 'laying down, ass view, ass up, big ass, sun bathing, topless'}
-  card_06: {outfit: cheerleader, prompt_pos: 'sexy cheer leader, football field, short skirt, mini skirt, white cheerleader outift'}
-  card_08: {outfit: gothic, place: castle}
-  card_09: {outfit: naked, place: park, pose: level_2_push_up_boobs}
-  card_10: {outfit: naked, place: park, pose: level_2_multigrope}
-  card_11: {place: park, pose: level_3_fucked_silly}
-  card_12: {place: park, pose: level_3_top_down_doggy}
-  card_13: {place: park, pose: level_4_airtight}
-  card_14: {place: park, pose: level_4_triple_penetration}
-  card_15: {place: park, pose: level_5_cum_covered}
-  card_16: {place: park, pose: level_5_trashcan}
-  card_17: {place: school, pose: level_5_cum_covered}
-  card_18: {place: gym_shower, pose: level_5_cum_covered}
+  card_01: {outfit: princess_cinderella, place: girl_room, pose: level_1_sitting}
+  card_02: {outfit: princess_cinderella, place: girl_room, pose: level_1_thinking, prompt_pos: 'leg exposed, sitting down, legs out'}
+  card_03: {outfit: princess_cinderella, place: girl_room, pose: level_2_flashing_tits}
+  card_04: {outfit: bikini, place: beach, pose: level_1_standing, prompt_pos: whitee bikini}
+  card_05: {outfit: bikini, place: beach, pose: level_1_standing, prompt_pos: 'white bikini, bikini top falling off, exposed nipples, topless, surprised, looking down at exposed boobs'}
+  card_06: {outfit: bikini, place: beach, pose: level_1_ass, prompt_pos: 'laying down, ass view, ass up, big ass, sun bathing, topless'}
+  card_07: {outfit: cheerleader, pose: level_1_standing, prompt_pos: 'sexy cheer leader, football field, short skirt, mini skirt, white cheerleader outift'}
+  card_08: {outfit: gothic_outfit, place: castle, pose: level_1_standing}
+  card_09: {outfit: streetwhore, place: park, pose: level_2_push_up_boobs}
+  card_10: {outfit: gym_outfit, place: park, pose: level_2_multigrope, prompt_pos: purple gym outfit}
+  card_11: {outfit: princess_cinderella, place: park, pose: level_3_blowjob}
+  card_12: {outfit: 0_naked, place: park, pose: level_3_deepthroat}
+  card_13: {outfit: 0_naked, place: park, pose: level_4_anal_gangbang}
+  card_14: {outfit: 0_naked, place: park, pose: level_4_airtight}
+  card_15: {outfit: 0_naked, place: park, pose: level_4_triple_penetration}
+  card_16: {outfit: bukkake, place: park, pose: level_5_trashcan}
+  card_17: {outfit: bukkake, place: school, pose: level_5_cum_covered}
+  card_18: {outfit: bukkake, place: bathroom, pose: level_4_cum_bath}
